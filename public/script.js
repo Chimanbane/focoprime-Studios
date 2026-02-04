@@ -78,30 +78,33 @@ const getCurrentTime = () => {
   });
 };
 
-//===== Login Simples ===== //
+// LOGIN MODAL
 // ==============================
-// LOGIN SIMPLES (FRONTEND)
-// ==============================
-let userLogged = localStorage.getItem("user_logged");
+const loginModal = document.getElementById("loginModal");
+const loginBtn = document.getElementById("loginBtn");
+const loginNameInput = document.getElementById("loginName");
 
-if (!userLogged) {
-  const nome = prompt("🔐 Digite o seu nome para entrar:");
+const savedUser = localStorage.getItem("user_name");
 
-  if (!nome || nome.trim() === "") {
-    alert("Precisa digitar um nome para usar a FocoPrime IA");
-    location.reload();
-  } else {
-    localStorage.setItem("user_logged", "true");
-    localStorage.setItem("user_name", nome.trim());
+if (savedUser) {
+  loginModal.style.display = "none";
+  document.querySelector(".heading").textContent = `Olá, ${savedUser}`;
+} else {
+  loginModal.style.display = "flex";
+}
+
+loginBtn.addEventListener("click", () => {
+  const name = loginNameInput.value.trim();
+
+  if (!name) {
+    loginNameInput.style.border = "1px solid #d62939";
+    return;
   }
-}
 
-const userName = localStorage.getItem("user_name") || "Aluno";
-
-const heading = document.querySelector(".heading");
-if (heading) {
-  heading.textContent = `Olá, ${userName}`;
-}
+  localStorage.setItem("user_name", name);
+  loginModal.style.display = "none";
+  document.querySelector(".heading").textContent = `Olá, ${name}`;
+});
 
 // mensagem de saída //
 document.getElementById("logoutBtn")?.addEventListener("click", () => {
