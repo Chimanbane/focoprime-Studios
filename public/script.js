@@ -120,14 +120,16 @@ chatsContainer.addEventListener("click", (e) => {
 // TYPING EFFECT
 // ==============================
 const typingEffect = (text, textElement, botMsgDiv) => {
-  textElement.textContent = "";
+  textElement.innerHTML = "";
   const words = text.split(" ");
   let index = 0;
 
   typingInterval = setInterval(() => {
     if (index < words.length) {
-      textElement.textContent +=
-        (index === 0 ? "" : " ") + words[index++];
+      textElement.innerHTML = marked.parse(
+        words.slice(0, index + 1).join(" ")
+      );
+      index++;
       scrollToBottom();
     } else {
       clearInterval(typingInterval);
