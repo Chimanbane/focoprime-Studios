@@ -40,7 +40,7 @@ body {
 }
 
 .cabeca {
-    padding: 5px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -599,4 +599,205 @@ body.bot-responding .prompt-form #stop-response-btn {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ===== BOTÃO SAIR (LOGOUT) ===== */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+
+  background: linear-gradient(to right, #1d7efd, #8f6fff);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+}
+
+.logout-btn span.material-symbols-rounded {
+  font-size: 1.3rem;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(214, 41, 57, 0.45);
+  opacity: 0.95;
+}
+
+.logout-btn:active {
+  transform: scale(0.96);
+}
+
+/* ===== SIDEBAR DIREITA ===== */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100vh;
+  background: var(--secondary-color);
+  box-shadow: -10px 0 30px rgba(0,0,0,0.35);
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: right 0.35s ease;
+}
+
+.side-menu.active {
+  right: 0;
+}
+
+/* Header */
+.side-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #1d7efd, #8f6fff);
+  margin: -20px -20px 20px -20px;
+  padding: 16px 20px;
+}
+
+.side-menu-header img {
+  height: 50px;
+  color: #000;
+}
+
+.side-menu-header h3 {
+  font-size: 1.2rem;
+}
+
+.side-menu-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* Lista */
+.side-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.side-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s;
+}
+
+.side-item span.material-symbols-rounded {
+  font-size: 1.4rem;
+  color: #1d7efd;
+}
+
+.side-item:hover {
+  background: var(--secondary-hover-color);
+  transform: translateX(5px);
+}
+
+/* Logout 100% */
+.side-logout {
+  width: 100%;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9997;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===============================
+   SIDEBAR – VERSÃO PC / DESKTOP
+================================ */
+@media (min-width: 728px) {
+
+  .side-menu {
+    width: 360px;
+    right: -380px;
+    padding: 28px;
+    border-left: 1px solid var(--secondary-hover-color);
   }
+
+  .side-menu.active {
+    right: 0;
+  }
+
+  .side-menu-header h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .side-menu-list {
+    margin-top: 10px;
+  }
+
+  .side-item {
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+  }
+
+  .side-item span.material-symbols-rounded {
+    font-size: 1.6rem;
+  }
+
+  .side-item:hover {
+    background: linear-gradient(
+      to right,
+      rgba(29, 126, 253, 0.15),
+      transparent
+    );
+    transform: translateX(6px);
+  }
+
+  /* Logout estilo painel */
+  .side-logout {
+    height: 52px;
+    border-radius: 14px;
+    font-size: 1rem;
+  }
+
+  /* Overlay mais discreto no PC */
+  .menu-overlay {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+  }
+}
+@media (min-width: 1280px) {
+  .side-menu {
+    right: 0;
+    position: sticky;
+    height: 100vh;
+  }
+
+  .menu-overlay {
+    display: none;
+  }
+}
