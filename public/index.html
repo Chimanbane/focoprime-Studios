@@ -21,21 +21,63 @@
             </div>
             
             <!--- Icones sociais -->
-            <button id="logoutBtn">Sair</button>
+            <button id="logoutBtn" class="logout-btn">
+  <span class="material-symbols-rounded">logout</span>
+  <span class="logout-text">Sair</span>
+</button>
         </div>
     </header>
   <div class="container">
+    
+    <!-- ===== SIDEBAR MENU DIREITA ===== -->
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-header">
+    <img src="images/Logo-header.png">
+    <button id="closeMenuBtn" class="material-symbols-rounded">close</button>
+  </div>
+
+  <ul class="side-menu-list">
+    <li class="side-item" id="newChatBtn">
+      <span class="material-symbols-rounded">add_comment</span>
+      <span>Nova mensagem</span>
+    </li>
+
+    <li class="side-item">
+      <span class="material-symbols-rounded">history</span>
+      <span>Histórico</span>
+    </li>
+
+    <li class="side-item">
+      <span class="material-symbols-rounded">description</span>
+      <span>Textes</span>
+    </li>
+
+    <li class="side-item">
+      <span class="material-symbols-rounded">settings</span>
+      <span>Definições</span>
+    </li>
+  </ul>
+
+  <!-- BOTÃO SAIR -->
+  <button id="sideLogoutBtn" class="logout-btn side-logout">
+    <span class="material-symbols-rounded">logout</span>
+    <span>Sair</span>
+  </button>
+</div>
+
+<!-- Overlay -->
+<div id="menuOverlay" class="menu-overlay"></div>
     <!-- App Header -->
     <header class="app-header">
       <h1 class="heading">Hello, Aluno</h1>
-      <h4 class="sub-heading">Como posso ajudar-te hoje? amigo</h4>
+      <h4 class="sub-heading">Como posso ajudar-te hoje? amigo/a</h4>
     </header>
     
     <!-- LOGIN MODAL -->
 <div id="loginModal" class="login-modal">
   <div class="login-box">
     <img src="images/Logo.png" class="login-logo" />
-    <h2>Bem vindo/a ao FocoPrime IA</h2>
+    <h2>Bem-vindo à FocoPrime IA (IRIANO)</h2>
     <p>Digite o seu nome para continuar</p>
 
     <input
@@ -94,7 +136,7 @@
         
         <!-- Theme and Delete Chats Buttons -->
         <button id="theme-toggle-btn" class="material-symbols-rounded">light_mode</button>
-        <button id="delete-chats-btn" class="material-symbols-rounded">delete</button>
+        <button id="delete-chats-btn" class="material-symbols-rounded menu-icon">apps</button>
       </div>
       
       <p class="disclaimer-text">A focoprime IA pode vir a cometer erros.</p>
