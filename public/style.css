@@ -638,8 +638,8 @@ body.bot-responding .prompt-form #stop-response-btn {
 .side-menu {
   position: fixed;
   top: 0;
-  right: -320px;
-  width: 300px;
+  right: -100vw;
+  width: 100vw;
   height: 100vh;
   background: var(--secondary-color);
   box-shadow: -10px 0 30px rgba(0,0,0,0.35);
@@ -677,7 +677,7 @@ body.bot-responding .prompt-form #stop-response-btn {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: white;
 }
 
@@ -686,7 +686,6 @@ body.bot-responding .prompt-form #stop-response-btn {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex: 1;
 }
 
 .side-item {
@@ -711,9 +710,10 @@ body.bot-responding .prompt-form #stop-response-btn {
 
 /* Logout 100% */
 .side-logout {
+  padding: 10px 20px;
   width: 100%;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 /* Overlay */
@@ -801,3 +801,7 @@ body.bot-responding .prompt-form #stop-response-btn {
     display: none;
   }
 }
+
+
+
+
