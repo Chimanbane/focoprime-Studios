@@ -89,10 +89,10 @@ chatsContainer.addEventListener("click", (e) => {
 
   if (btn.classList.contains("copy")) {
     navigator.clipboard.writeText(message);
-    btn.innerHTML = "✔️";
+    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
     setTimeout(() => {
       btn.innerHTML = '<i class="fa-regular fa-copy"></i>';
-    }, 1000);
+    }, 1200);
   }
 
   if (btn.classList.contains("like")) {
