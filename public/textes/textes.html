@@ -7,15 +7,34 @@
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="textes.css" />
   <link rel="icon" href="images/groq.png" type="image/png">
+  <!-- Linking Google Fonts For Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@32,400,0,0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Ícones e fonts --->
+  <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <!--- Cabeçalho do Header -->
+  <div id="header"></div>
 
-<header class="app-header">
-  <h1 class="heading">Textes Inteligentes</h1>
-  <h4 class="sub-heading">Gere textos escolares e académicos com ajuda da FocoPrime IA</h4>
-</header>
+<script>
+  fetch("../components/header.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header").innerHTML = data;
+    });
+</script>
 
 <div class="container">
+  
+  <div class="textolir">
+    <h1>Moçambique Ia ehhwh</h1>
+    <p>Cumprima a minha opinião nesta ehsbhs bbs</p>
+  </div>
 
   <!-- FORMULÁRIO DE TEXTOS -->
   <div class="textes-form">
@@ -61,4 +80,5 @@
 
 <script src="textes.js"></script>
 </body>
+  </html>
                                                            </html>
