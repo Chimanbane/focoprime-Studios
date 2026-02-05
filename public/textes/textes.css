@@ -1,0 +1,71 @@
+.textes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: var(--secondary-color);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.textes-form label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.textes-form input,
+.textes-form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.textes-form button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #1d7efd, #8f6fff);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.textes-form button:hover {
+  transform: scale(1.03);
+}
+
+.textes-result {
+  background: var(--secondary-color);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.generated-text {
+  min-height: 120px;
+  padding: 15px;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  margin-bottom: 10px;
+  white-space: pre-line;
+  overflow-x: auto;
+}
+
+#copyTextBtn {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #28a745, #6fdbb8);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#copyTextBtn:hover {
+  opacity: 0.9;
+  }
