@@ -88,6 +88,15 @@ const getCurrentTime = () => {
   });
 };
 
+const highlightUserName = (text, userName) => {
+  if (!userName) return text;
+
+  const escapedName = userName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`\\b(${escapedName})\\b`, "gi");
+
+  return text.replace(regex, "**$1**");
+};
+
 // ==============================
 // LOGIN MODAL
 // ==============================
@@ -202,9 +211,14 @@ const generateResponse = async (botMsgDiv) => {
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "Erro no servidor");
 
-    const responseText = data.choices?.[0]?.message?.content?.trim() || "Não consegui responder agora.";
+    const rawText =
+  data.choices?.[0]?.message?.content?.trim() ||
+  "Não consegui responder agora.";
 
-    typingEffect(responseText, textElement, botMsgDiv);
+const userName = localStorage.getItem("user_name") || "Aluno";
+const responseText = highlightUserName(rawText, userName);
+
+typingEffect(responseText, textElement, botMsgDiv);
 
     chatHistory.push({ role: "assistant", content: responseText });
 
