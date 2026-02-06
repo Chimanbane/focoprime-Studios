@@ -233,28 +233,32 @@ typingEffect(responseText, textElement, botMsgDiv);
 // ==============================
 // FORM SUBMIT
 // ==============================
-const handleFormSubmit = (e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
-
   const userMessage = promptInput.value.trim();
   if (!userMessage || document.body.classList.contains("bot-responding")) return;
 
   promptInput.value = "";
+
+  const file = fileInput.files[0];
+  const formData = new FormData();
+  formData.append("message", userMessage);
+  if (file) formData.append("file", file);
+
   document.body.classList.add("chats-active", "bot-responding");
 
   chatHistory.push({ role: "user", content: userMessage });
 
+  // Cria a mensagem no chat
   const time = getCurrentTime();
-
   const userMsgHTML = `<span class="message-time">${time}</span><p class="message-text"></p>`;
   const userMsgDiv = createMessageElement(userMsgHTML, "user-message");
   userMsgDiv.querySelector(".message-text").textContent = userMessage;
   chatsContainer.appendChild(userMsgDiv);
   scrollToBottom();
 
-  setTimeout(() => {
+  setTimeout(async () => {
     const botTime = getCurrentTime();
-
     const botMsgHTML = `
       <img class="avatar" src="images/groq.png" />
       <div class="bot-content">
@@ -271,7 +275,28 @@ const handleFormSubmit = (e) => {
     const botMsgDiv = createMessageElement(botMsgHTML, "bot-message", "loading");
     chatsContainer.appendChild(botMsgDiv);
     scrollToBottom();
-    generateResponse(botMsgDiv);
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      const rawText = data.choices?.[0]?.message?.content?.trim() || "Não consegui responder agora.";
+      const userName = localStorage.getItem("user_name") || "Aluno";
+      const responseText = highlightUserName(rawText, userName);
+
+      typingEffect(responseText, botMsgDiv.querySelector(".message-text"), botMsgDiv);
+      chatHistory.push({ role: "assistant", content: responseText });
+
+    } catch (error) {
+      botMsgDiv.querySelector(".message-text").textContent = "Erro ao enviar a imagem.";
+      botMsgDiv.querySelector(".message-text").style.color = "#d62939";
+      botMsgDiv.classList.remove("loading");
+      document.body.classList.remove("bot-responding");
+    }
+
   }, 400);
 };
 
@@ -349,10 +374,38 @@ document.querySelectorAll(".suggestions-item").forEach(item => {
 // ==============================
 // FILE UPLOAD (DESATIVADO)
 // ==============================
-fileInput.disabled = true;
-fileUploadWrapper.style.display = "none";
+fileInput.disabled = false;
+fileUploadWrapper.style.display = "flex"; // mostra o container
 
 // ==============================
 // EVENTS
 // ==============================
 promptForm.addEventListener("submit", handleFormSubmit);
+
+fileInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  const preview = fileUploadWrapper.querySelector(".file-preview");
+
+  if (file && file.type.startsWith("image/")) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      preview.src = reader.result;
+      preview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+    preview.style.display = "none";
+  }
+});
+
+document.getElementById("add-file-btn").addEventListener("click", () => {
+  fileInput.click();
+});
+
+document.getElementById("cancel-file-btn").addEventListener("click", () => {
+  fileInput.value = "";
+  const preview = fileUploadWrapper.querySelector(".file-preview");
+  preview.src = "";
+  preview.style.display = "none";
+});
