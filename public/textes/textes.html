@@ -1,108 +1,181 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FocoPrime IA – Textes Inteligentes</title>
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="textes.css" />
-  <link rel="icon" href="images/groq.png" type="image/png">
-  <!-- Linking Google Fonts For Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@32,400,0,0" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Ícones e fonts --->
-  <link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-  <!--- Cabeçalho do Header -->
-  <div id="header"></div>
+.textes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: var(--secondary-color);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
 
-<script>
-  fetch("../components/header.html")
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("header").innerHTML = data;
-    });
-</script>
+.textes-form label {
+  font-weight: 500;
+  font-size: 1rem;
+}
 
-<div class="container">
-  
-  <!-- PARTE DO TEXTO INFORMATIVO -->
-  <div class="texto-container-texte">
-    <h1 class="titulo-texte">
-  <span class="material-symbols-rounded icon-texte">
-    <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M20 2H6C4.35 2 3 3.35 3 5v14c0 1.65 1.35 3 3 3h15v-2H6c-.55 0-1-.45-1-1s.45-1 1-1h14c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1m-6 14H6c-.35 0-.69.07-1 .18V5c0-.55.45-1 1-1h7v7l2-1 2 1V4h2v12z"></path>
-</svg>
-  </span>
-  Simplifique os seus Trabalhos
-</h1>
-<!-- badge de etiqueta -->
-<span class="badge-texte">
-  <i class="fa-solid fa-wand-magic-sparkles"></i> IA Educacional
-</span>
-    <p class="paragrafo-texte">Gere textos <strong>automáticos</strong> para seus trabalhos <strong>escolares</strong> de todas as disciplinas. 
-    para além você pode gerar também textos automáticos da focoprime para <strong>redações escolares, composições,  resumo académico ou até explicação de temas</strong>
-    gratuitamente, só com um click</p>
-  </div>
+.textes-form input,
+.textes-form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-size: 1rem;
+}
 
-  <!-- FORMULÁRIO DE TEXTOS -->
-  <div class="textes-form">
-    <label for="textType">Tipo de texto:</label>
-    <select id="textType">
-      <option value="redacao">Redação Escolar</option>
-      <option value="composicao">Composição</option>
-      <option value="resumo">Resumo Académico</option>
-      <option value="explicacao">Explicação de Tema</option>
-      <option value="carta">Carta / Pedido Formal</option>
-    </select>
+.textes-form button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #1d7efd, #8f6fff);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
-    <label for="textTheme">Tema do texto:</label>
-    <input type="text" id="textTheme" placeholder="Ex: A importância da educação" />
+.textes-form button:hover {
+  transform: scale(1.03);
+}
 
-    <label for="textLevel">Nível de ensino:</label>
-    <select id="textLevel">
-      <option value="primario">Primário</option>
-      <option value="secundario">Secundário</option>
-      <option value="universitario">Universitário</option>
-    </select>
+.textes-result {
+  background: var(--secondary-color);
+  padding: 20px;
+  border-radius: 12px;
+}
 
-    <label for="textLength">Tamanho do texto:</label>
-    <select id="textLength">
-      <option value="curto">Curto</option>
-      <option value="medio">Médio</option>
-      <option value="longo">Longo</option>
-    </select>
+.generated-text {
+  min-height: 120px;
+  padding: 15px;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  margin-bottom: 10px;
+  white-space: pre-line;
+  overflow-x: auto;
+}
 
-    <button class="generateTextBtn" id="generateTextBtn">
-  <span class="material-symbols-rounded"><svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M18.71 5.29a.996.996 0 0 0-1.41 0l-11 11a1 1 0 0 0-.29.71v3c0 .55.45 1 1 1h3c.27 0 .52-.11.71-.29l11-11a.996.996 0 0 0 0-1.41l-3-3ZM9.59 19H8v-1.59l7.5-7.5 1.59 1.59zm8.91-8.91L16.91 8.5 18 7.41 19.59 9zM7 12c.26 0 .5-.15.61-.4l1.23-2.77 2.77-1.23c.24-.11.4-.35.4-.61s-.16-.5-.4-.61L8.84 5.15 7.61 2.38a.68.68 0 0 0-.6-.4c-.27-.02-.5.15-.61.39L5.17 5.04 2.39 6.38c-.23.11-.38.35-.38.61s.16.49.4.6l2.77 1.23 1.23 2.77c.11.24.35.4.61.4Zm14.76 6.63-1.66-.74-.74-1.66a.41.41 0 0 0-.36-.24c-.16-.01-.3.09-.37.23l-.74 1.6-1.67.8c-.14.07-.23.21-.23.37s.1.3.24.36l1.66.74.74 1.66a.404.404 0 0 0 .74 0l.74-1.66 1.66-.74a.404.404 0 0 0 0-.74Z"></path>
-</svg></span> Gerar Texto
-</button>
-  </div>
+#copyTextBtn {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #28a745, #6fdbb8);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
 
-  <!-- RESULTADO -->
-  <div class="textes-result">
-    <h3>Texto gerado:</h3>
-    <div id="generatedText" class="generated-text">
-      <p>Aqui aparecerá o texto gerado pela FocoPrime IA.</p>
-    </div>
-    <button id="copyTextBtn">
-  <i class="fa-solid fa-copy"></i> Copiar Texto
-</button>
-  </div>
+#copyTextBtn:hover {
+  opacity: 0.9;
+}
 
-</div>
+.app-header {
+  padding: 10px;
+  position: relative;
+}
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="textes.js"></script>
-</body>
-      </html>
+/* ====BARRA DO CONTAINER DE TEXTO ===*/
+.texto-container-texte {
+  background: linear-gradient(135deg, #1d7efd20, #8f6fff20);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radus: 18px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Linha decorativa lateral */
+.texto-container-texte::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(to bottom, #1d7efd, #8f6fff);
+}
+
+/* ===== BARRA DO TÍTULO ====*/
+.titulo-texte {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 12px;
+}
+
+.icon-texte {
+  font-size: 1.8rem;
+  color: #1d7efd;
+}
+
+/*===== PARAGRAPH =====*/
+.paragrafo-texte {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted, #1d7efd);
+  max-width: 700px;
+}
+
+/* Destaque nos <strong> */
+.paragrafo-texte strong {
+  color: var(--subheading-color);
+  font-weight: 600;
+}
+
+.badge-texte {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: rgba(29, 126, 253, 0.15);
+  color: #1d7efd;
+  margin-bottom: 12px;
+}
+
+.generateTextBtn {
+  color: #000;
+}
+
+/* ALINHAMENTO DOS ÍCONES */
+button i,
+button .material-symbols-rounded {
+  vertical-align: middle;
+  margin-right: 6px;
+  font-size: 1.1em; /* aumenta ou diminui conforme o tamanho do botão */
+}
+
+/* BOTÃO PARAR GERAÇÃO */
+.stop-typing-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #ff4d4d, #ff7a7a);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.stop-typing-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+
+.stop-typing-btn i {
+  font-size: 1rem;
+}
