@@ -28,6 +28,7 @@ generateBtn.addEventListener("click", async () => {
             role: "system",
             content: `
 Tu és FocoPrime IA, um assistente escolar de Moçambique.
+Nome do aluno: ${userName}
 Cria um texto para o aluno:
 - Tipo de texto: ${type}
 - Tema: ${theme}
@@ -42,7 +43,7 @@ Cria um texto para o aluno:
 
     const data = await response.json();
     const text = data.choices?.[0]?.message?.content || "Erro ao gerar texto.";
-    generatedText.textContent = text;
+    generatedText.innerHTML = marked.parse(text);
 
   } catch (err) {
     generatedText.textContent = "Erro na conexão com a IA.";
@@ -60,3 +61,12 @@ copyBtn.addEventListener("click", () => {
 // ===== HERDAR TEMA =====
 const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
 document.body.classList.toggle("light-theme", isLightTheme);
+
+const highlightUserName = (text, userName) => {
+  if (!userName) return text;
+  const regex = new RegExp(`\\b(${userName})\\b`, "gi");
+  return text.replace(regex, "**$1**"); // adiciona negrito
+};
+
+const highlightedText = highlightUserName(text, userName);
+generatedText.innerHTML = marked.parse(highlightedText);
