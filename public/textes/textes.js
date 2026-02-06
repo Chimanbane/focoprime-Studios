@@ -1,3 +1,6 @@
+// ==============================
+// ELEMENTOS
+// ==============================
 const generateBtn = document.getElementById("generateTextBtn");
 const generatedText = document.getElementById("generatedText");
 const copyBtn = document.getElementById("copyTextBtn");
@@ -5,6 +8,18 @@ const copyBtn = document.getElementById("copyTextBtn");
 // Pega o nome salvo ou usa "Aluno" como padrão
 const userName = localStorage.getItem("user_name") || "Aluno";
 
+// ==============================
+// FUNÇÃO PARA DESTACAR NOME
+// ==============================
+const highlightUserName = (text, userName) => {
+  if (!userName) return text;
+  const regex = new RegExp(`\\b(${userName})\\b`, "gi");
+  return text.replace(regex, "**$1**"); // adiciona negrito
+};
+
+// ==============================
+// BOTÃO GERAR TEXTO
+// ==============================
 generateBtn.addEventListener("click", async () => {
   const type = document.getElementById("textType").value;
   const theme = document.getElementById("textTheme").value.trim();
@@ -35,6 +50,8 @@ Cria um texto para o aluno:
 - Nível: ${level}
 - Tamanho: ${length}
 - Em português claro, amigável e educativo.
+- Usa **negrito** e *itálico* quando fizer sentido.
+- Emojis são permitidos 😄
 `
           }
         ]
@@ -42,8 +59,13 @@ Cria um texto para o aluno:
     });
 
     const data = await response.json();
-    const text = data.choices?.[0]?.message?.content || "Erro ao gerar texto.";
-    generatedText.innerHTML = marked.parse(text);
+    const rawText = data.choices?.[0]?.message?.content || "Erro ao gerar texto.";
+
+    // Destaca o nome do usuário
+    const highlightedText = highlightUserName(rawText, userName);
+
+    // Renderiza markdown e emojis
+    generatedText.innerHTML = marked.parse(highlightedText);
 
   } catch (err) {
     generatedText.textContent = "Erro na conexão com a IA.";
@@ -51,22 +73,17 @@ Cria um texto para o aluno:
   }
 });
 
-// Copiar texto
+// ==============================
+// BOTÃO COPIAR TEXTO
+// ==============================
 copyBtn.addEventListener("click", () => {
   const text = generatedText.textContent;
   navigator.clipboard.writeText(text);
   alert("Texto copiado para a área de transferência!");
 });
 
-// ===== HERDAR TEMA =====
+// ==============================
+// HERDAR TEMA
+// ==============================
 const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
 document.body.classList.toggle("light-theme", isLightTheme);
-
-const highlightUserName = (text, userName) => {
-  if (!userName) return text;
-  const regex = new RegExp(`\\b(${userName})\\b`, "gi");
-  return text.replace(regex, "**$1**"); // adiciona negrito
-};
-
-const highlightedText = highlightUserName(text, userName);
-generatedText.innerHTML = marked.parse(highlightedText);
