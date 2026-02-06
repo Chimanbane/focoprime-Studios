@@ -1,5 +1,12 @@
 let typingInterval = null;
-const stopTypingBtn = document.getElementById("stopTypingBtn");
+let isTyping = false;
+
+const generateBtn = document.getElementById("generateTextBtn");
+const generatedText = document.getElementById("generatedText");
+const copyBtn = document.getElementById("copyTextBtn");
+
+const btnText = generateBtn.querySelector(".btn-text");
+const btnIcon = generateBtn.querySelector("svg");
 const generateBtn = document.getElementById("generateTextBtn");
 const generatedText = document.getElementById("generatedText");
 const copyBtn = document.getElementById("copyTextBtn");
@@ -8,6 +15,15 @@ const copyBtn = document.getElementById("copyTextBtn");
 const userName = localStorage.getItem("user_name") || "Aluno";
 
 generateBtn.addEventListener("click", async () => {
+
+  // SE ESTIVER A DIGITAR → PARAR
+  if (isTyping) {
+    clearInterval(typingInterval);
+    isTyping = false;
+    resetButton();
+    return;
+  }
+
   const type = document.getElementById("textType").value;
   const theme = document.getElementById("textTheme").value.trim();
   const level = document.getElementById("textLevel").value;
@@ -45,10 +61,13 @@ Cria um texto para o aluno:
     const data = await response.json();
     const text = data.choices?.[0]?.message?.content || "Erro ao gerar texto.";
     const html = marked.parse(text);
-typeWriter(generatedText, html, 20);
+
+    startButtonAsStop();
+    typeWriter(generatedText, html, 20);
 
   } catch (err) {
     generatedText.textContent = "Erro na conexão com a IA.";
+    resetButton();
     console.error(err);
   }
 });
@@ -66,8 +85,6 @@ document.body.classList.toggle("light-theme", isLightTheme);
 
 function typeWriter(element, html, speed = 35) {
   element.innerHTML = "";
-  stopTypingBtn.style.display = "flex";
-
   const words = html.split(" ");
   let index = 0;
 
@@ -77,13 +94,20 @@ function typeWriter(element, html, speed = 35) {
       index++;
     } else {
       clearInterval(typingInterval);
-      stopTypingBtn.style.display = "none";
+      resetButton();
     }
   }, speed);
 }
 
 // BOTÃO PARAR GERAÇÃO //
-stopTypingBtn.addEventListener("click", () => {
-  clearInterval(typingInterval);
-  stopTypingBtn.style.display = "none";
-});
+function startButtonAsStop() {
+  isTyping = true;
+  generateBtn.classList.add("stop");
+  btnText.textContent = "Parar Geração";
+}
+
+function resetButton() {
+  isTyping = false;
+  generateBtn.classList.remove("stop");
+  btnText.textContent = "Gerar Texto";
+}
