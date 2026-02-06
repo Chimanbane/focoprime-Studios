@@ -42,7 +42,7 @@ Cria um texto para o aluno:
 
     const data = await response.json();
     const text = data.choices?.[0]?.message?.content || "Erro ao gerar texto.";
-    generatedText.textContent = text;
+    generatedText.innerHTML = marked.parse(text);
 
   } catch (err) {
     generatedText.textContent = "Erro na conexão com a IA.";
