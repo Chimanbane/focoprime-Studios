@@ -179,3 +179,12 @@ button .material-symbols-rounded {
 .stop-typing-btn i {
   font-size: 1rem;
 }
+
+/* PARAR EFECT */
+.generateTextBtn.stop {
+  background: linear-gradient(135deg, #ff4d4d, #ff7a7a);
+}
+
+.generateTextBtn.stop:hover {
+  transform: scale(1.03);
+  }
