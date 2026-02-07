@@ -209,11 +209,11 @@ body.chats-active .container :where(.app-header, .suggestions) {
 }
 
 .chats-container .message .avatar {
-  width: 43px;
-  height: 43px;
+  width: 34px;
+  height: 34px;
   flex-shrink: 0;
   align-self: flex-start;
-  border-radius: 50%;
+  border-radius: 12px;
   padding: 6px;
   margin-right: -7px;
   background: linear-gradient(to right, #1d7efd, #8f6fff);
