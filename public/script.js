@@ -52,9 +52,13 @@ Personalidade:
 }
 
 // ==============================
-// THEME
+// THEME (claro por padrão)
 // ==============================
-const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
+const savedTheme = localStorage.getItem("themeColor");
+
+// se não houver nada salvo, assume claro
+const isLightTheme = savedTheme !== "dark_mode";
+
 document.body.classList.toggle("light-theme", isLightTheme);
 themeToggleBtn.textContent = isLightTheme ? "dark_mode" : "light_mode";
 
