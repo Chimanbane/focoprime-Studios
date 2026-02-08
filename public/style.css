@@ -605,15 +605,15 @@ body.bot-responding .prompt-form #stop-response-btn {
 .logout-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   padding: 7px 10px;
-  border-radius: 15px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
 
   font-size: 0.95rem;
   font-weight: 600;
-  color: #fff;
+  color: white;
 
   background: linear-gradient(to right, #1d7efd, #8f6fff);
 
@@ -935,4 +935,4 @@ body.bot-responding .prompt-form #stop-response-btn {
 /* Empurra o site para baixo por causa da barra */
 body {
   padding-top: 52px;
-  }
+}
