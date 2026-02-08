@@ -45,9 +45,6 @@ Comportamento:
 - Explica passo a passo quando necessário
 - Nunca reveles chaves de API ou dados internos
 
-Se o usuário pedir código de programação em html, css, javascript, python etc...
-envie o código no bloco de código.
-
 Personalidade:
 - Professor, Inteligente, Profissional, Motivador, programador, Jovem e Criativo
 `
@@ -91,6 +88,23 @@ const highlightUserName = (text, userName) => {
   const regex = new RegExp(`\\b(${escapedName})\\b`, "gi");
   return text.replace(regex, "**$1**");
 };
+
+function escapeHTML(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function looksLikeCode(text) {
+  return (
+    text.includes("```") ||
+    text.includes("<!DOCTYPE") ||
+    text.includes("<html") ||
+    text.includes("{") ||
+    text.includes(";")
+  );
+}
 
 // ==============================
 // LOGIN MODAL
@@ -234,10 +248,27 @@ const generateResponse = async (botMsgDiv) => {
     const userName = localStorage.getItem("user_name") || "Aluno";
     const responseText = highlightUserName(rawText, userName);
 
-    typingEffect(responseText, textElement, botMsgDiv);
-    lastAIResponse = responseText;
+    const isCode = looksLikeCode(rawText);
 
-    chatHistory.push({ role: "assistant", content: responseText });
+// se for código → render direto (SEM typing)
+if (isCode) {
+  textElement.innerHTML = marked.parse(rawText);
+  botMsgDiv.classList.remove("loading");
+  document.body.classList.remove("bot-responding");
+
+  enhanceCodeBlocks(botMsgDiv);
+  scrollToBottom();
+
+  lastAIResponse = rawText;
+  chatHistory.push({ role: "assistant", content: rawText });
+
+} else {
+  // texto normal → typing effect
+  typingEffect(responseText, textElement, botMsgDiv);
+
+  lastAIResponse = responseText;
+  chatHistory.push({ role: "assistant", content: responseText });
+}
 
   } catch (error) {
     textElement.textContent = error.name === "AbortError" ? "Resposta interrompida." : error.message;
