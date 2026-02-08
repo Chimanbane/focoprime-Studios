@@ -314,15 +314,14 @@ fileUploadWrapper.style.display = "flex";
 // PDF
 // ==============================
 async function gerarPDF(texto) {
-  const res = await fetch("/api/gerar_pdf", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ texto })
-  });
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "focoprime.pdf";
-  a.click();
-  }
+  // Criar um novo PDF
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Adicionar texto (ajusta margens e largura)
+  const linhas = doc.splitTextToSize(texto, 180); // 180mm de largura
+  doc.text(linhas, 10, 20); // x=10, y=20
+
+  // Download do PDF
+  doc.save("focoprime.pdf");
+}
