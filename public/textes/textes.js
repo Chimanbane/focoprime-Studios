@@ -105,8 +105,13 @@ function resetButton() {
   btnText.textContent = "Gerar Texto";
 }
 
-// ===== HERDAR TEMA =====
-const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
+// ===== HERDAR TEMA DO PRINCIPAL (CLARO POR PADRÃO) =====
+const savedTheme = localStorage.getItem("themeColor");
+
+// no principal: light_mode | dark_mode
+const isLightTheme = savedTheme !== "dark_mode";
+
+// aplica exatamente o mesmo comportamento
 document.body.classList.toggle("light-theme", isLightTheme);
 
 // ANIMAÇÃO DE ENTRADA
