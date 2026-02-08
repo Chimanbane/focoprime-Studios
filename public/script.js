@@ -337,5 +337,3 @@ window.addEventListener("load", () => {
     loader.classList.add("hidden");
   }, 2000); // mantém loader 2s antes de desaparecer
 });
-
-
