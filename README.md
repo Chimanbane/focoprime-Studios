@@ -2,7 +2,7 @@
 
 A focoprime é a plataforma oficial da Focoprime creative mozambique studios. fundada por Iriano Gonçalves Chimanbane em Vilankulo/Inhambane Moçambique 
 
-Check the demo [here](https://demo.once-ui.com).
+Check the demo [here](https://ai-focoprime.online).
 
 ![Once UI](public/images/og/home.jpg)
 
