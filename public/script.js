@@ -325,3 +325,13 @@ async function gerarPDF(texto) {
   // Download do PDF
   doc.save("focoprime.pdf");
 }
+
+// ANIMAÇÃO DE ENTRADA
+window.addEventListener("load", () => {
+  const loader = document.getElementById("ai-loader");
+  setTimeout(() => {
+    loader.classList.add("hidden");
+  }, 2000); // mantém loader 2s antes de desaparecer
+});
+
+
