@@ -1,46 +1,32 @@
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import A4
-from reportlab.lib import colors
-from reportlab.lib.styles import ParagraphStyle
+from reportlab.pdfgen import canvas
 from io import BytesIO
-import json
 
 def handler(request):
-
-    body = request.get("body", "{}")
-    data = json.loads(body)
-
-    texto = data.get("texto", "Documento vazio")
+    data = request.get_json()
+    texto = data.get("texto", "Sem conteúdo")
 
     buffer = BytesIO()
+    pdf = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
 
-    doc = SimpleDocTemplate(buffer, pagesize=A4)
+    y = height - 40
+    for linha in texto.split("\n"):
+        pdf.drawString(40, y, linha)
+        y -= 14
+        if y < 40:
+            pdf.showPage()
+            y = height - 40
 
-    styles = getSampleStyleSheet()
-
-    estilo = ParagraphStyle(
-        "NormalCustom",
-        parent=styles["Normal"],
-        fontSize=12,
-        textColor=colors.black
-    )
-
-    elementos = []
-
-    elementos.append(Paragraph("Focoprime IA – Documento", styles["Title"]))
-    elementos.append(Spacer(1, 20))
-    elementos.append(Paragraph(texto, estilo))
-
-    doc.build(elementos)
-
-    pdf = buffer.getvalue()
+    pdf.save()
+    buffer.seek(0)
 
     return {
         "statusCode": 200,
         "headers": {
-            "Content-Type": "application/pdf"
+            "Content-Type": "application/pdf",
+            "Content-Disposition": "attachment; filename=focoprime.pdf"
         },
-        "body": pdf,
+        "body": buffer.getvalue(),
         "isBase64Encoded": False
     }
