@@ -1004,4 +1004,73 @@ body {
 
 .copy-code-btn:hover {
   background: #0264e3;
+  }
+  
+  /* APP INSTALL BAR */
+.app-install-bar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 680px;
+  background: linear-gradient(135deg, #1d7efd, #8f6fff);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  z-index: 9999;
+  animation: slideUp .6s ease;
 }
+
+.app-install-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  color: #fff;
+}
+
+.app-icon img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+.app-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-text strong {
+  font-size: 1rem;
+}
+
+.app-text span {
+  font-size: .85rem;
+  opacity: .9;
+}
+
+.app-install-btn {
+  background: #fff;
+  color: #1d7efd;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-install-btn:hover {
+  background: #f2f2f2;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  }
