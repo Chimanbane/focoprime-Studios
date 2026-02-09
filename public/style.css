@@ -1129,4 +1129,20 @@ body {
 
 .app-install-close:active {
   transform: scale(0.9);
-    }
+  }
+  
+  /* REMOVER ÍCONE / AVATAR DA IA */
+.bot-message .avatar {
+  display: none;
+}
+
+/* Ajustar layout da mensagem da IA */
+.bot-message {
+  align-items: flex-start;
+}
+
+/* Texto da IA ocupa todo o espaço */
+.bot-message .message-text {
+  padding-left: 0;
+  max-width: 100%;
+}
