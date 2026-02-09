@@ -1073,4 +1073,43 @@ body {
     opacity: 1;
     transform: translate(-50%, 0);
   }
+}
+
+/* ===== APP INSTALL BAR ===== */
+.app-install-bar {
+  position: relative;
+}
+
+/* Botão fechar */
+.app-install-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.2rem;
+
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
+}
+
+.app-install-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg) scale(1.1);
+}
+
+.app-install-close:active {
+  transform: scale(0.9);
   }
