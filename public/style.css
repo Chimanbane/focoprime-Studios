@@ -231,7 +231,7 @@ body.chats-active .container :where(.app-header, .suggestions) {
 }
 
 .chats-container .message .message-text {
-  padding: 3px 16px;
+  padding: 3px 6px;
   word-wrap: break-word;
   white-space: pre-line;
 }
@@ -454,7 +454,7 @@ body.bot-responding .prompt-form #stop-response-btn {
 .message-time {
   font-size: 0.75rem;
   opacity: 0.6;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   display: block;
 }
 
@@ -467,7 +467,7 @@ body.bot-responding .prompt-form #stop-response-btn {
 /* Hora do bot (alinhada à esquerda) */
 .bot-message .message-time {
   text-align: left;
-  margin-left: 15px; /* alinha com o texto, não com o avatar */
+  margin-left: 7px; /* alinha com o texto, não com o avatar */
 }
 
 /* Container do bot */
@@ -1145,4 +1145,4 @@ body {
 .bot-message .message-text {
   padding-left: 0;
   max-width: 100%;
-}
+  }
