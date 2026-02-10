@@ -363,3 +363,24 @@ async function gerarPDF(texto) {
   doc.save("focoprime.pdf");
 }
 
+// ===== BLOQUEAR UPLOAD E MOSTRAR UPGRADE =====
+const addFileBtn = document.getElementById("add-file-btn");
+const upgradeModal = document.getElementById("upgradeModal");
+const closeUpgrade = document.getElementById("closeUpgrade");
+
+if (addFileBtn) {
+  addFileBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    upgradeModal.classList.add("show");
+  });
+}
+
+closeUpgrade.addEventListener("click", () => {
+  upgradeModal.classList.remove("show");
+});
+
+upgradeModal.addEventListener("click", (e) => {
+  if (e.target === upgradeModal) {
+    upgradeModal.classList.remove("show");
+  }
+});
