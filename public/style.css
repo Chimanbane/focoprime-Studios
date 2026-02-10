@@ -974,16 +974,42 @@ body.bot-responding .prompt-form #stop-response-btn {
   opacity: 0.8;
 }
 
+/* Botão Upgrade */
 .top-app-btn {
-  gap: 8px;
-  background: gold;
-  color: #000;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
+  display: inline-flex;              /* 🔑 chave do alinhamento */
+  align-items: center;               /* centra verticalmente */
+  justify-content: center;
+  gap: 8px;                           /* espaço entre ícone e texto */
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
   text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;                     /* evita desalinhamento */
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
+}
+
+/* Ícone */
+.top-app-btn .material-symbols-rounded {
+  font-size: 20px;
+  line-height: 1;                     /* MUITO importante */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Texto */
+.top-app-btn .btn-text {
   white-space: nowrap;
+}
+
+/* Hover premium */
+.top-app-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 /* Empurra o site para baixo por causa da barra */
