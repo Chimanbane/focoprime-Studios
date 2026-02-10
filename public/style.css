@@ -1166,40 +1166,4 @@ body {
 
 .google-btn:hover {
   opacity: 0.9;
-}
-
-.ai-loader {
-  position: fixed;
-  inset: 0;
-  background: #101623;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.ai-loader.hide {
-  opacity: 0;
-  transform: scale(1.05);
-  pointer-events: none;
-}
-
-.login-modal {
-  pointer-events: auto;
-}
-
-.login-modal.hidden {
-  display: none;
-  pointer-events: none;
-}
-
-.prompt-container {
-  z-index: 10000;
-}
-
-#send-prompt-btn {
-  pointer-events: auto;
-  z-index: 10001;
-}
+  }
