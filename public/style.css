@@ -1390,27 +1390,8 @@ body {
   cursor: pointer;
 }
 
-/* ===== UPGRADE MODAL HEADER ===== */
 .upgrade-header {
-  background: linear-gradient(to right, #1d7efd, #8f6fff);
-  padding: 28px 22px;
   text-align: center;
-  color: #fff;
-  border-radius: 16px 16px 0 0;
-}
-
-/* Título */
-.upgrade-header h2 {
-  margin-top: 12px;
-  font-size: 1.7rem;
-  font-weight: 600;
-}
-
-/* Descrição */
-.upgrade-header p {
-  margin-top: 6px;
-  font-size: 0.95rem;
-  opacity: 0.9;
 }
 
 /* ÍCONE DO HEADER */
@@ -1431,6 +1412,17 @@ body {
   width: 28px;
   height: 28px;
   color: #fff;
+}
+
+.upgrade-header h2 {
+  margin-top: 10px;
+  font-size: 1.8rem;
+}
+
+.upgrade-header p {
+  font-size: 0.95rem;
+  color: var(--subheading-color);
+  margin-top: 4px;
 }
 
 .upgrade-features {
@@ -1481,14 +1473,4 @@ body {
   margin-top: 12px;
   font-size: 0.8rem;
   color: var(--placeholder-color);
-}
-
-.upgrade-logo {
-  font-size: 50px;
-  color: #4285f4;
-  }
-
-.upgrade-box {
-  border-radius: 16px;
-  overflow: hidden;
 }
