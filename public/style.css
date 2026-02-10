@@ -1287,4 +1287,53 @@ body {
 .user-panel-overlay.show {
   opacity: 1;
   pointer-events: all;
-      }
+}
+
+
+/* ===== USER CHIP ===== */
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--secondary-color);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.user-chip:hover {
+  background: var(--secondary-hover-color);
+}
+
+.user-chip img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ===== UPGRADE BUTTON ===== */
+.upgrade-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #facc15, #f97316);
+  color: #000;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(250,204,21,0.3);
+  transition: 0.3s ease;
+}
+
+.upgrade-btn i {
+  font-size: 18px;
+}
+
+.upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(250,204,21,0.5);
+}
