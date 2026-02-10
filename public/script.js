@@ -109,36 +109,6 @@ function looksLikeCode(text) {
 // ==============================
 // LOGIN MODAL
 // ==============================
-const loginModal = document.getElementById("loginModal");
-const loginBtn = document.getElementById("loginBtn");
-const loginNameInput = document.getElementById("loginName");
-
-let savedUser = localStorage.getItem("user_name");
-if (savedUser) {
-  loginModal.style.display = "none";
-  document.querySelector(".heading").textContent = `Olá, ${savedUser}`;
-  updateSystemPrompt(savedUser);
-} else {
-  loginModal.style.display = "flex";
-  updateSystemPrompt("Aluno");
-}
-
-loginBtn.addEventListener("click", () => {
-  const name = loginNameInput.value.trim();
-  if (!name) {
-    loginNameInput.style.border = "1px solid #d62939";
-    return;
-  }
-  localStorage.setItem("user_name", name);
-  loginModal.style.display = "none";
-  document.querySelector(".heading").textContent = `Olá, ${name}`;
-  updateSystemPrompt(name);
-});
-
-document.getElementById("logoutBtn")?.addEventListener("click", () => {
-  localStorage.clear();
-  location.reload();
-});
 
 // ==============================
 // MESSAGE ACTIONS
@@ -392,11 +362,3 @@ async function gerarPDF(texto) {
   // Download do PDF
   doc.save("focoprime.pdf");
 }
-
-// ANIMAÇÃO DE ENTRADA
-window.addEventListener("load", () => {
-  const loader = document.getElementById("ai-loader");
-  setTimeout(() => {
-    loader.classList.add("hidden");
-  }, 2000); // mantém loader 2s antes de desaparecer
-});
