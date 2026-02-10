@@ -58,11 +58,6 @@
     Go to WhatsApp
   </a>
 </div>
-  <!--- ANÚNCIO POPUP -->
-  <script async src="https://ss.mrmnd.com/interstitial.js" data-mndintid="81841b49-b361-42f5-9146-f0cb86f5adf1"></script>
-  
-  <!--- ANÚNCIO IN PAGE -->
-  <script async src="https://ss.mrmnd.com/static/ef83077b-257a-4c01-90a3-48d11e0ac6b7.js"></script>
   
     <header>
         <div class="cabeca">
@@ -359,6 +354,7 @@ fill="currentColor" viewBox="0 0 24 24" >
   const loginModal = document.getElementById("loginModal");
   const googleBtn = document.getElementById("googleLoginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
+  const loader = document.getElementById("ai-loader");
 
   // Login Google
   googleBtn.addEventListener("click", async () => {
@@ -371,16 +367,22 @@ fill="currentColor" viewBox="0 0 24 24" >
 
   // Sessão
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      loginModal.style.display = "none";
+  // FECHAR LOADER SEMPRE
+  if (loader) {
+    loader.classList.add("hide");
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 500);
+  }
 
-      document.querySelector(".heading").textContent =
-        "Olá, " + user.displayName;
-
-    } else {
-      loginModal.style.display = "flex";
-    }
-  });
+  if (user) {
+    loginModal.style.display = "none";
+    document.querySelector(".heading").textContent =
+      "Olá, " + user.displayName;
+  } else {
+    loginModal.style.display = "flex";
+  }
+});
 
   // Logout
   logoutBtn.addEventListener("click", () => {
@@ -389,4 +391,4 @@ fill="currentColor" viewBox="0 0 24 24" >
 </script>
 </body>
 
-  </html>
+                                                                                                                                 </html>
