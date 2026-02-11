@@ -1396,11 +1396,9 @@ body {
 
 /* ÍCONE DO HEADER */
 .upgrade-logo {
-  width: 54px;
-  height: 54px;
   margin: 0 auto;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(to right, #1d7efd, #8f6fff);
   display: flex;
   align-items: center;
   justify-content: center;
