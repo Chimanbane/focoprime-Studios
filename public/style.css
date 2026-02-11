@@ -1424,7 +1424,7 @@ body {
   color: var(--subheading-color);
   margin-top: 4px;
   padding: 10px;
-  background: var(--secondary-color);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 12px;
 }
 
