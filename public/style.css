@@ -1438,13 +1438,8 @@ body {
   color: #fff;
   border-radius: 50px;
   background: linear-gradient(to right, #1d7efd, #8f6fff);
-  box-shadow: 0 0 15px rgba(143, 111, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(29, 126, 253, 0.4);
   letter-spacing: 1px;
-  transition: 0.3s ease;
-}
-
-.titu:hover {
-  transform: scale(1.05);
 }
 
 .upgrade-features {
