@@ -510,6 +510,11 @@ const passwordInput = document.getElementById("passwordInput");
 const emailLoginBtn = document.getElementById("emailLoginBtn");
 const emailRegisterBtn = document.getElementById("emailRegisterBtn");
 
+const registerName = document.getElementById("registerName");
+const registerEmail = document.getElementById("registerEmail");
+const registerPassword = document.getElementById("registerPassword");
+const photoInput = document.getElementById("photoInput");
+
 const logoutBtn = document.getElementById("logoutBtn");
 const logoutReal = document.getElementById("logoutReal");
 
@@ -554,10 +559,6 @@ emailLoginBtn.addEventListener("click", async () => {
 /* ===============================
    📝 REGISTO
 ================================= */
-const registerName = document.getElementById("registerName");
-const registerEmail = document.getElementById("registerEmail");
-const registerPassword = document.getElementById("registerPassword");
-
 emailRegisterBtn.addEventListener("click", async () => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -568,12 +569,38 @@ emailRegisterBtn.addEventListener("click", async () => {
 
     const user = userCredential.user;
 
-    // Salvar nome
+    let photoData = null;
+
+    if (photoInput.files[0]) {
+      const reader = new FileReader();
+      photoData = await new Promise((resolve) => {
+        reader.onload = e => resolve(e.target.result);
+        reader.readAsDataURL(photoInput.files[0]);
+      });
+    }
+
     await updateProfile(user, {
-      displayName: registerName.value
-    });
+  displayName: registerName.value
+});
+
+// Salvar foto localmente
+if (photoData) {
+  localStorage.setItem("userPhoto_" + user.uid, photoData);
+}
+
+    // 🔥 FORÇA ATUALIZAÇÃO DO USER
+    await user.reload();
+    const updatedUser = auth.currentUser;
+
+    heading.textContent = "Olá, " + updatedUser.displayName;
+    userChipName.textContent =
+      updatedUser.displayName.split(" ")[0];
+
+    userPhoto.src =
+      updatedUser.photoURL || "images/user-placeholder.png";
 
     alert("Conta criada com sucesso!");
+
   } catch (error) {
     alert("Erro: " + error.message);
   }
@@ -584,20 +611,25 @@ emailRegisterBtn.addEventListener("click", async () => {
 ================================= */
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // Esconder modal
+
     loginModal.style.display = "none";
 
-    // Atualizar interface
     heading.textContent = "Olá, " + (user.displayName || "Aluno");
 
     userEmail.value = user.email;
     userName.value = user.displayName || "";
 
-    userPhoto.src =
-      user.photoURL || "images/user-placeholder.png";
-
     userChipName.textContent =
       user.displayName?.split(" ")[0] || "Usuário";
+
+    // 🔥 FOTO LOCAL
+    const savedPhoto = localStorage.getItem("userPhoto_" + user.uid);
+
+    if (savedPhoto) {
+      userPhoto.src = savedPhoto;
+    } else {
+      userPhoto.src = "images/user-placeholder.png";
+    }
 
   } else {
     loginModal.style.display = "flex";
@@ -690,7 +722,6 @@ showLogin.addEventListener("click", () => {
   loginSubtitle.textContent = "Entrar com a sua conta";
 });
 
-const photoInput = document.getElementById("photoInput");
 const previewPhoto = document.getElementById("previewPhoto");
 const changePhotoBtn = document.getElementById("changePhotoBtn");
 
@@ -711,4 +742,4 @@ photoInput.addEventListener("change", () => {
 </script>
 </body>
 
-                  </html>
+      </html>
