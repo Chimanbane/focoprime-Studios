@@ -1424,7 +1424,7 @@ body {
   color: var(--subheading-color);
   margin-top: 4px;
   padding: 10px;
-  background: linear-gradient(to right, #1d7efd, #8f6fff);
+  background: var(--secondary-color);
   border-radius: 12px;
 }
 
