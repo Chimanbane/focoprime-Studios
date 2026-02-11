@@ -1502,3 +1502,28 @@ body {
   font-size: 0.8rem;
   color: var(--placeholder-color);
 }
+
+.email-input {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 8px;
+  border: none;
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.email-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #1d7efd, #8f6fff);
+  color: white;
+  cursor: pointer;
+}
+
+.email-btn.register {
+  background: #28a745;
+  }
