@@ -1443,15 +1443,14 @@ body {
 }
 
 .pro-badge {
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
   color: white;
-  background: linear-gradient(to right, #1d7efd, #8f6fff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, #1d7efd, #8f6fff);
+  box-shadow: 0 4px 12px rgba(29, 126, 253, 0.4);
 }
 
 .upgrade-features {
