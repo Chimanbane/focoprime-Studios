@@ -4,6 +4,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Focoprime AI</title>
   <!-- Favicon -->
@@ -37,358 +38,176 @@
 <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
 
 <!-- Linguagens principais -->
-<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-html.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 </head>
 
 <body>
-  <!-- TOP APP BAR (Google Play) -->
-<div class="top-app-bar">
-  <div class="top-app-left">
-    <strong>FocoPrime AI</strong>
-    <span>Get a better experience</span>
-  </div>
-
-  <a
-  href="https://whatsapp.com/channel/0029Vb7k17AJJhzQxbRkXl2l"
-  target="_blank"
-  class="top-app-btn"
->
-  <span class="material-symbols-rounded">
-    <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M20.33 3.06a1 1 0 0 0-1.11.32L16 7.4l-3.22-4.02c-.38-.47-1.18-.47-1.56 0L8 7.4 4.78 3.38c-.27-.33-.71-.46-1.11-.32S3 3.58 3 4v15c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-.42-.27-.8-.67-.94M7.22 9.63c.38.47 1.18.47 1.56 0L12 5.61l3.22 4.02c.38.47 1.18.47 1.56 0L19 6.86v8.15H5V6.85l2.22 2.77ZM5 19.01v-2h14v2z"></path>
-</svg>
-  </span>
-  <span class="btn-text">Upgrade Plan</span>
-</a>
-</div>
+  <!--- TOP UP BAR CABEÇALHO  --->
+  <div id="top-app-bar"></div>
   
-    <header>
-        <div class="cabeca">
-            <div class="logo">
-                <img src="images/Logo.png" alt="Logo">
-            </div>
-            
-            <!--- Icones sociais -->
-            <button id="logoutBtn" class="user-chip">
-  <img id="userPhoto" src="images/user-placeholder.png" />
-  <span id="userChipName">Usuário</span>
-</button>
-        </div>
-    </header>
-    
-    <!-- ===== USER PANEL (LEFT SIDEBAR) ===== -->
-<div id="userPanel" class="user-panel">
-  <div class="user-panel-header">
-    <h3>Conta</h3>
-    <button id="closeUserPanel">
-      <i class="ri-close-line"></i>
-    </button>
-  </div>
-
-  <div class="user-panel-body">
-    <div class="user-avatar">
-      <i class="ri-user-3-fill"></i>
-    </div>
-
-    <label>Email</label>
-    <input type="email" id="userEmail" disabled>
-
-    <label>Nome do usuário</label>
-    <input type="text" id="userName">
-
-    <button id="saveUserName" class="save-btn">
-      <i class="ri-save-3-line"></i> Salvar alterações
-    </button>
-  </div>
-
-  <div class="user-panel-footer">
-    <button id="logoutReal" class="logout-btn danger">
-      <i class="ri-logout-box-r-line"></i> Sair da conta
-    </button>
-  </div>
-</div>
-
-<div id="userPanelOverlay" class="user-panel-overlay"></div>
+  <!--- CABEÇALHO FOCOPRIME  --->
+  <div id="header"></div>
+  
+  <!--- USER PAINEL --->
+  <div id="userPanelContainer"></div>
+  
   <div class="container">
     
-    <!-- APP INSTALL BAR (SÓ NO NAVEGADOR) -->
-<div id="appInstallBar" class="app-install-bar">
-  <!-- BOTÃO FECHAR -->
-  <button id="closeAppBar" class="app-install-close" aria-label="Fechar">
-    <i class="ri-close-line"></i>
-  </button>
-  <div class="app-install-content">
-    <div class="app-icon">
-      <img src="images/groq.png" alt="FocoPrime App">
-    </div>
-
-    <div class="app-text">
-      <strong>FocoPrime IA</strong>
-      <span>Tenha uma melhor experiência no app</span>
-    </div>
-
-    <a
-      href="https://apk.e-droid.net/apk/app3258844-f45kmx.apk?v=7"
-      class="app-install-btn"
-      target="_blank"
-    >
-      Baixar App
-    </a>
-  </div>
-</div>
-
-<!-- ===== UPGRADE PRO MODAL ===== -->
-<div id="upgradeModal" class="upgrade-modal">
-  <div class="upgrade-box">
-    <button class="upgrade-close" id="closeUpgrade">&times;</button>
-
-    <div class="upgrade-header">
-      <span class="upgrade-logo">
-        <svg  xmlns="http://www.w3.org/2000/svg" width="45" height="45"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M17.31 14H9.72L5.95 2.68A1 1 0 0 0 5 2H2v2h2.28l3.54 10.63A2 2 0 0 0 9.72 16h7.59a2 2 0 0 0 1.87-1.3l2.76-7.35-1.87-.7zM10 18a2 2 0 1 0 0 4 2 2 0 1 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 1 0 0-4"></path><path d="m11.71 7.29-1.42 1.42 2.71 2.7 4.71-4.7-1.42-1.42L13 8.59z"></path>
-</svg>
-      </span>
-      <div class="upgrade-title">
-  <h2>Upgrade para</h2>
-  <span class="pro-badge">PRO</span>
-</div>
-      <p>Desbloqueie recursos avançados da FocoPrime IA e tenha acesso total a focoprime</p>
-    </div>
-
-    <ul class="upgrade-features">
-      <li>
-        <span class="material-symbols-rounded">image</span>
-        Fotos ilimitadas
-      </li>
-      <li>
-        <span class="material-symbols-rounded">all_inclusive</span>
-        Mensagens ilimitadas
-      </li>
-      <li>
-        <span class="material-symbols-rounded">record_voice_over</span>
-        Explicação por voz
-      </li>
-      <li>
-        <span class="material-symbols-rounded">spellcheck</span>
-        Resolução de textos
-      </li>
-      <li>
-        <span class="material-symbols-rounded">hub</span>
-        Modelos ilimitados
-      </li>
-    </ul>
-
-    <button class="upgrade-btn">
-      <span class="material-symbols-rounded">
-        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M20.33 3.06a1 1 0 0 0-1.11.32L16 7.4l-3.22-4.02c-.38-.47-1.18-.47-1.56 0L8 7.4 4.78 3.38c-.27-.33-.71-.46-1.11-.32S3 3.58 3 4v15c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-.42-.27-.8-.67-.94M7.22 9.63c.38.47 1.18.47 1.56 0L12 5.61l3.22 4.02c.38.47 1.18.47 1.56 0L19 6.86v8.15H5V6.85l2.22 2.77ZM5 19.01v-2h14v2z"></path>
-</svg>
-      </span>
-      Fazer Upgrade Agora
-    </button>
-
-    <span class="upgrade-note">
-      Cancelar quando quiser • Seguro • Rápido
-    </span>
-  </div>
-</div>
+    <!--- APK RECOMENDAÇÃO  --->
+    <div id="appInstallBar"></div>
     
-    <!-- LOADER DE ENTRADA -->
-<div id="ai-loader" class="ai-loader">
-  <div class="loader-logo">
-    <img src="images/entrada.png" alt="FocoPrime IA" />
-  </div>
-  <div class="loader-dots">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <!-- ASSINATURA -->
-  <div class="loader-signature">
-    Criado por <strong>Iriano Gonçalves</strong>
-  </div>
-  <div class="loader-parag">
-    <strong>Focoprime@2026 Direitos reservados</strong>
-  </div>
-</div>
-    <!-- ===== SIDEBAR MENU DIREITA ===== -->
-<div id="sideMenu" class="side-menu">
-  <div class="side-menu-header">
-    <img src="images/Logo-header.png">
-    <button id="closeMenuBtn" class="material-symbols-rounded">close</button>
-  </div>
-
-  <ul class="side-menu-list">
-    <li class="side-item" id="newChatBtn">
-      <span class="material-symbols-rounded"><i class="ri-chat-smile-ai-fill"></i></span>
-      <span>Nova mensagem</span>
-    </li>
-
-    <li class="side-item" onclick="location.href='historias/index.html'">
-      <span class="material-symbols-rounded">
-        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M21.21 8.11c-.25-.59-.56-1.16-.92-1.7-.36-.53-.77-1.03-1.22-1.48s-.95-.86-1.48-1.22c-.54-.36-1.11-.67-1.7-.92-.6-.26-1.24-.45-1.88-.58-1.31-.27-2.72-.27-4.03 0-.64.13-1.27.33-1.88.58-.59.25-1.16.56-1.7.92-.53.36-1.03.77-1.48 1.22-.17.17-.32.35-.48.52L1.99 3v6h6L5.86 6.87c.15-.18.31-.36.48-.52.36-.36.76-.69 1.18-.98.43-.29.89-.54 1.36-.74.48-.2.99-.36 1.5-.47 1.05-.21 2.18-.21 3.23 0 .51.11 1.02.26 1.5.47.47.2.93.45 1.36.74.42.29.82.62 1.18.98s.69.76.98 1.18c.29.43.54.89.74 1.36.2.48.36.99.47 1.5.11.53.16 1.07.16 1.61a7.85 7.85 0 0 1-.63 3.11c-.2.47-.45.93-.74 1.36-.29.42-.62.82-.98 1.18s-.76.69-1.18.98c-.43.29-.89.54-1.36.74-.48.2-.99.36-1.5.47-1.05.21-2.18.21-3.23 0a8 8 0 0 1-1.5-.47c-.47-.2-.93-.45-1.36-.74-.42-.29-.82-.62-1.18-.98s-.69-.76-.98-1.18c-.29-.43-.54-.89-.74-1.36-.2-.48-.36-.99-.47-1.5A8 8 0 0 1 3.99 12h-2c0 .68.07 1.35.2 2.01.13.64.33 1.27.58 1.88.25.59.56 1.16.92 1.7.36.53.77 1.03 1.22 1.48s.95.86 1.48 1.22c.54.36 1.11.67 1.7.92.6.26 1.24.45 1.88.58.66.13 1.33.2 2.01.2s1.36-.07 2.01-.2c.64-.13 1.27-.33 1.88-.58.59-.25 1.16-.56 1.7-.92.53-.36 1.03-.77 1.48-1.22s.86-.95 1.22-1.48c.36-.54.67-1.11.92-1.7.26-.6.45-1.24.58-1.88.13-.66.2-1.34.2-2.01s-.07-1.35-.2-2.01c-.13-.64-.33-1.27-.58-1.88Z"/><path d="M11 7v6h6v-2h-4V7z"/>
-</svg>
-      </span>
-      <span>Histórico</span>
-    </li>
-
-    <li class="side-item" onclick="location.href='textes/textes.html'">
-      <span class="material-symbols-rounded">
-        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="m21.09,7.33c1.22-1.22,1.22-3.2,0-4.41-1.22-1.22-3.2-1.22-4.41,0L7.8,11.78c-.71.06-1.41.27-2.01.64-1.17.72-1.81,1.89-1.81,3.29,0,.3.02.59.04.86.08,1.03.11,1.42-1.47,2.21-.32.16-.53.47-.55.82-.02.35.14.69.43.89,1,.69,2.76,1.49,4.62,1.49,1.35,0,2.74-.42,3.92-1.6,1.12-1.12,1.71-2.85,1.55-4.49l8.56-8.56Zm-3-3c.44-.44,1.15-.44,1.59,0s.44,1.15,0,1.58l-7.86,7.86c-.4-.63-.96-1.15-1.65-1.52l7.92-7.92Zm-8.53,14.64c-1.44,1.44-3.31,1.1-4.58.61,1.09-.98,1.13-1.99,1.04-3.16-.02-.22-.04-.46-.04-.71,0-.7.29-1.23.86-1.59.68-.42,1.66-.49,2.31-.16.65.32.99.81,1.18,1.28l-.05.05.1.1c.05.16.09.32.12.47.18,1.09-.22,2.37-.96,3.11Z"/><path d="m2.32,6.49l2.21.98.98,2.21c.09.19.28.32.49.32s.4-.12.49-.32l.98-2.21,2.21-.98c.19-.09.32-.28.32-.49s-.12-.4-.32-.49l-2.21-.98-.98-2.21c-.08-.19-.27-.32-.48-.32-.21-.02-.4.12-.49.31l-.99,2.14-2.23,1.07c-.19.09-.3.28-.3.49s.13.39.32.48Z"/><path d="m21.76,18.63l-1.66-.74-.74-1.66c-.06-.14-.21-.24-.36-.24-.16-.01-.3.09-.37.23l-.74,1.6-1.67.8c-.14.07-.23.21-.23.37,0,.16.1.3.24.36l1.66.74.74,1.66c.06.14.21.24.37.24s.3-.09.37-.24l.74-1.66,1.66-.74c.14-.06.24-.21.24-.37s-.09-.3-.24-.37Z"/>
-</svg>
-      </span>
-      <span>Textes Inteligentes</span>
-    </li>
-
-    <li class="side-item">
-      <span class="material-symbols-rounded">settings</span>
-      <span>Definições</span>
-    </li>
-    
-    <!--- Botão de novidades --->
-  <li class="side-item" onclick="location.href='novidades/news.html'">
-    <span class="material-symbols-rounded">
-      <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M18.5 10H22v2h-3.5zm.05-1.17 1.5-1 1.5-1L21 6l-.55-.83-1.5 1-1.5 1L18 8zm0 4.34L18 14l-.55.83 1.5 1 1.5 1L21 16l.55-.83-1.5-1zM15 8.18V4c0-.37-.2-.71-.53-.88s-.72-.15-1.03.05L7.69 7h-1.7c-2.21 0-4 1.79-4 4 0 1.52.86 2.82 2.1 3.5l1.94 6.77 1.92-.55-1.64-5.73h1.37l5.75 3.83c.17.11.36.17.55.17.16 0 .32-.04.47-.12.33-.17.53-.51.53-.88v-4.18c1.16-.41 2-1.51 2-2.82s-.84-2.4-2-2.82Zm-2 7.95-4.45-2.96A1 1 0 0 0 8 13H6c-1.1 0-2-.9-2-2s.9-2 2-2h2c.2 0 .39-.06.55-.17L13 5.87z"></path>
-</svg>
-    </span>
-    <span>Novidades</span>
-  </li>
-  </ul>
-
-  <!-- BOTÃO SAIR -->
-  <button id="sideLogoutBtn" class="logout-btn side-logout" class="side-menu-footer">
-    <span class="material-symbols-rounded">logout</span>
-    <span>Sair</span>
-  </button>
-</div>
-
-<!-- Overlay -->
-<div id="menuOverlay" class="menu-overlay"></div>
-    <!-- App Header -->
-    <header class="app-header">
-      <h1 class="heading">Hello, Aluno</h1>
-      <h4 class="sub-heading">Como posso ajudar-te hoje? amigo/a</h4>
-    </header>
-    
-    <!-- LOGIN MODAL -->
-<div id="loginModal" class="login-modal">
-  <div class="login-box">
-
-    <!-- HEADER -->
-    <img src="images/Logo.png" class="login-logo" />
-    <h2 id="loginTitle">Bem-vindo à FocoPrime</h2>
-    <p id="loginSubtitle">Entrar com a sua conta</p>
-
-    <!-- ================= LOGIN VIEW ================= -->
-    <div id="loginView">
-
-      <input type="email" id="emailInput" placeholder="Email" class="input-premium">
-      <input type="password" id="passwordInput" placeholder="Senha" class="input-premium">
-
-      <button id="emailLoginBtn" class="btn-premium">
-        Entrar
-      </button>
-
-      <button id="googleLoginBtn" class="btn-google">
-        <i class="fa-brands fa-google"></i> Continuar com Google
-      </button>
-
-      <p class="switch-text">
-        Ainda não tens conta?
-        <span id="showRegister">Criar conta</span>
-      </p>
-
-    </div>
-
-    <!-- ================= REGISTER VIEW ================= -->
-    <div id="registerView" style="display:none;">
-
-      <div class="avatar-upload">
-        <input type="file" id="photoInput" accept="image/*" hidden>
-        <img src="images/user-placeholder.png" id="previewPhoto">
-        <button type="button" id="changePhotoBtn">
-          <i class="ri-camera-line"></i>
+    <!--- UPGRADE PREMIUM MODAL --->
+    <!---======= UPGRADE MODE ====== --->
+    <div id="upgradeModal" class="upgrade-modal">
+      <div class="upgrade-box">
+        <button class="upgrade-close" id="closeUpgrade">&times;</button>
+        
+        <div class="upgrade-header">
+          <span class="upgrade-logo">
+            <svg xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 24 24" >
+              <!-- focoprime chat ia svg --->
+              <path d="M17.31 14H9.72L5.95 2.68A1 1 0 0 0 5 2H2v2h2.28l3.54 10.63A2 2 0 0 0 9.72 16h7.59a2 2 0 0 0 1.87-1.3l2.76-7.35-1.87-.7zM10 18a2 2 0 1 0 0 4 2 2 0 1 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 1 0 0-4"></path><path d="m11.71 7.29-1.42 1.42 2.71 2.7 4.71-4.7-1.42-1.42L13 8.59z"></path>
+            </svg>
+          </span>
+          
+          <!--- parte do título  --->
+          <div class="upgrade-title">
+            <h2>Upgrade para</h2>
+            <span class="pro-badge">PRO</span>
+          </div>
+          <!--- descrição  --->
+          <p>Desbloqueie recursos avançados da FocoPrime IA e tenha acesso total a focoprime</p>
+        </div>
+        <!--- recursos  --->
+        <ul class="upgrade-features">
+          <li>
+            <span class="material-symbols-rounded">image</span>
+            Fotos ilimitadas
+          </li>
+          <li>
+            <span class="material-symbols-rounded">all_inclusive</span>
+            Mensagens ilimitadas
+          </li>
+          <li>
+            <span class="material-symbols-rounded">record_voice_over</span>
+            Explicação por voz
+          </li>
+          <li>
+            <span class="material-symbols-rounded">spellcheck</span>
+            Resolução de textos
+          </li>
+          <li>
+            <span class="material-symbols-rounded">hub</span>
+            Modelos ilimitados
+          </li>
+        </ul>
+        
+        <!--- botão do upgrade --->
+        <button class="upgrade-btn">
+          <span class="material-symbols-rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            fill="currentColor" viewBox="0 0 24 24" >
+              <!--- focoprime iriano 2026 ícone  --->
+              <path d="M20.33 3.06a1 1 0 0 0-1.11.32L16 7.4l-3.22-4.02c-.38-.47-1.18-.47-1.56 0L8 7.4 4.78 3.38c-.27-.33-.71-.46-1.11-.32S3 3.58 3 4v15c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-.42-.27-.8-.67-.94M7.22 9.63c.38.47 1.18.47 1.56 0L12 5.61l3.22 4.02c.38.47 1.18.47 1.56 0L19 6.86v8.15H5V6.85l2.22 2.77ZM5 19.01v-2h14v2z"></path>
+            </svg>
+          </span>
+          Fazer Upgrade Agora
         </button>
+        <!--- nota focoprime (baixo) --->
+        <span class="upgrade-note">
+          Cancelar quando quiser • Seguro • Rápido
+        </span>
       </div>
-
-      <input type="text" id="registerName" placeholder="Nome completo" class="input-premium">
-      <input type="email" id="registerEmail" placeholder="Email" class="input-premium">
-      <input type="password" id="registerPassword" placeholder="Senha" class="input-premium">
-
-      <button id="emailRegisterBtn" class="btn-premium">
-        Criar Conta
-      </button>
-
-      <p class="switch-text">
-        Já tens conta?
-        <span id="showLogin">Entrar</span>
-      </p>
-
     </div>
-
-  </div>
-</div>
+    <!--- ====== FINAL DO POPUP (UPGRADE) ====--->
+    <!--- =====≈==============================--->
+    <!--- ====== LOADER DE ENTRADA ====== --->
+    <div id="ai-loader"></div>
     
-    <!-- Suggestions List -->
-    <ul class="suggestions">
-      <li class="suggestions-item">
-        <p class="text">Podes ajudar me com as minhas aulas escolares?.</p>
-        <span class="icon material-symbols-rounded">
-          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="m21.45 8.61-9-4.5a1 1 0 0 0-.89 0l-6 3-3 1.5-1 .5a1 1 0 0 0-.55.89v6h2v-5.38l2 1v3.83c0 2.06 3.12 4.56 7 4.56s7-2.49 7-4.56v-3.83l2.45-1.22c.34-.17.55-.52.55-.89s-.21-.72-.55-.89Zm-15 .29L12 6.12l6.76 3.38L12 12.88 5.24 9.5l1.21-.61ZM17 15.45c0 .76-2.11 2.56-5 2.56s-5-1.79-5-2.56v-2.83l4.55 2.28c.14.07.29.11.45.11s.31-.04.45-.11L17 12.62z"></path>
-</svg>
-        </span>
-      </li>
-      <li class="suggestions-item">
-        <p class="text">Como posso aumentar o meu desempenho escolar?</p>
-        <span class="icon material-symbols-rounded">
-          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M8 6h9v2H8z"></path><path d="M20 2H6C4.35 2 3 3.35 3 5v14c0 1.65 1.35 3 3 3h15v-2H6c-.55 0-1-.45-1-1s.45-1 1-1h14c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1m-6 14H6c-.35 0-.69.07-1 .18V5c0-.55.45-1 1-1h13v12z"></path>
-</svg>
-        </span>
-      </li>
-      <li class="suggestions-item">
-        <p class="text">Peço sugestões de exames escolares para praticar?.</p>
-        <span class="icon material-symbols-rounded">
-          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M18.5 2h-12C4.57 2 3 3.57 3 5.5V21c0 .35.18.67.47.85s.66.2.97.04l5.55-2.78 5.55 2.78a.997.997 0 0 0 1.45-.89v-8h4c.55 0 1-.45 1-1V5.5c0-1.93-1.57-3.5-3.5-3.5ZM15 19.38l-4.55-2.28a1 1 0 0 0-.89 0l-4.55 2.28V5.5c0-.83.67-1.5 1.5-1.5h8.85c-.22.46-.35.96-.35 1.5v13.88ZM20 11h-3V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"></path>
-</svg>
-        </span>
-      </li>
-      <li class="suggestions-item">
-        <p class="text">Crie uma lista das disciplinas mais essenciais no meu país.</p>
-        <span class="icon material-symbols-rounded">
-          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M21 8c-.2 0-4.85.03-9 2.01C7.85 8.03 3.2 8 3 8c-.55 0-1 .45-1 1v9.88c0 .27.11.53.31.72.19.19.45.3.73.28.04 0 3.97-.11 8.54 2.02.02 0 .03 0 .05.01.12.05.24.08.37.08s.25-.03.37-.08c.02 0 .03 0 .05-.01 4.54-2.12 8.51-2.03 8.54-2.02.27.02.53-.09.73-.28.19-.19.31-.45.31-.72V9c0-.55-.45-1-1-1M4 10.05c1.49.11 4.38.48 7 1.69v7.74c-3.02-1.18-5.62-1.5-7-1.58v-7.86Zm16 7.86c-1.38.08-3.98.4-7 1.58v-7.74c2.62-1.21 5.51-1.58 7-1.69v7.86ZM12 2a3 3 0 1 0 0 6 3 3 0 1 0 0-6"></path>
-</svg>
-        </span>
-      </li>
-    </ul>
+    <!--- ====== MENU SIDEBAR PRINCIPAL ====== --->
+    <div id="sideMenu" class="side-menu">
+      <div class="side-menu-header">
+        <img src="images/logo-header.png">
+        <button id="closeMenuBtn" class="material-symbols-rounded">close</button>
+      </div>
+      
+      <ul class="side-menu-list">
+        <li class="side-item" id="newChatBtn">
+          <span class="material-symbols-rounded"><i class="ri-chat-smile-ai-fill"></i></span>
+          <span>Nova Mensagem</span>
+        </li>
+        <!--- historias  --->
+        <li class="side-item" onclick="location.href='historias/index.html'">
+          <span class="material-symbols-rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            fill="currentColor" viewBox="0 0 24 24" >
+              <!--- ícone focoprime (historias) --->
+              <path d="M21.21 8.11c-.25-.59-.56-1.16-.92-1.7-.36-.53-.77-1.03-1.22-1.48s-.95-.86-1.48-1.22c-.54-.36-1.11-.67-1.7-.92-.6-.26-1.24-.45-1.88-.58-1.31-.27-2.72-.27-4.03 0-.64.13-1.27.33-1.88.58-.59.25-1.16.56-1.7.92-.53.36-1.03.77-1.48 1.22-.17.17-.32.35-.48.52L1.99 3v6h6L5.86 6.87c.15-.18.31-.36.48-.52.36-.36.76-.69 1.18-.98.43-.29.89-.54 1.36-.74.48-.2.99-.36 1.5-.47 1.05-.21 2.18-.21 3.23 0 .51.11 1.02.26 1.5.47.47.2.93.45 1.36.74.42.29.82.62 1.18.98s.69.76.98 1.18c.29.43.54.89.74 1.36.2.48.36.99.47 1.5.11.53.16 1.07.16 1.61a7.85 7.85 0 0 1-.63 3.11c-.2.47-.45.93-.74 1.36-.29.42-.62.82-.98 1.18s-.76.69-1.18.98c-.43.29-.89.54-1.36.74-.48.2-.99.36-1.5.47-1.05.21-2.18.21-3.23 0a8 8 0 0 1-1.5-.47c-.47-.2-.93-.45-1.36-.74-.42-.29-.82-.62-1.18-.98s-.69-.76-.98-1.18c-.29-.43-.54-.89-.74-1.36-.2-.48-.36-.99-.47-1.5A8 8 0 0 1 3.99 12h-2c0 .68.07 1.35.2 2.01.13.64.33 1.27.58 1.88.25.59.56 1.16.92 1.7.36.53.77 1.03 1.22 1.48s.95.86 1.48 1.22c.54.36 1.11.67 1.7.92.6.26 1.24.45 1.88.58.66.13 1.33.2 2.01.2s1.36-.07 2.01-.2c.64-.13 1.27-.33 1.88-.58.59-.25 1.16-.56 1.7-.92.53-.36 1.03-.77 1.48-1.22s.86-.95 1.22-1.48c.36-.54.67-1.11.92-1.7.26-.6.45-1.24.58-1.88.13-.66.2-1.34.2-2.01s-.07-1.35-.2-2.01c-.13-.64-.33-1.27-.58-1.88Z"/><path d="M11 7v6h6v-2h-4V7z"/>
+            </svg>
+          </span>
+          <span>Histórico</span>
+        </li>
+        <!--- texte Inteligentes--->
+        <li class="side-item" onclick="location.href='testes/testes.html'">
+          <span class="material-symbols-rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            fill="currentColor" viewBox="0 0 24 24" >
+              <!--- ícone focoprime  --->
+              <path d="m21.09,7.33c1.22-1.22,1.22-3.2,0-4.41-1.22-1.22-3.2-1.22-4.41,0L7.8,11.78c-.71.06-1.41.27-2.01.64-1.17.72-1.81,1.89-1.81,3.29,0,.3.02.59.04.86.08,1.03.11,1.42-1.47,2.21-.32.16-.53.47-.55.82-.02.35.14.69.43.89,1,.69,2.76,1.49,4.62,1.49,1.35,0,2.74-.42,3.92-1.6,1.12-1.12,1.71-2.85,1.55-4.49l8.56-8.56Zm-3-3c.44-.44,1.15-.44,1.59,0s.44,1.15,0,1.58l-7.86,7.86c-.4-.63-.96-1.15-1.65-1.52l7.92-7.92Zm-8.53,14.64c-1.44,1.44-3.31,1.1-4.58.61,1.09-.98,1.13-1.99,1.04-3.16-.02-.22-.04-.46-.04-.71,0-.7.29-1.23.86-1.59.68-.42,1.66-.49,2.31-.16.65.32.99.81,1.18,1.28l-.05.05.1.1c.05.16.09.32.12.47.18,1.09-.22,2.37-.96,3.11Z"/><path d="m2.32,6.49l2.21.98.98,2.21c.09.19.28.32.49.32s.4-.12.49-.32l.98-2.21,2.21-.98c.19-.09.32-.28.32-.49s-.12-.4-.32-.49l-2.21-.98-.98-2.21c-.08-.19-.27-.32-.48-.32-.21-.02-.4.12-.49.31l-.99,2.14-2.23,1.07c-.19.09-.3.28-.3.49s.13.39.32.48Z"/><path d="m21.76,18.63l-1.66-.74-.74-1.66c-.06-.14-.21-.24-.36-.24-.16-.01-.3.09-.37.23l-.74,1.6-1.67.8c-.14.07-.23.21-.23.37,0,.16.1.3.24.36l1.66.74.74,1.66c.06.14.21.24.37.24s.3-.09.37-.24l.74-1.66,1.66-.74c.14-.06.24-.21.24-.37s-.09-.3-.24-.37Z"/>
+            </svg>
+          </span>
+          <span>Textes Inteligentes</span>
+        </li>
+        <!--- Definições --->
+        <li class="side-item">
+          <span class="material-symbols-rounded">settings</span>
+          <span>Definições</span>
+        </li>
+        <!--- novidades --->
+        <li class="side-item" onclick="location.href='news/news.html'">
+          <span class="material-symbols-rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            fill="currentColor" viewBox="0 0 24 24" >
+              <!--- ícone focoprime --->
+              <path d="M18.5 10H22v2h-3.5zm.05-1.17 1.5-1 1.5-1L21 6l-.55-.83-1.5 1-1.5 1L18 8zm0 4.34L18 14l-.55.83 1.5 1 1.5 1L21 16l.55-.83-1.5-1zM15 8.18V4c0-.37-.2-.71-.53-.88s-.72-.15-1.03.05L7.69 7h-1.7c-2.21 0-4 1.79-4 4 0 1.52.86 2.82 2.1 3.5l1.94 6.77 1.92-.55-1.64-5.73h1.37l5.75 3.83c.17.11.36.17.55.17.16 0 .32-.04.47-.12.33-.17.53-.51.53-.88v-4.18c1.16-.41 2-1.51 2-2.82s-.84-2.4-2-2.82Zm-2 7.95-4.45-2.96A1 1 0 0 0 8 13H6c-1.1 0-2-.9-2-2s.9-2 2-2h2c.2 0 .39-.06.55-.17L13 5.87z"></path>
+            </svg>
+          </span>
+          <span>Novidades</span>
+        </li>
+      </ul>
+      <!--- botão de sair --->
+      <button id="sideLogoutBtn" class="logout-btn side-logout" class="side-menu-footer">
+        <span class="material-symbols-rounded">logout</span>
+        <span>Sair</span>
+      </button>
+    </div>
+    <!--- menu overlay --->
+    <div id="menuOverlay" class="menu-overlay"></div>
+    <!--- ====== FECHAMENTO DO SIDEMENU ===== --->
+    <!--- =================================== --->
+
+    <!--- ====== APP HEADER ====== --->
+    <div id="appheader"></div>
+    <script>
+      fetch("components/appheader.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("appheader").innerHTML = data;
+      });
+    </script>
+    <!--- ====== FECHAMENTO DO APP HEADER ====== --->
+    <!--- ====================================== --->
+    
+    <!--- ====== LOGIN MODAL (REQUERIDO) ====== --->
+    <div id="loginModal"></div>
+    <!--- ====== FECHAMENTO DO LOGIN (ID) ====== --->
+    <!--- ====================================== --->
+    
+    <!--- ====== SUGESTÕES ====== --->
+    <div id="sugere"></div>
+    
     
     <!-- Chats -->
     <div class="chats-container"></div>
@@ -406,11 +225,11 @@ fill="currentColor" viewBox="0 0 24 24" >
               <button type="button" class="file-icon material-symbols-rounded">description</button>
               <button id="cancel-file-btn" type="button" class="material-symbols-rounded">close</button>
               <button id="add-file-btn" type="button" class="material-symbols-rounded">
-                <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="m5 17.41 3-3 1.29 1.29c.39.39 1.02.39 1.41 0l5.29-5.29 3 3V14h2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H5zM19 5v5.59L16.71 8.3a.996.996 0 0 0-1.41 0l-5.29 5.29-1.29-1.29a.996.996 0 0 0-1.41 0l-2.29 2.29V5h14Z"></path><path d="M8.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3m13.22 11.07-1.94-.86-.86-1.94a.46.46 0 0 0-.42-.28c-.19-.02-.35.1-.43.27l-.86 1.87-1.95.94c-.16.08-.27.25-.26.43 0 .18.11.35.28.42l1.94.86.86 1.94a.471.471 0 0 0 .86 0l.86-1.94 1.94-.86a.471.471 0 0 0 0-.86Z"></path>
-</svg>
+                <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                fill="currentColor" viewBox="0 0 24 24" >
+                  <!--- focoprime 2026 --->
+                  <path d="m5 17.41 3-3 1.29 1.29c.39.39 1.02.39 1.41 0l5.29-5.29 3 3V14h2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H5zM19 5v5.59L16.71 8.3a.996.996 0 0 0-1.41 0l-5.29 5.29-1.29-1.29a.996.996 0 0 0-1.41 0l-2.29 2.29V5h14Z"></path><path d="M8.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3m13.22 11.07-1.94-.86-.86-1.94a.46.46 0 0 0-.42-.28c-.19-.02-.35.1-.43.27l-.86 1.87-1.95.94c-.16.08-.27.25-.26.43 0 .18.11.35.28.42l1.94.86.86 1.94a.471.471 0 0 0 .86 0l.86-1.94 1.94-.86a.471.471 0 0 0 0-.86Z"></path>
+                </svg>
               </button>
             </div>
             
@@ -423,323 +242,28 @@ fill="currentColor" viewBox="0 0 24 24" >
         <!-- Theme and Delete Chats Buttons -->
         <button id="theme-toggle-btn" class="material-symbols-rounded">light_mode</button>
         <button id="delete-chats-btn" class="material-symbols-rounded menu-icon">
-          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M4 11h5c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2m0-7h5v5H4zm11 9c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2h5c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm0 7v-5h5v5zM4 20h3v2l4-3-4-3v2H4v-5H2v5c0 1.1.9 2 2 2M22 6c0-1.1-.9-2-2-2h-3V2l-4 3 4 3V6h3v5h2z"></path>
-</svg>
+          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          fill="currentColor" viewBox="0 0 24 24" >
+            <!--- focoprime @2026 www.ai-focoprime.online --->
+            <path d="M4 11h5c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2m0-7h5v5H4zm11 9c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2h5c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm0 7v-5h5v5zM4 20h3v2l4-3-4-3v2H4v-5H2v5c0 1.1.9 2 2 2M22 6c0-1.1-.9-2-2-2h-3V2l-4 3 4 3V6h3v5h2z"></path>
+          </svg>
         </button>
       </div>
     </div>
   </div>
   
+  <!--- prism js --->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-html.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+  
+  <script type="module" src="scripts/init.js"></script>
   <script src="script.js"></script>
+  <script src="scripts/load.js"></script>
+  <script src="scripts/apk.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  
-  <script>
-(function () {
-  const ua = navigator.userAgent.toLowerCase();
-
-  const isWebView =
-    ua.includes("wv") ||
-    ua.includes("webview") ||
-    ua.includes("appcreator") ||
-    (!window.chrome && ua.includes("android"));
-
-  const bar = document.getElementById("appInstallBar");
-  const closeBtn = document.getElementById("closeAppBar");
-
-  /* Não mostrar dentro do App (WebView) */
-  if (isWebView && bar) {
-    bar.style.display = "none";
-    return;
-  }
-
-  /* Fechar temporariamente */
-  if (closeBtn && bar) {
-    closeBtn.addEventListener("click", () => {
-      bar.style.opacity = "0";
-      bar.style.transform = "translateY(-10px)";
-      bar.style.transition = "0.3s ease";
-
-      setTimeout(() => {
-        bar.style.display = "none";
-      }, 300);
-    });
-  }
-})();
-</script>
-
-<!-- login modal -->
-<script type="module">
-/* ===============================
-   🔥 FIREBASE CONFIG
-================================= */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged,
-  signOut,
-  updateProfile,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAKwBNz6CkVP_FpUP9hxMsjj8J8NNbMk3M",
-  authDomain: "focoprime-ai.firebaseapp.com",
-  projectId: "focoprime-ai"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-/* ===============================
-   📌 ELEMENTOS DOM
-================================= */
-const loginModal = document.getElementById("loginModal");
-const googleBtn = document.getElementById("googleLoginBtn");
-
-const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
-const emailLoginBtn = document.getElementById("emailLoginBtn");
-const emailRegisterBtn = document.getElementById("emailRegisterBtn");
-
-const registerName = document.getElementById("registerName");
-const registerEmail = document.getElementById("registerEmail");
-const registerPassword = document.getElementById("registerPassword");
-const photoInput = document.getElementById("photoInput");
-
-const logoutBtn = document.getElementById("logoutBtn");
-const logoutReal = document.getElementById("logoutReal");
-
-const userPanel = document.getElementById("userPanel");
-const overlay = document.getElementById("userPanelOverlay");
-const closePanel = document.getElementById("closeUserPanel");
-
-const userEmail = document.getElementById("userEmail");
-const userName = document.getElementById("userName");
-const saveUserName = document.getElementById("saveUserName");
-
-const heading = document.querySelector(".heading");
-const userPhoto = document.getElementById("userPhoto");
-const userChipName = document.getElementById("userChipName");
-
-/* ===============================
-   🔐 GOOGLE LOGIN
-================================= */
-googleBtn.addEventListener("click", async () => {
-  try {
-    await signInWithPopup(auth, provider);
-  } catch (error) {
-    alert("Erro Google: " + error.message);
-  }
-});
-
-/* ===============================
-   📧 LOGIN COM EMAIL
-================================= */
-emailLoginBtn.addEventListener("click", async () => {
-  try {
-    await signInWithEmailAndPassword(
-      auth,
-      emailInput.value,
-      passwordInput.value
-    );
-  } catch (error) {
-    alert("Erro: " + error.message);
-  }
-});
-
-/* ===============================
-   📝 REGISTO
-================================= */
-emailRegisterBtn.addEventListener("click", async () => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      registerEmail.value,
-      registerPassword.value
-    );
-
-    const user = userCredential.user;
-
-    let photoData = null;
-
-    if (photoInput.files[0]) {
-      const reader = new FileReader();
-      photoData = await new Promise((resolve) => {
-        reader.onload = e => resolve(e.target.result);
-        reader.readAsDataURL(photoInput.files[0]);
-      });
-    }
-
-    await updateProfile(user, {
-  displayName: registerName.value
-});
-
-// Salvar foto localmente
-if (photoData) {
-  localStorage.setItem("userPhoto_" + user.uid, photoData);
-}
-
-    // 🔥 FORÇA ATUALIZAÇÃO DO USER
-    await user.reload();
-    const updatedUser = auth.currentUser;
-
-    heading.textContent = "Olá, " + updatedUser.displayName;
-    userChipName.textContent =
-      updatedUser.displayName.split(" ")[0];
-
-    userPhoto.src =
-      updatedUser.photoURL || "images/user-placeholder.png";
-
-    alert("Conta criada com sucesso!");
-
-  } catch (error) {
-    alert("Erro: " + error.message);
-  }
-});
-
-/* ===============================
-   👤 CONTROLE DE SESSÃO
-================================= */
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-
-    loginModal.style.display = "none";
-
-    heading.textContent = "Olá, " + (user.displayName || "Aluno");
-
-    userEmail.value = user.email;
-    userName.value = user.displayName || "";
-
-    userChipName.textContent =
-      user.displayName?.split(" ")[0] || "Usuário";
-
-    // 🔥 FOTO LOCAL
-    const savedPhoto = localStorage.getItem("userPhoto_" + user.uid);
-
-    if (savedPhoto) {
-      userPhoto.src = savedPhoto;
-    } else {
-      userPhoto.src = "images/user-placeholder.png";
-    }
-
-  } else {
-    loginModal.style.display = "flex";
-  }
-});
-
-/* ===============================
-   🧠 ATUALIZAR NOME
-================================= */
-saveUserName.addEventListener("click", async () => {
-  const user = auth.currentUser;
-  if (!user) return;
-
-  try {
-    await updateProfile(user, {
-      displayName: userName.value
-    });
-
-    heading.textContent = "Olá, " + userName.value;
-    userChipName.textContent = userName.value.split(" ")[0];
-
-    alert("Nome atualizado com sucesso!");
-  } catch (error) {
-    alert("Erro: " + error.message);
-  }
-});
-
-/* ===============================
-   🚪 LOGOUT
-================================= */
-logoutReal.addEventListener("click", async () => {
-  await signOut(auth);
-  closeUserPanel();
-});
-
-/* ===============================
-   📂 ABRIR / FECHAR PAINEL
-================================= */
-logoutBtn.addEventListener("click", () => {
-  userPanel.classList.add("open");
-  overlay.classList.add("show");
-});
-
-function closeUserPanel() {
-  userPanel.classList.remove("open");
-  overlay.classList.remove("show");
-}
-
-closePanel.addEventListener("click", closeUserPanel);
-overlay.addEventListener("click", closeUserPanel);
-
-</script>
-<script>
-window.addEventListener("load", () => {
-  const loader = document.getElementById("ai-loader");
-
-  if (!loader) return;
-
-  setTimeout(() => {
-    loader.classList.add("hide");
-
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 500);
-
-  }, 800); // tempo mínimo para animação
-});
-
-// Alternar views
-const loginView = document.getElementById("loginView");
-const registerView = document.getElementById("registerView");
-
-const showRegister = document.getElementById("showRegister");
-const showLogin = document.getElementById("showLogin");
-
-const loginTitle = document.getElementById("loginTitle");
-const loginSubtitle = document.getElementById("loginSubtitle");
-
-showRegister.addEventListener("click", () => {
-  loginView.style.display = "none";
-  registerView.style.display = "block";
-  loginTitle.textContent = "Criar Conta";
-  loginSubtitle.textContent = "Junte-se à FocoPrime";
-});
-
-showLogin.addEventListener("click", () => {
-  registerView.style.display = "none";
-  loginView.style.display = "block";
-  loginTitle.textContent = "Bem-vindo à FocoPrime";
-  loginSubtitle.textContent = "Entrar com a sua conta";
-});
-
-const previewPhoto = document.getElementById("previewPhoto");
-const changePhotoBtn = document.getElementById("changePhotoBtn");
-
-changePhotoBtn.addEventListener("click", () => {
-  photoInput.click();
-});
-
-photoInput.addEventListener("change", () => {
-  const file = photoInput.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = e => {
-      previewPhoto.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-});
-</script>
+<!--- CÓDIGO DO LOADER --->
 </body>
 
-    </html>
+  </html>
