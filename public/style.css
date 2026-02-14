@@ -1428,7 +1428,7 @@ body {
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid;
+  border: 1px solid;
   border-color: #1d7efd;
 }
 
@@ -1731,4 +1731,4 @@ body {
   font-size: 0.7rem;
   font-weight: 500;
   color: #22c55e;
-  }
+    }
