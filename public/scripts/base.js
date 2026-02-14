@@ -60,7 +60,16 @@ const userChipName = document.getElementById("userChipName");
 ================================= */
 googleBtn.addEventListener("click", async () => {
   try {
-    await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    // Atualiza instantaneamente
+    userChipName.textContent =
+      user.displayName?.split(" ")[0] || "Usuário";
+
+    userPhoto.src =
+      user.photoURL || "images/carta.png";
+
   } catch (error) {
     alert("Erro Google: " + error.message);
   }
@@ -122,7 +131,7 @@ if (photoData) {
       updatedUser.displayName.split(" ")[0];
 
     userPhoto.src =
-      updatedUser.photoURL || "images/user-placeholder.png";
+  photoData || "images/carta.png";
 
     alert("Conta criada com sucesso!");
 
@@ -147,13 +156,19 @@ onAuthStateChanged(auth, (user) => {
     userChipName.textContent =
       user.displayName?.split(" ")[0] || "Usuário";
 
-    // 🔥 FOTO LOCAL
+    // 🔥 PRIORIDADE:
+    // 1️⃣ Foto salva no localStorage
+    // 2️⃣ Foto do Google (photoURL)
+    // 3️⃣ Foto padrão carta.png
+
     const savedPhoto = localStorage.getItem("userPhoto_" + user.uid);
 
     if (savedPhoto) {
       userPhoto.src = savedPhoto;
+    } else if (user.photoURL) {
+      userPhoto.src = user.photoURL;
     } else {
-      userPhoto.src = "images/user-placeholder.png";
+      userPhoto.src = "images/carta.png";
     }
 
   } else {
