@@ -2,6 +2,7 @@
    🔥 FIREBASE CONFIG
 ================================= */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
 import {
   getAuth,
   GoogleAuthProvider,
@@ -42,7 +43,6 @@ const photoInput = document.getElementById("photoInput");
 
 const logoutBtn = document.getElementById("logoutBtn");
 const logoutReal = document.getElementById("logoutReal");
-const sideLogoutBtn = document.getElementById("sideLogoutBtn");
 
 const userPanel = document.getElementById("userPanel");
 const overlay = document.getElementById("userPanelOverlay");
@@ -59,17 +59,16 @@ const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
 const toast = document.getElementById("toast");
 const toastMessage = document.getElementById("toastMessage");
 
-const loginBtn = document.getElementById("loginBtn");
-
-/* ===============================
-   🟢 FUNÇÃO TOAST
-================================= */
 function showToast(message, type = "success") {
   toastMessage.textContent = message;
+
   toast.classList.remove("success", "error");
   toast.classList.add(type);
   toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 4000);
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 4000);
 }
 
 /* ===============================
@@ -80,8 +79,12 @@ googleBtn.addEventListener("click", async () => {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    userChipName.textContent = user.displayName?.split(" ")[0] || "Usuário";
-    userPhoto.src = user.photoURL || "images/carta.png";
+    // Atualiza instantaneamente
+    userChipName.textContent =
+      user.displayName?.split(" ")[0] || "Usuário";
+
+    userPhoto.src =
+      user.photoURL || "images/carta.png";
 
   } catch (error) {
     alert("Erro Google: " + error.message);
@@ -93,7 +96,11 @@ googleBtn.addEventListener("click", async () => {
 ================================= */
 emailLoginBtn.addEventListener("click", async () => {
   try {
-    await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+    await signInWithEmailAndPassword(
+      auth,
+      emailInput.value,
+      passwordInput.value
+    );
   } catch (error) {
     alert("Erro: " + error.message);
   }
@@ -103,10 +110,12 @@ emailLoginBtn.addEventListener("click", async () => {
    🔑 RESET PASSWORD
 ================================= */
 forgotPasswordBtn.addEventListener("click", async () => {
+
   if (!emailInput.value) {
     showToast("Digite seu email primeiro.", "error");
     return;
   }
+
   try {
     await sendPasswordResetEmail(auth, emailInput.value);
     showToast("Email de redefinição enviado com sucesso!", "success");
@@ -120,60 +129,94 @@ forgotPasswordBtn.addEventListener("click", async () => {
 ================================= */
 emailRegisterBtn.addEventListener("click", async () => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, registerEmail.value, registerPassword.value);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      registerEmail.value,
+      registerPassword.value
+    );
+
     const user = userCredential.user;
 
     let photoData = null;
+
     if (photoInput.files[0]) {
       const reader = new FileReader();
-      photoData = await new Promise(resolve => {
+      photoData = await new Promise((resolve) => {
         reader.onload = e => resolve(e.target.result);
         reader.readAsDataURL(photoInput.files[0]);
       });
     }
 
-    await updateProfile(user, { displayName: registerName.value });
+    await updateProfile(user, {
+  displayName: registerName.value
+});
 
-    if (photoData) localStorage.setItem("userPhoto_" + user.uid, photoData);
+// Salvar foto localmente
+if (photoData) {
+  localStorage.setItem("userPhoto_" + user.uid, photoData);
+}
 
+    // 🔥 FORÇA ATUALIZAÇÃO DO USER
     await user.reload();
     const updatedUser = auth.currentUser;
 
     heading.textContent = "Olá, " + updatedUser.displayName;
-    userChipName.textContent = updatedUser.displayName.split(" ")[0];
-    userPhoto.src = photoData || "images/carta.png";
+    userChipName.textContent =
+      updatedUser.displayName.split(" ")[0];
+
+    userPhoto.src =
+  photoData || "images/carta.png";
 
     alert("Conta criada com sucesso!");
 
   } catch (error) {
     alert("Erro: " + error.message);
   }
+  
+  localStorage.setItem("user_name", registerName.value);
+  updateSystemPrompt(registerName.value);
 });
 
 /* ===============================
    👤 CONTROLE DE SESSÃO
 ================================= */
 onAuthStateChanged(auth, (user) => {
+  const loginBtn = document.getElementById("loginBtn");
+
   if (user) {
+    // usuário logado → mostra o botão normal
     loginModal.style.display = "none";
     logoutBtn.style.display = "flex";
     loginBtn.style.display = "none";
 
     heading.textContent = "Olá, " + (user.displayName || "Aluno");
+    
+    // guardar nome no localStorage 
+    localStorage.setItem("user_name", user.displayName || "Aluno");
+    
+    // Actualizar Sytem prompt da IA
+    if (typeof updateSystemPrompt === "function") {
+      updateSystemPrompt(user.displayName || "Aluno");
+    }
+
     userEmail.value = user.email;
     userName.value = user.displayName || "";
     userChipName.textContent = user.displayName?.split(" ")[0] || "Usuário";
 
     const savedPhoto = localStorage.getItem("userPhoto_" + user.uid);
-    userPhoto.src = savedPhoto || user.photoURL || "images/carta.png";
+
+    if (savedPhoto) {
+      userPhoto.src = savedPhoto;
+    } else if (user.photoURL) {
+      userPhoto.src = user.photoURL;
+    } else {
+      userPhoto.src = "images/carta.png";
+    }
 
   } else {
+    // usuário não logado → mostra botão entrar
     logoutBtn.style.display = "none";
     loginBtn.style.display = "flex";
-
-    heading.textContent = "Olá, Aluno";
-    userChipName.textContent = "Usuário";
-    userPhoto.src = "images/carta.png";
   }
 });
 
@@ -183,10 +226,15 @@ onAuthStateChanged(auth, (user) => {
 saveUserName.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) return;
+
   try {
-    await updateProfile(user, { displayName: userName.value });
+    await updateProfile(user, {
+      displayName: userName.value
+    });
+
     heading.textContent = "Olá, " + userName.value;
     userChipName.textContent = userName.value.split(" ")[0];
+
     alert("Nome atualizado com sucesso!");
   } catch (error) {
     alert("Erro: " + error.message);
@@ -194,35 +242,12 @@ saveUserName.addEventListener("click", async () => {
 });
 
 /* ===============================
-   🚪 LOGOUT TOTAL (NADA FICA GUARDADO)
+   🚪 LOGOUT
 ================================= */
-async function logoutUser() {
-  try {
-    await signOut(auth);
-    localStorage.clear();      // remove tudo
-    closeUserPanel();          // fecha painel
-
-    // reset visual
-    heading.textContent = "Olá, Aluno";
-    userChipName.textContent = "Usuário";
-    userPhoto.src = "images/carta.png";
-
-    loginBtn.style.display = "flex";
-    logoutBtn.style.display = "none";
-
-    // reset de menu lateral
-    const sideMenu = document.getElementById("sideMenu");
-    const menuOverlay = document.getElementById("menuOverlay");
-    sideMenu?.classList.remove("active");
-    menuOverlay?.classList.remove("active");
-
-  } catch (error) {
-    alert("Erro ao sair: " + error.message);
-  }
-}
-
-logoutReal.addEventListener("click", logoutUser);
-sideLogoutBtn?.addEventListener("click", logoutUser);
+logoutReal.addEventListener("click", async () => {
+  await signOut(auth);
+  closeUserPanel();
+});
 
 /* ===============================
    📂 ABRIR / FECHAR PAINEL
@@ -239,6 +264,9 @@ function closeUserPanel() {
 
 closePanel.addEventListener("click", closeUserPanel);
 overlay.addEventListener("click", closeUserPanel);
+
+// ehrhejejeenehne
+const loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", () => {
   loginModal.style.display = "flex";
