@@ -174,7 +174,7 @@ if (photoData) {
   }
   
   localStorage.setItem("user_name", registerName.value);
-updateSystemPrompt(registerName.value);
+  updateSystemPrompt(registerName.value);
 });
 
 /* ===============================
@@ -191,13 +191,13 @@ onAuthStateChanged(auth, (user) => {
 
     heading.textContent = "Olá, " + (user.displayName || "Aluno");
     
-    // Guardar nome no localStorage
-localStorage.setItem("user_name", user.displayName || "Aluno");
-
-// Atualizar System Prompt da IA
-if (typeof updateSystemPrompt === "function") {
-  updateSystemPrompt(user.displayName || "Aluno");
-}
+    // guardar nome no localStorage 
+    localStorage.setItem("user_name", user.displayName || "Aluno");
+    
+    // Actualizar Sytem prompt da IA
+    if (typeof updateSystemPrompt === "function") {
+      updateSystemPrompt(user.displayName || "Aluno");
+    }
 
     userEmail.value = user.email;
     userName.value = user.displayName || "";
