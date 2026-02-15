@@ -249,6 +249,30 @@ logoutReal.addEventListener("click", async () => {
   closeUserPanel();
 });
 
+const sideLogoutBtn = document.getElementById("sideLogoutBtn");
+
+sideLogoutBtn?.addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+
+    // limpa apenas o nome guardado
+    localStorage.removeItem("user_name");
+
+    // fecha menu se estiver aberto
+    const sideMenu = document.getElementById("sideMenu");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+    sideMenu?.classList.remove("active");
+    menuOverlay?.classList.remove("active");
+
+    location.reload();
+
+  } catch (error) {
+    alert("Erro ao sair: " + error.message);
+  }
+});
+
+
 /* ===============================
    📂 ABRIR / FECHAR PAINEL
 ================================= */
