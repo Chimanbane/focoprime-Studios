@@ -28,7 +28,6 @@ const provider = new GoogleAuthProvider();
    📌 ELEMENTOS DOM
 ================================= */
 const loginModal = document.getElementById("loginModal");
-const loginBtn = document.getElementById("loginBtn");
 const googleBtn = document.getElementById("googleLoginBtn");
 
 const emailInput = document.getElementById("emailInput");
@@ -57,9 +56,10 @@ const heading = document.querySelector(".heading");
 const userPhoto = document.getElementById("userPhoto");
 const userChipName = document.getElementById("userChipName");
 const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
-
 const toast = document.getElementById("toast");
 const toastMessage = document.getElementById("toastMessage");
+
+const loginBtn = document.getElementById("loginBtn");
 
 /* ===============================
    🟢 FUNÇÃO TOAST
@@ -67,13 +67,13 @@ const toastMessage = document.getElementById("toastMessage");
 function showToast(message, type = "success") {
   toastMessage.textContent = message;
   toast.classList.remove("success", "error");
-  toast.classList.add(type, "show");
-
+  toast.classList.add(type);
+  toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 4000);
 }
 
 /* ===============================
-   🔐 LOGIN GOOGLE
+   🔐 GOOGLE LOGIN
 ================================= */
 googleBtn.addEventListener("click", async () => {
   try {
@@ -82,13 +82,14 @@ googleBtn.addEventListener("click", async () => {
 
     userChipName.textContent = user.displayName?.split(" ")[0] || "Usuário";
     userPhoto.src = user.photoURL || "images/carta.png";
+
   } catch (error) {
     alert("Erro Google: " + error.message);
   }
 });
 
 /* ===============================
-   📧 LOGIN EMAIL
+   📧 LOGIN COM EMAIL
 ================================= */
 emailLoginBtn.addEventListener("click", async () => {
   try {
@@ -102,26 +103,24 @@ emailLoginBtn.addEventListener("click", async () => {
    🔑 RESET PASSWORD
 ================================= */
 forgotPasswordBtn.addEventListener("click", async () => {
-  if (!emailInput.value) return showToast("Digite seu email primeiro.", "error");
+  if (!emailInput.value) {
+    showToast("Digite seu email primeiro.", "error");
+    return;
+  }
   try {
     await sendPasswordResetEmail(auth, emailInput.value);
     showToast("Email de redefinição enviado com sucesso!", "success");
-  } catch {
+  } catch (error) {
     showToast("Erro ao enviar email.", "error");
   }
 });
 
 /* ===============================
-   📝 REGISTRO
+   📝 REGISTO
 ================================= */
 emailRegisterBtn.addEventListener("click", async () => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      registerEmail.value,
-      registerPassword.value
-    );
-
+    const userCredential = await createUserWithEmailAndPassword(auth, registerEmail.value, registerPassword.value);
     const user = userCredential.user;
 
     let photoData = null;
@@ -134,6 +133,7 @@ emailRegisterBtn.addEventListener("click", async () => {
     }
 
     await updateProfile(user, { displayName: registerName.value });
+
     if (photoData) localStorage.setItem("userPhoto_" + user.uid, photoData);
 
     await user.reload();
@@ -144,8 +144,6 @@ emailRegisterBtn.addEventListener("click", async () => {
     userPhoto.src = photoData || "images/carta.png";
 
     alert("Conta criada com sucesso!");
-    localStorage.setItem("user_name", registerName.value);
-    updateSystemPrompt(registerName.value);
 
   } catch (error) {
     alert("Erro: " + error.message);
@@ -162,9 +160,6 @@ onAuthStateChanged(auth, (user) => {
     loginBtn.style.display = "none";
 
     heading.textContent = "Olá, " + (user.displayName || "Aluno");
-    localStorage.setItem("user_name", user.displayName || "Aluno");
-    if (typeof updateSystemPrompt === "function") updateSystemPrompt(user.displayName || "Aluno");
-
     userEmail.value = user.email;
     userName.value = user.displayName || "";
     userChipName.textContent = user.displayName?.split(" ")[0] || "Usuário";
@@ -175,6 +170,10 @@ onAuthStateChanged(auth, (user) => {
   } else {
     logoutBtn.style.display = "none";
     loginBtn.style.display = "flex";
+
+    heading.textContent = "Olá, Aluno";
+    userChipName.textContent = "Usuário";
+    userPhoto.src = "images/carta.png";
   }
 });
 
@@ -184,7 +183,6 @@ onAuthStateChanged(auth, (user) => {
 saveUserName.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) return;
-
   try {
     await updateProfile(user, { displayName: userName.value });
     heading.textContent = "Olá, " + userName.value;
@@ -196,30 +194,23 @@ saveUserName.addEventListener("click", async () => {
 });
 
 /* ===============================
-/* ===============================
-   🚪 LOGOUT TOTAL
+   🚪 LOGOUT TOTAL (NADA FICA GUARDADO)
 ================================= */
 async function logoutUser() {
   try {
-    // 1️⃣ Sair do Firebase
     await signOut(auth);
+    localStorage.clear();      // remove tudo
+    closeUserPanel();          // fecha painel
 
-    // 2️⃣ Limpar todo o localStorage
-    localStorage.clear();
-
-    // 3️⃣ Fechar painel de usuário
-    closeUserPanel();
-
-    // 4️⃣ Resetar elementos visuais
+    // reset visual
     heading.textContent = "Olá, Aluno";
     userChipName.textContent = "Usuário";
     userPhoto.src = "images/carta.png";
 
-    // 5️⃣ Mostrar botão login, esconder logout
     loginBtn.style.display = "flex";
     logoutBtn.style.display = "none";
 
-    // 6️⃣ Opcional: reset de menu lateral
+    // reset de menu lateral
     const sideMenu = document.getElementById("sideMenu");
     const menuOverlay = document.getElementById("menuOverlay");
     sideMenu?.classList.remove("active");
@@ -230,12 +221,11 @@ async function logoutUser() {
   }
 }
 
-// Botões de logout
 logoutReal.addEventListener("click", logoutUser);
 sideLogoutBtn?.addEventListener("click", logoutUser);
 
 /* ===============================
-   📂 PAINEL USUÁRIO
+   📂 ABRIR / FECHAR PAINEL
 ================================= */
 logoutBtn.addEventListener("click", () => {
   userPanel.classList.add("open");
@@ -250,9 +240,6 @@ function closeUserPanel() {
 closePanel.addEventListener("click", closeUserPanel);
 overlay.addEventListener("click", closeUserPanel);
 
-/* ===============================
-   🟢 ABRIR LOGIN
-================================= */
 loginBtn.addEventListener("click", () => {
   loginModal.style.display = "flex";
 });
