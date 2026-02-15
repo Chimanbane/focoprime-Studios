@@ -196,30 +196,43 @@ saveUserName.addEventListener("click", async () => {
 });
 
 /* ===============================
-   🚪 LOGOUT
+/* ===============================
+   🚪 LOGOUT TOTAL
 ================================= */
-logoutReal.addEventListener("click", async () => {
-  await signOut(auth);
-  localStorage.removeItem("user_name");
-  closeUserPanel();
-  location.reload();
-});
-
-sideLogoutBtn?.addEventListener("click", async () => {
+async function logoutUser() {
   try {
+    // 1️⃣ Sair do Firebase
     await signOut(auth);
-    localStorage.removeItem("user_name");
 
+    // 2️⃣ Limpar todo o localStorage
+    localStorage.clear();
+
+    // 3️⃣ Fechar painel de usuário
+    closeUserPanel();
+
+    // 4️⃣ Resetar elementos visuais
+    heading.textContent = "Olá, Aluno";
+    userChipName.textContent = "Usuário";
+    userPhoto.src = "images/carta.png";
+
+    // 5️⃣ Mostrar botão login, esconder logout
+    loginBtn.style.display = "flex";
+    logoutBtn.style.display = "none";
+
+    // 6️⃣ Opcional: reset de menu lateral
     const sideMenu = document.getElementById("sideMenu");
     const menuOverlay = document.getElementById("menuOverlay");
     sideMenu?.classList.remove("active");
     menuOverlay?.classList.remove("active");
 
-    location.reload();
   } catch (error) {
     alert("Erro ao sair: " + error.message);
   }
-});
+}
+
+// Botões de logout
+logoutReal.addEventListener("click", logoutUser);
+sideLogoutBtn?.addEventListener("click", logoutUser);
 
 /* ===============================
    📂 PAINEL USUÁRIO
