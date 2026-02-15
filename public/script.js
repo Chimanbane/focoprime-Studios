@@ -326,9 +326,29 @@ newChatBtn?.addEventListener("click", () => {
   closeMenu();
 });
 
-sideLogoutBtn?.addEventListener("click", () => {
-  localStorage.clear();
-  location.reload();
+sideLogoutBtn?.addEventListener("click", async () => {
+  try {
+    // 1️⃣ Sai da conta Firebase
+    if (auth.currentUser) {
+      await signOut(auth);
+    }
+
+    // 2️⃣ Limpa todo localStorage e sessionStorage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // 3️⃣ Reseta variáveis importantes do chat
+    lastAIResponse = "";
+    chatHistory.length = 0;
+
+    // 4️⃣ Atualiza system prompt para "Aluno" (ou vazio)
+    updateSystemPrompt("Aluno");
+
+    // 5️⃣ Recarrega página
+    location.reload();
+  } catch (error) {
+    alert("Erro ao sair: " + error.message);
+  }
 });
 
 // ==============================
