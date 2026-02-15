@@ -56,6 +56,20 @@ const heading = document.querySelector(".heading");
 const userPhoto = document.getElementById("userPhoto");
 const userChipName = document.getElementById("userChipName");
 const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+const toast = document.getElementById("toast");
+const toastMessage = document.getElementById("toastMessage");
+
+function showToast(message, type = "success") {
+  toastMessage.textContent = message;
+
+  toast.classList.remove("success", "error");
+  toast.classList.add(type);
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 4000);
+}
 
 /* ===============================
    🔐 GOOGLE LOGIN
@@ -98,15 +112,15 @@ emailLoginBtn.addEventListener("click", async () => {
 forgotPasswordBtn.addEventListener("click", async () => {
 
   if (!emailInput.value) {
-    alert("Digite seu email primeiro.");
+    showToast("Digite seu email primeiro.", "error");
     return;
   }
 
   try {
     await sendPasswordResetEmail(auth, emailInput.value);
-    alert("Email de redefinição enviado! Verifique sua caixa de entrada.");
+    showToast("Email de redefinição enviado com sucesso!", "success");
   } catch (error) {
-    alert("Erro: " + error.message);
+    showToast("Erro ao enviar email.", "error");
   }
 });
 
@@ -164,22 +178,19 @@ if (photoData) {
    👤 CONTROLE DE SESSÃO
 ================================= */
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+  const loginBtn = document.getElementById("loginBtn");
 
+  if (user) {
+    // usuário logado → mostra o botão normal
     loginModal.style.display = "none";
+    logoutBtn.style.display = "flex";
+    loginBtn.style.display = "none";
 
     heading.textContent = "Olá, " + (user.displayName || "Aluno");
 
     userEmail.value = user.email;
     userName.value = user.displayName || "";
-
-    userChipName.textContent =
-      user.displayName?.split(" ")[0] || "Usuário";
-
-    // 🔥 PRIORIDADE:
-    // 1️⃣ Foto salva no localStorage
-    // 2️⃣ Foto do Google (photoURL)
-    // 3️⃣ Foto padrão carta.png
+    userChipName.textContent = user.displayName?.split(" ")[0] || "Usuário";
 
     const savedPhoto = localStorage.getItem("userPhoto_" + user.uid);
 
@@ -192,7 +203,9 @@ onAuthStateChanged(auth, (user) => {
     }
 
   } else {
-    loginModal.style.display = "flex";
+    // usuário não logado → mostra botão entrar
+    logoutBtn.style.display = "none";
+    loginBtn.style.display = "flex";
   }
 });
 
@@ -240,3 +253,10 @@ function closeUserPanel() {
 
 closePanel.addEventListener("click", closeUserPanel);
 overlay.addEventListener("click", closeUserPanel);
+
+// ehrhejejeenehne
+const loginBtn = document.getElementById("loginBtn");
+
+loginBtn.addEventListener("click", () => {
+  loginModal.style.display = "flex";
+});
