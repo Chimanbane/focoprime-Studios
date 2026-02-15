@@ -249,10 +249,29 @@ if (isCode) {
 };
 
 // ==============================
+// VERIFICAR SE ESTÁ LOGADO
+// ==============================
+function isUserLoggedIn() {
+  return !!localStorage.getItem("user_name");
+}
+
+function openLoginModal() {
+  const loginModal = document.getElementById("loginModal");
+  loginModal.classList.add("show");
+}
+
+// ==============================
 // FORM SUBMIT
 // ==============================
 const handleFormSubmit = (e) => {
   e.preventDefault();
+
+  // 🔒 VERIFICA LOGIN
+  if (!isUserLoggedIn()) {
+    openLoginModal();
+    return; // ⛔ impede envio da mensagem
+  }
+
   const userMessage = promptInput.value.trim();
   if (!userMessage || document.body.classList.contains("bot-responding")) return;
 
@@ -262,7 +281,11 @@ const handleFormSubmit = (e) => {
   chatHistory.push({ role: "user", content: userMessage });
   const time = getCurrentTime();
 
-  const userMsgDiv = createMessageElement(`<span class="message-time">${time}</span><p class="message-text"></p>`, "user-message");
+  const userMsgDiv = createMessageElement(
+    `<span class="message-time">${time}</span><p class="message-text"></p>`,
+    "user-message"
+  );
+
   userMsgDiv.querySelector(".message-text").textContent = userMessage;
   chatsContainer.appendChild(userMsgDiv);
   scrollToBottom();
@@ -280,11 +303,12 @@ const handleFormSubmit = (e) => {
           <button class="action-btn dislike"><i class="fa-regular fa-thumbs-down"></i></button>
           <button class="action-btn share"><i class="fa-solid fa-share-nodes"></i></button>
           <button class="action-btn pdf">
-  <i class="fa-solid fa-file-pdf"></i>
-</button>
+            <i class="fa-solid fa-file-pdf"></i>
+          </button>
         </div>
       </div>
     `, "bot-message", "loading");
+
     chatsContainer.appendChild(botMsgDiv);
     scrollToBottom();
     generateResponse(botMsgDiv);
