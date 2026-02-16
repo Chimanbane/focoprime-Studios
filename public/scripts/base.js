@@ -191,9 +191,6 @@ onAuthStateChanged(auth, (user) => {
 
     heading.textContent = "Olá, " + (user.displayName || "Aluno");
     
-    // guardar nome no localStorage 
-    localStorage.setItem("user_name", user.displayName || "Aluno");
-    
     // Actualizar Sytem prompt da IA
     if (typeof updateSystemPrompt === "function") {
       updateSystemPrompt(user.displayName || "Aluno");
