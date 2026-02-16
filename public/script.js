@@ -214,7 +214,7 @@ const generateResponse = async (botMsgDiv) => {
     if (!response.ok) throw new Error(data.error || "Erro no servidor");
 
     const rawText = data.choices?.[0]?.message?.content?.trim() || "Não consegui responder agora.";
-    const currentUser = auth.currentUser;
+    const currentUser = window.auth?.currentUser;
 const userName = currentUser?.displayName || "Aluno";
     const responseText = highlightUserName(rawText, userName);
 
@@ -327,7 +327,7 @@ newChatBtn?.addEventListener("click", () => {
 });
 
 sideLogoutBtn?.addEventListener("click", async () => {
-  await signOut(auth);
+  await window.signOut(window.auth);
   location.reload();
 });
 
