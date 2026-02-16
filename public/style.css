@@ -209,11 +209,11 @@ body.chats-active .container :where(.app-header, .suggestions) {
 }
 
 .chats-container .message .avatar {
-  width: 34px;
-  height: 34px;
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
   align-self: flex-start;
-  border-radius: 12px;
+  border-radius: 7px;
   padding: 6px;
   margin-right: -7px;
   background: linear-gradient(to right, #1d7efd, #8f6fff);
@@ -1247,7 +1247,7 @@ body {
   
   /* REMOVER ÍCONE / AVATAR DA IA */
 .bot-message .avatar {
-  display: none;
+  display: flex;
 }
 
 /* Ajustar layout da mensagem da IA */
@@ -1747,4 +1747,4 @@ body {
 /*shegsnshjdndh */
 .login-btn span.material-symbols-rounded {
   color: #8f6fff;
-}
+  }
