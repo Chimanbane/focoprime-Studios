@@ -268,3 +268,7 @@ const loginBtn = document.getElementById("loginBtn");
 loginBtn.addEventListener("click", () => {
   loginModal.style.display = "flex";
 });
+
+// 🔥 Tornar auth global
+window.auth = auth;
+window.signOut = signOut;
