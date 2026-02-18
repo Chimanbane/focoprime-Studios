@@ -17,7 +17,7 @@ import {
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKwBNz6CkVP_FpUP9hxMsjj8J8NNbMk3M",
-  authDomain: "ai-focoprime.online",
+  authDomain: "focoprime-ai.firebaseapp.com",
   projectId: "focoprime-ai"
 };
 
