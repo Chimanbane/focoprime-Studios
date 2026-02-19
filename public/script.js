@@ -13,6 +13,50 @@ const themeToggleBtn = document.querySelector("#theme-toggle-btn");
 const API_URL = "/api/chat";
 const MODEL = "llama-3.1-8b-instant";
 
+// ==============================
+// MODEL CONTROL SYSTEM
+// ==============================
+
+const MODEL_LIMITS = {
+  "v3.5": 5,
+  "v4.0": 10,
+  "v5.0": Infinity
+};
+
+let currentModel = "v3.5";
+let messageCount = 0;
+let resetAt = 0;
+
+function getRemainingMessages() {
+  const limit = MODEL_LIMITS[currentModel];
+
+  if (limit === Infinity) return Infinity;
+
+  return limit - messageCount;
+}
+
+function updateUsageDisplay() {
+  const remaining = getRemainingMessages();
+
+  let display = document.getElementById("modelUsageInfo");
+  if (!display) {
+    display = document.createElement("div");
+    display.id = "modelUsageInfo";
+    display.style.fontSize = "12px";
+    display.style.opacity = "0.7";
+    display.style.marginTop = "5px";
+    promptForm.appendChild(display);
+  }
+
+  if (remaining === Infinity) {
+    display.textContent = `Modelo: ${currentModel} • Mensagens ilimitadas`;
+  } else {
+    display.textContent = `Modelo: ${currentModel} • Restam ${remaining} mensagens`;
+  }
+}
+
+updateUsageDisplay();
+
 let controller, typingInterval;
 const chatHistory = [];
 
@@ -251,7 +295,7 @@ if (isCode) {
 // ==============================
 // FORM SUBMIT
 // ==============================
-const handleFormSubmit = (e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
   // 🔐 VERIFICA SE ESTÁ LOGADO
   const currentUser = window.auth?.currentUser;
@@ -261,6 +305,13 @@ const handleFormSubmit = (e) => {
     loginModal.style.display = "flex"; // ou classList.add("show") se usares classe
     return;
   }
+  
+  // LIMITE DE MENSAGENS 
+  if (getRemainingMessages() <= 0) {
+    alert("Limite atingido para este modelo. Escolha outro modelo.");
+    return;
+  }
+  
   const userMessage = promptInput.value.trim();
   if (!userMessage || document.body.classList.contains("bot-responding")) return;
 
@@ -268,6 +319,16 @@ const handleFormSubmit = (e) => {
   document.body.classList.add("chats-active", "bot-responding");
 
   chatHistory.push({ role: "user", content: userMessage });
+  messageCount++;
+updateUsageDisplay();
+
+const userRef = doc(window.db, "users", currentUser.uid);
+
+await updateDoc(userRef, {
+  messageCount,
+  model: currentModel,
+  resetAt
+});
   const time = getCurrentTime();
 
   const userMsgDiv = createMessageElement(`<span class="message-time">${time}</span><p class="message-text"></p>`, "user-message");
@@ -407,7 +468,7 @@ document.getElementById("closeLoginModal").addEventListener("click", () => {
   document.getElementById("loginModal").style.display = "none";
 });
 
-// sjejeghjehhe
+// EFEITO DE DESFOQUE DO BOTÃO LATERAL
 const newsButton = document.getElementById("newsButton");
 
 let idleTimeout;
@@ -432,3 +493,77 @@ function resetIdle() {
 
 // Inicializa contador
 idleTimeout = setTimeout(setIdle, 3000);
+
+
+// ===== MODEL MODAL =====
+
+const modelModal = document.getElementById("modelModal");
+const deleteChatsBtn = document.getElementById("delete-chats-btn");
+
+// abrir popup ao clicar no botão
+deleteChatsBtn.addEventListener("click", () => {
+  modelModal.classList.add("show");
+});
+
+// fechar clicando fora
+modelModal.addEventListener("click", (e) => {
+  if (e.target === modelModal) {
+    modelModal.classList.remove("show");
+  }
+});
+
+// selecionar modelo
+document.querySelectorAll(".model-item").forEach(item => {
+  item.addEventListener("click", () => {
+    const selectedModel = item.dataset.model;
+
+    currentModel = selectedModel;
+    messageCount = 0;
+
+    localStorage.setItem("selectedModel", currentModel);
+    localStorage.setItem("messageCount", messageCount);
+
+    updateUsageDisplay();
+
+    console.log("Modelo selecionado:", selectedModel);
+
+    modelModal.classList.remove("show");
+  });
+});
+
+// VERIFICA 
+async function loadUserUsage(user) {
+  const userRef = doc(window.db, "users", user.uid);
+  const snap = await getDoc(userRef);
+
+  if (snap.exists()) {
+    const data = snap.data();
+
+    currentModel = data.model || "v3.5";
+    messageCount = data.messageCount || 0;
+    resetAt = data.resetAt || 0;
+
+    // 🔥 Verifica se já passou 2h
+    if (Date.now() > resetAt) {
+      messageCount = 0;
+      resetAt = Date.now() + 2 * 60 * 60 * 1000; // +2h
+
+      await updateDoc(userRef, {
+        messageCount,
+        resetAt
+      });
+    }
+
+  } else {
+    // Novo usuário
+    resetAt = Date.now() + 2 * 60 * 60 * 1000;
+
+    await setDoc(userRef, {
+      model: "v3.5",
+      messageCount: 0,
+      resetAt
+    });
+  }
+
+  updateUsageDisplay();
+}
