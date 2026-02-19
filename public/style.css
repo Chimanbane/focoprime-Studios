@@ -1122,11 +1122,11 @@ body {
 
 /* BLOCO DE CÓDIGO ESTILO CHATGPT */
 .code-block {
+  width: 100%;
   position: relative;
   background: #0f172a;
   border-radius: 12px;
   margin: 16px 0;
-  overflow: hidden;
 }
 
 .code-block pre {
@@ -1845,16 +1845,5 @@ body {
 
 /* Estado reduzido (modo discreto) */
 .news-button.idle {
-  transform: scale(0.75);
   opacity: 0.4;
-}
-
-/* Ao passar o mouse ou tocar */
-.news-button:hover {
-  transform: scale(1.05);
-}
-
-.kiko {
-  margin-top: 8px;
-  font-size: 0.7rem;
   }
