@@ -38,18 +38,39 @@ function getRemainingMessages() {
 
 function updateUsageDisplay() {
   const remaining = getRemainingMessages();
-  let display = document.getElementById("modelUsageBadge");
+  const timeLeft = getRemainingTime();
 
-  if (!display) {
-    display = document.createElement("div");
-    display.id = "modelUsageBadge";
-    document.body.appendChild(display);
+  let badge = document.getElementById("modelUsageBadge");
+  if (!badge) {
+    badge = document.createElement("div");
+    badge.id = "modelUsageBadge";
+    document.body.appendChild(badge);
   }
 
+  const panelInfo = document.getElementById("userUsageInfo");
+
   if (remaining === Infinity) {
-    display.textContent = `Modelo: ${currentModel} • Mensagens ilimitadas`;
+    badge.textContent = `Modelo: ${currentModel} • Ilimitado`;
+    
+    if (panelInfo) {
+      panelInfo.innerHTML = `
+        <strong>Modelo:</strong> ${currentModel}<br>
+        <strong>Plano:</strong> ${userPlan}<br>
+        <strong>Mensagens:</strong> Ilimitadas
+      `;
+    }
+
   } else {
-    display.textContent = `Modelo: ${currentModel} • Restam ${remaining}`;
+    badge.textContent = `Modelo: ${currentModel} • ${remaining} restantes`;
+
+    if (panelInfo) {
+      panelInfo.innerHTML = `
+        <strong>Modelo:</strong> ${currentModel}<br>
+        <strong>Plano:</strong> ${userPlan}<br>
+        <strong>Restam:</strong> ${remaining} mensagens<br>
+        <strong>Reset em:</strong> ${timeLeft}
+      `;
+    }
   }
 }
 
@@ -593,3 +614,20 @@ function applyModelLocks() {
     }
   });
 }
+
+function getRemainingTime() {
+  const diff = resetAt - Date.now();
+
+  if (diff <= 0) return "Resetando...";
+
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  return `${hours}h ${minutes}m`;
+}
+
+setInterval(() => {
+  if (resetAt > 0) {
+    updateUsageDisplay();
+  }
+}, 60000); // atualiza a cada 1 minuto
