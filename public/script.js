@@ -324,11 +324,16 @@ updateUsageDisplay();
 
 const userRef = doc(window.db, "users", currentUser.uid);
 
-await updateDoc(userRef, {
+const snap = await getDoc(userRef);
+const data = snap.data();
+const models = data.models || {};
+
+models[currentModel] = {
   messageCount,
-  model: currentModel,
   resetAt
-});
+};
+
+await updateDoc(userRef, { models });
   const time = getCurrentTime();
 
   const userMsgDiv = createMessageElement(`<span class="message-time">${time}</span><p class="message-text"></p>`, "user-message");
@@ -518,10 +523,18 @@ document.querySelectorAll(".model-item").forEach(item => {
     const selectedModel = item.dataset.model;
 
     currentModel = selectedModel;
-    messageCount = 0;
+    document.querySelectorAll(".model-item").forEach(item => {
+  item.addEventListener("click", async () => {
+    currentModel = item.dataset.model;
 
-    localStorage.setItem("selectedModel", currentModel);
-    localStorage.setItem("messageCount", messageCount);
+    const user = window.auth.currentUser;
+    if (user) {
+      await loadUserUsage(user);
+    }
+
+    modelModal.classList.remove("show");
+  });
+});
 
     updateUsageDisplay();
 
@@ -536,34 +549,34 @@ async function loadUserUsage(user) {
   const userRef = doc(window.db, "users", user.uid);
   const snap = await getDoc(userRef);
 
-  if (snap.exists()) {
-    const data = snap.data();
-
-    currentModel = data.model || "v3.5";
-    messageCount = data.messageCount || 0;
-    resetAt = data.resetAt || 0;
-
-    // 🔥 Verifica se já passou 2h
-    if (Date.now() > resetAt) {
-      messageCount = 0;
-      resetAt = Date.now() + 2 * 60 * 60 * 1000; // +2h
-
-      await updateDoc(userRef, {
-        messageCount,
-        resetAt
-      });
-    }
-
-  } else {
-    // Novo usuário
-    resetAt = Date.now() + 2 * 60 * 60 * 1000;
-
+  if (!snap.exists()) {
     await setDoc(userRef, {
-      model: "v3.5",
-      messageCount: 0,
-      resetAt
+      models: {}
     });
   }
 
+  const data = (await getDoc(userRef)).data();
+  const models = data.models || {};
+
+  if (!models[currentModel]) {
+    models[currentModel] = {
+      messageCount: 0,
+      resetAt: Date.now() + 2 * 60 * 60 * 1000
+    };
+
+    await updateDoc(userRef, { models });
+  }
+
+  messageCount = models[currentModel].messageCount;
+  resetAt = models[currentModel].resetAt;
+
+  if (Date.now() > resetAt) {
+    messageCount = 0;
+    resetAt = Date.now() + 2 * 60 * 60 * 1000;
+
+    models[currentModel] = { messageCount, resetAt };
+    await updateDoc(userRef, { models });
+  }
+
   updateUsageDisplay();
-}
+                   }
