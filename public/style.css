@@ -1330,6 +1330,10 @@ body {
   border-bottom: 1px solid var(--secondary-hover-color);
 }
 
+.user-panel-header img {
+  height: 50px;
+}
+
 .user-panel-header h1 {
   font-size: 1.2rem;
   color: var(--text-color);
@@ -1854,4 +1858,4 @@ body {
 /* Estado reduzido (modo discreto) */
 .news-button.idle {
   opacity: 0.4;
-    }
+  }
