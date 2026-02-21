@@ -467,12 +467,26 @@ closeMenuBtn?.addEventListener("click", closeMenu);
 menuOverlay?.addEventListener("click", closeMenu);
 
 newChatBtn?.addEventListener("click", () => {
+
+  // ⛔ Cancela resposta ativa
+  controller?.abort();
+  clearInterval(typingInterval);
+
+  // 🧠 Reset estado
   currentChatId = null;
-  chatHistory.splice(1);
+  lastAIResponse = "";
   chatsContainer.innerHTML = "";
   document.body.classList.remove("chats-active", "bot-responding");
 
-  toggleWelcomeUI(true); // 🔥 MOSTRAR DE NOVO
+  // 🔥 RESET TOTAL DO HISTÓRICO
+  chatHistory.length = 0;
+
+  const currentUser = window.auth?.currentUser;
+  const userName = currentUser?.displayName || "Aluno";
+
+  updateSystemPrompt(userName); // recria system prompt limpo
+
+  toggleWelcomeUI(true);
 
   closeMenu();
 });
@@ -769,4 +783,4 @@ fill="currentColor" viewBox="0 0 24 24" >
 
     historyList.appendChild(item);
   });
-    }
+                }
