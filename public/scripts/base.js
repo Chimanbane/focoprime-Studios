@@ -201,6 +201,10 @@ onAuthStateChanged(auth, (user) => {
 
     heading.textContent = "Olá, " + (user.displayName || "Aluno");
     
+    if (typeof loadUserChats === "function") {
+      loadUserChats();
+    }
+    
     // Actualizar Sytem prompt da IA
     if (typeof updateSystemPrompt === "function") {
       updateSystemPrompt(user.displayName || "Aluno");
@@ -315,4 +319,4 @@ function loadChat(chat) {
   });
 
   currentChatId = chat.id;
-       }
+   }
