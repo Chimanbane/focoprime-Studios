@@ -456,6 +456,7 @@ closeMenuBtn?.addEventListener("click", closeMenu);
 menuOverlay?.addEventListener("click", closeMenu);
 
 newChatBtn?.addEventListener("click", () => {
+  currentChatId = null; // 🔥 muito importante
   chatHistory.splice(1);
   chatsContainer.innerHTML = "";
   document.body.classList.remove("chats-active", "bot-responding");
@@ -755,4 +756,4 @@ async function loadUserChats() {
 
     historyList.appendChild(item);
   });
-    }
+                       }
