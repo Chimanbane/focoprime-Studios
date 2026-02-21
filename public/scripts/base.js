@@ -313,27 +313,53 @@ async function loadChat(chat) {
   chatHistory.length = 0;
   currentChatId = chat.id;
 
-  const messagesRef = collection(window.db, "users", user.uid, "chats", chat.id, "messages");
-  const snapshot = await getDocs(messagesRef);
+  const chatRef = doc(window.db, "users", user.uid, "chats", chat.id);
+  const snap = await getDoc(chatRef);
 
-  const messages = snapshot.docs.map(doc => doc.data());
-  messages.sort((a, b) => a.createdAt - b.createdAt);
+  if (!snap.exists()) return;
 
-  if (messages.length === 0) {
-    chatsContainer.innerHTML = `<p class="empty-chat">Esta conversa está vazia.</p>`;
-  } else {
-    messages.forEach(msg => {
+  const data = snap.data();
+  const messages = data.messages || [];
+
+  messages
+    .filter(msg => msg.role !== "system") // 🔥 NÃO MOSTRAR SYSTEM
+    .forEach(msg => {
+
       chatHistory.push(msg);
 
-      const div = createMessageElement(
-        `<span class="message-time">${getCurrentTime()}</span>
-         <p class="message-text">${marked.parse(escapeHTML(msg.content))}</p>`,
-        msg.role === "user" ? "user-message" : "bot-message"
-      );
+      const time = getCurrentTime();
 
-      chatsContainer.appendChild(div);
+      if (msg.role === "user") {
+
+        const userMsgDiv = createMessageElement(
+          `<span class="message-time">${time}</span>
+           <p class="message-text">${escapeHTML(msg.content)}</p>`,
+          "user-message"
+        );
+
+        chatsContainer.appendChild(userMsgDiv);
+
+      } else {
+
+        const botMsgDiv = createMessageElement(`
+          <img class="avatar" src="images/groq.png" />
+          <div class="bot-content">
+            <span class="message-time">${time}</span>
+            <p class="message-text">${marked.parse(msg.content)}</p>
+            <div class="message-actions">
+              <button class="action-btn copy"><i class="fa-regular fa-copy"></i></button>
+              <button class="action-btn like"><i class="fa-regular fa-thumbs-up"></i></button>
+              <button class="action-btn dislike"><i class="fa-regular fa-thumbs-down"></i></button>
+              <button class="action-btn share"><i class="fa-solid fa-share-nodes"></i></button>
+              <button class="action-btn pdf"><i class="fa-solid fa-file-pdf"></i></button>
+            </div>
+          </div>
+        `, "bot-message");
+
+        chatsContainer.appendChild(botMsgDiv);
+      }
+
     });
-  }
 
   scrollToBottom();
 }
