@@ -7,7 +7,6 @@ async function loadComponent(id, path) {
 
 async function initApp() {
   // Carrega componentes
-  await loadComponent("top-app-bar", "components/proheader.html");
   await loadComponent("header", "components/header.html");
   await loadComponent("userPanelContainer", "components/user-painel.html");
   await loadComponent("appInstallBar", "components/apk.html");
