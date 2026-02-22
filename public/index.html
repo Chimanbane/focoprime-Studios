@@ -46,7 +46,7 @@
 
 <body>
   <!--- TOP UP BAR CABEÇALHO  --->
-  <div id="top-app-bar"></div>
+  
   
   <!--- CABEÇALHO FOCOPRIME  --->
   <div id="header"></div>
@@ -129,39 +129,43 @@
     <!--- ====== FINAL DO POPUP (UPGRADE) ====--->
     <!--- =====≈==============================--->
     
-    <!-- ===== MODEL SELECT MODAL ===== -->
-<div id="modelModal" class="model-modal">
-  <div class="model-box">
-
-    <h3 class="model-title">Selecionar modelo</h3>
-
-    <div class="model-list">
-
-      <div class="model-item" data-model="v3.5">
-        <div class="model-info">
-          <strong>FocoPrime V3.5</strong>
-          <span class="badge free">Grátis</span>
+    <!--- ====== MODELO SELETOR MODAL ======== --->
+    <div id="modelModal" class="model-modal">
+      <div class="model-box">
+        
+        <h3 class="model-title">Selecionar modelo</h3>
+        
+        <div class="model-list">
+          
+          <!--- modelo v3.5 lite --->
+          <div class="model-item" data-model="v3.5">
+            <div class="model-info">
+              <strong>FocoPrime V3.5</strong>
+              <span class="badge free">Grátis</span>
+            </div>
+          </div>
+          
+          <!--- modelo v4.0 crack --->
+          <div class="model-item" data-model="v4.0">
+            <div class="model-info">
+              <strong>FocoPro V4.0</strong>
+              <span class="badge free">Grátis</span>
+            </div>
+          </div>
+          
+          <!--- modelo v5.0 premium --->
+          <div class="model-item premium" data-model="v5.0">
+            <div class="model-info">
+              <strong>FocoPremium V5.0</strong>
+              <span class="badge premium-badge">Premium</span>
+            </div>
+          </div>
+          
         </div>
       </div>
-
-      <div class="model-item" data-model="v4.0">
-        <div class="model-info">
-          <strong>FocoPro V4.0</strong>
-          <span class="badge free">Grátis</span>
-        </div>
-      </div>
-
-      <div class="model-item premium" data-model="v5.0">
-        <div class="model-info">
-          <strong>FocoPremium V5.0</strong>
-          <span class="badge premium-badge">Premium</span>
-        </div>
-      </div>
-
     </div>
-
-  </div>
-</div>
+    <!--- ========= FECHAMENTO DO SELETOR ========== --->
+    <!--- =========================÷===÷÷÷÷========= --->
     
     <!--- ====== LOADER DE ENTRADA ====== --->
     <div id="ai-loader" class="ai-loader">
@@ -204,7 +208,7 @@
           <span>Histórico</span>
         </li>
         <!--- texte Inteligentes--->
-        <li class="side-item" onclick="location.href='testes/testes.html'">
+        <li class="side-item texte">
           <span class="material-symbols-rounded">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             fill="currentColor" viewBox="0 0 24 24" >
@@ -253,23 +257,24 @@
     <div id="menuOverlay" class="menu-overlay"></div>
     <!--- ====== FECHAMENTO DO SIDEMENU ===== --->
     
-    <!-- ===== HISTÓRICO SIDEBAR ===== -->
-<div id="historySidebar" class="history-sidebar">
-  <div class="history-header">
-    <h3>Histórico</h3>
-    <button id="closeHistoryBtn" class="closehistory">
-      <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M14.83 7.76 12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83z"></path><path d="M12 2C9.33 2 6.82 3.04 4.93 4.93S2 9.33 2 12s1.04 5.18 2.93 7.07c1.95 1.95 4.51 2.92 7.07 2.92s5.12-.97 7.07-2.92S22 14.67 22 12s-1.04-5.18-2.93-7.07A9.93 9.93 0 0 0 12 2m5.66 15.66c-3.12 3.12-8.19 3.12-11.31 0-1.51-1.51-2.34-3.52-2.34-5.66s.83-4.15 2.34-5.66S9.87 4 12.01 4s4.15.83 5.66 2.34 2.34 3.52 2.34 5.66-.83 4.15-2.34 5.66Z"></path>
-</svg>
-    </button>
-  </div>
-
-  <div id="historyList" class="history-list"></div>
-</div>
-
-<div id="historyOverlay" class="history-overlay"></div>
+    <!--- ========== HISTÓRICO SIDEBAR ========== --->
+    <div id="historySidebar" class="history-sidebar">
+      <div class="history-header">
+        <h3>Histórico</h3>
+        <button id="closeHistoryBtn" class="closehistory">
+          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+          fill="currentColor" viewBox="0 0 24 24" >
+            <!--- focoprime historias bar --->
+            <path d="M14.83 7.76 12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83z"></path><path d="M12 2C9.33 2 6.82 3.04 4.93 4.93S2 9.33 2 12s1.04 5.18 2.93 7.07c1.95 1.95 4.51 2.92 7.07 2.92s5.12-.97 7.07-2.92S22 14.67 22 12s-1.04-5.18-2.93-7.07A9.93 9.93 0 0 0 12 2m5.66 15.66c-3.12 3.12-8.19 3.12-11.31 0-1.51-1.51-2.34-3.52-2.34-5.66s.83-4.15 2.34-5.66S9.87 4 12.01 4s4.15.83 5.66 2.34 2.34 3.52 2.34 5.66-.83 4.15-2.34 5.66Z"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <div id="historyList" class="history-list"></div>
+    </div>
+    
+    <div id="historyOverlay" class="history-overlay"></div>
+    <!--- ============== FECHAMENTO DO HISTÓRICO ========= --->
     <!--- =================================== --->
 
     <!--- ====== APP HEADER ====== --->
@@ -420,16 +425,6 @@ fill="currentColor" viewBox="0 0 24 24" >
   <!--- ========== FECHAMENTO ============= --->
   <!--- =================================== --->
   
-  <!--- Botão de abrir menu --->
-  <div id="newsButton" class="news-button">
-    <span class="material-symbols-rounded">
-      <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-      fill="currentColor" viewBox="0 0 24 24" >
-        <!--- focoprime icon barra de menu --->
-        <path d="M7 11c2.21 0 4-1.79 4-4S9.21 3 7 3 3 4.79 3 7s1.79 4 4 4m0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m10-2c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2M7 21c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4m0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m11-2h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
-      </svg>
-    </span>
-  </div>
   <!--- ======== FECHAMENTO ============= --->
 
   
