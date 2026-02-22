@@ -276,27 +276,27 @@
 }
 
 .menu {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid;
+  border: none;
 
   border-radius: 50%;
   border-color: #1d7efd;
   cursor: pointer;
 
-  background: var(--primary-color);
+  background: var(--secondary-color);
 
   transition: all 0.3s ease;
 }
 
 /* Ícone */
 .menu svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   color: var(--text-color);
 }
 
