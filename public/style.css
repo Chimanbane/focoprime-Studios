@@ -40,11 +40,15 @@ body {
 }
 
 .cabeca {
+  position: relative;
   padding: 10px;
   display: flex;
+  background: transparent !important;
+  box-shadow: none;
   align-items: center;
   justify-content: space-between;
   z-index: 100;
+  overflow: visible;
 }
 
 /*===== Ivones soviais =====*/
