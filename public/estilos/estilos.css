@@ -264,5 +264,49 @@
 .closehistory {
   border: none;
   color: var(--text-color);
+}
 
-  }
+.texte {
+  opacity: 0.4;
+}
+
+.texte:hover {
+  background: none;
+  transform: translhateX(5px);
+}
+
+.menu {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid;
+
+  border-radius: 50%;
+  border-color: #1d7efd;
+  cursor: pointer;
+
+  background: var(--primary-color);
+
+  transition: all 0.3s ease;
+}
+
+/* Ícone */
+.menu svg {
+  width: 24px;
+  height: 24px;
+  color: var(--text-color);
+}
+
+/* Hover elegante */
+.menu:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(143, 111, 255, 0.45);
+}
+
+/* Clique */
+.menu:active {
+  transform: scale(0.95);
+}
