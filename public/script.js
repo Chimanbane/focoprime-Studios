@@ -372,6 +372,38 @@ if (isCode) {
   }
 };
 
+// TÍTULO AUTOMATIC 
+async function generateChatTitle(userMessage) {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: "system",
+            content: "Cria um título curto (máximo 5 palavras), profissional e bonito para esta conversa. Não uses aspas."
+          },
+          {
+            role: "user",
+            content: userMessage
+          }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    const title =
+      data.choices?.[0]?.message?.content?.trim() || "Nova Conversa";
+
+    return title.substring(0, 50);
+
+  } catch (error) {
+    return "Nova Conversa";
+  }
+}
+
 // ==============================
 // FORM SUBMIT
 // ==============================
@@ -401,8 +433,8 @@ const handleFormSubmit = async (e) => {
 
   chatHistory.push({ role: "user", content: userMessage });
   if (!currentChatId) {
-  const title = userMessage.substring(0, 40);
-  saveChatToFirestore(title, chatHistory);
+  const aiTitle = await generateChatTitle(userMessage);
+  saveChatToFirestore(aiTitle, chatHistory);
 }
   messageCount++;
 updateUsageDisplay();
