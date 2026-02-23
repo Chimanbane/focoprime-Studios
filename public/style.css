@@ -1265,7 +1265,7 @@ body.bot-responding .prompt-form #stop-response-btn {
   
   /* REMOVER ÍCONE / AVATAR DA IA */
 .bot-message .avatar {
-  display: flex;
+  display: none;
 }
 
 /* Ajustar layout da mensagem da IA */
@@ -1753,11 +1753,15 @@ body.bot-responding .prompt-form #stop-response-btn {
   box-shadow: 0 0 6px #22c55e;
 }
 
+.status-dot {
+  display: none;
+}
+
 /* Texto pequeno */
 .status-text {
   font-size: 0.7rem;
   font-weight: 500;
-  color: #22c55e;
+  color: var(--subheading-color);
 }
 
 .login-chip {
