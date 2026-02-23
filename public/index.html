@@ -270,15 +270,21 @@
     <!--- ========== HISTÓRICO SIDEBAR ========== --->
     <div id="historySidebar" class="history-sidebar">
       <div class="history-header">
-        <h3>Histórico</h3>
-        <button id="closeHistoryBtn" class="closehistory">
-          <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-          fill="currentColor" viewBox="0 0 24 24" >
-            <!--- focoprime historias bar --->
-            <path d="M14.83 7.76 12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83z"></path><path d="M12 2C9.33 2 6.82 3.04 4.93 4.93S2 9.33 2 12s1.04 5.18 2.93 7.07c1.95 1.95 4.51 2.92 7.07 2.92s5.12-.97 7.07-2.92S22 14.67 22 12s-1.04-5.18-2.93-7.07A9.93 9.93 0 0 0 12 2m5.66 15.66c-3.12 3.12-8.19 3.12-11.31 0-1.51-1.51-2.34-3.52-2.34-5.66s.83-4.15 2.34-5.66S9.87 4 12.01 4s4.15.83 5.66 2.34 2.34 3.52 2.34 5.66-.83 4.15-2.34 5.66Z"></path>
-          </svg>
-        </button>
-      </div>
+  <div class="search-wrapper">
+    <input type="text" id="historySearch" placeholder="Pesquisar conversas...">
+    <button class="search-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M10 2a8 8 0 105.29 14.29l5.35 5.36 1.41-1.41-5.36-5.35A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+      </svg>
+    </button>
+  </div>
+  <button id="closeHistoryBtn" class="closehistory">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M14.83 7.76L12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83z"/>
+      <path d="M12 2C9.33 2 6.82 3.04 4.93 4.93S2 9.33 2 12s1.04 5.18 2.93 7.07c1.95 1.95 4.51 2.92 7.07 2.92s5.12-.97 7.07-2.92S22 14.67 22 12s-1.04-5.18-2.93-7.07A9.93 9.93 0 0 0 12 2m5.66 15.66c-3.12 3.12-8.19 3.12-11.31 0-1.51-1.51-2.34-3.52-2.34-5.66s.83-4.15 2.34-5.66S9.87 4 12.01 4s4.15.83 5.66 2.34 2.34 3.52 2.34 5.66-.83 4.15-2.34 5.66Z"/>
+    </svg>
+  </button>
+</div>
       
       <div id="historyList" class="history-list"></div>
     </div>
@@ -419,13 +425,6 @@ fill="currentColor" viewBox="0 0 24 24" >
 <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
 <path d="M16 12V6c0-2.21-1.79-4-4-4S8 3.79 8 6v6c0 2.21 1.79 4 4 4s4-1.79 4-4m-6 0V6c0-1.1.9-2 2-2s2 .9 2 2v6c0 1.1-.9 2-2 2s-2-.9-2-2"></path><path d="M18 12c0 3.31-2.69 6-6 6s-6-2.69-6-6H4c0 4.07 3.06 7.44 7 7.93V22h2v-2.07c3.94-.49 7-3.86 7-7.93z"></path>
 </svg>
-
-<div id="recordingUI" class="recording-ui" style="display:none;">
-  <div class="record-bar">
-    <div class="record-progress" id="recordProgress"></div>
-  </div>
-  <span id="recordTime">00:00</span>
-</div>
         </button>
       </div>
     </div>
@@ -454,6 +453,7 @@ fill="currentColor" viewBox="0 0 24 24" >
   <script src="script.js"></script>
   <script src="scripts/load.js"></script>
   <script src="scripts/apk.js"></script>
+  <script src="scripts/historias.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
