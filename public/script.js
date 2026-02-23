@@ -209,6 +209,18 @@ function escapeHTML(str) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 }
+
+function formatChatTime(timestamp) {
+  const date = new Date(timestamp);
+
+  return date.toLocaleString("pt-PT", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
 // MENSAGENS ESCONDIDAS 
 function toggleWelcomeUI(show) {
   const header = document.getElementById("appheader");
@@ -743,15 +755,24 @@ async function loadUserChats() {
     const item = document.createElement("div");
     item.className = "history-item";
 
-    item.innerHTML = `
-      <img src="${user.photoURL || 'images/carta.png'}" width="28" style="border-radius:50%">
-      <span class="history-title">${chat.title}</span>
-      <button class="delete-history"><svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+    const formattedTime = formatChatTime(chat.createdAt);
+
+item.innerHTML = `
+  <img src="${user.photoURL || 'images/carta.png'}" width="28" style="border-radius:50%">
+  
+  <div class="history-content">
+    <span class="history-title">${chat.title}</span>
+    <span class="history-time">${formattedTime}</span>
+  </div>
+
+  <button class="delete-history">
+    <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
 fill="currentColor" viewBox="0 0 24 24" >
 <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M18.5 2h-12C4.57 2 3 3.57 3 5.5V21c0 .35.18.67.47.85s.66.2.97.04l5.55-2.78 5.55 2.78a.997.997 0 0 0 1.45-.89v-8h4c.55 0 1-.45 1-1V5.5c0-1.93-1.57-3.5-3.5-3.5ZM15 19.38l-4.55-2.28a1 1 0 0 0-.89 0l-4.55 2.28V5.5c0-.83.67-1.5 1.5-1.5h8.85c-.22.46-.35.96-.35 1.5v13.88ZM20 11h-3V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"></path><path d="M7 9h6v2H7z"></path>
-</svg></button>
-    `;
+<path d="m7.76 14.83-2.83 2.83 1.41 1.41 2.83-2.83 2.12-2.12.71-.71.71.71 1.41 1.42 3.54 3.53 1.41-1.41-3.53-3.54-1.42-1.41-.71-.71 5.66-5.66-1.41-1.41L12 10.59 6.34 4.93 4.93 6.34 10.59 12l-.71.71z"></path>
+</svg>
+  </button>
+`;
 
     item.querySelector(".delete-history").addEventListener("click", async (e) => {
       e.stopPropagation();
