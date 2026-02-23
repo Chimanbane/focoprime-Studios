@@ -559,48 +559,6 @@ document.getElementById("closeLoginModal").addEventListener("click", () => {
   document.getElementById("loginModal").style.display = "none";
 });
 
-
-// ===== MODEL MODAL =====
-
-const modelModal = document.getElementById("modelModal");
-const deleteChatsBtn = document.getElementById("delete-chats-btn");
-
-// abrir popup ao clicar no botão
-deleteChatsBtn.addEventListener("click", () => {
-  modelModal.classList.add("show");
-});
-
-// fechar clicando fora
-modelModal.addEventListener("click", (e) => {
-  if (e.target === modelModal) {
-    modelModal.classList.remove("show");
-  }
-});
-
-// selecionar modelo
-document.querySelectorAll(".model-item").forEach(item => {
-  item.addEventListener("click", async () => {
-
-    const selectedModel = item.dataset.model;
-
-    // 🔒 BLOQUEIO
-    if (selectedModel === "v5.0" && userPlan !== "premium") {
-      alert("🚀 O modelo v5.0 é exclusivo para Premium.");
-      return;
-    }
-
-    currentModel = selectedModel;
-
-    const user = window.auth.currentUser;
-    if (user) {
-      await loadUserUsage(user);
-    }
-
-    updateUsageDisplay();
-    modelModal.classList.remove("show");
-  });
-});
-
 // VERIFICA 
 async function loadUserUsage(user) {
   const userRef = doc(window.db, "users", user.uid);
@@ -757,4 +715,4 @@ fill="currentColor" viewBox="0 0 24 24" >
 
     historyList.appendChild(item);
   });
-    }
+                  }
