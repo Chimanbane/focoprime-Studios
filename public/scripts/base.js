@@ -3,6 +3,9 @@
 ================================= */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
+import { getDatabase, ref, push, onValue } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
 import {
   getAuth,
   GoogleAuthProvider,
@@ -27,13 +30,16 @@ import {
   addDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAKwBNz6CkVP_FpUP9hxMsjj8J8NNbMk3M",
   authDomain: "focoprime-ai.firebaseapp.com",
-  projectId: "focoprime-ai"
+  projectId: "focoprime-ai",
+  databaseURL: "https://focoprime-ai-default-rtdb.firebaseio.com/"
 };
 
 const app = initializeApp(firebaseConfig);
+const realtimeDB = getDatabase();
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
@@ -438,3 +444,54 @@ menuOverlay?.addEventListener("click", closeMenu);
 
 
 window.statusText = statusText;
+
+const sendBtn = document.getElementById("sendGroupMessage");
+const groupInput = document.getElementById("groupMessageInput");
+
+sendBtn.addEventListener("click", () => {
+  const user = auth.currentUser;
+  if (!user) return alert("Precisa estar logado");
+
+  const message = groupInput.value.trim();
+  if (!message) return;
+
+  push(ref(realtimeDB, "groupChat"), {
+    name: user.displayName,
+    photo: user.photoURL || "images/user-placeholder.png",
+    text: message,
+    timestamp: Date.now()
+  });
+
+  groupInput.value = "";
+});
+
+const groupMessages = document.getElementById("groupMessages");
+
+onValue(ref(realtimeDB, "groupChat"), (snapshot) => {
+  groupMessages.innerHTML = "";
+
+  snapshot.forEach((child) => {
+    const data = child.val();
+
+    const div = document.createElement("div");
+    div.classList.add("group-message");
+
+    div.innerHTML = `
+      <img src="${data.photo}">
+      <div>
+        <strong>${data.name}</strong>
+        <p>${data.text}</p>
+      </div>
+    `;
+
+    groupMessages.appendChild(div);
+  });
+
+  groupMessages.scrollTop = groupMessages.scrollHeight;
+});
+
+document.getElementById("closeGroupChat")
+.addEventListener("click", () => {
+  document.getElementById("groupChatModal")
+  .classList.remove("active");
+});
