@@ -423,4 +423,26 @@
 .login-error-bar.show {
   transform: translateY(0);
   opacity: 1;
-  }
+}
+
+/* Barra de sucesso flutuante */
+.login-success-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  z-index: 100;
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+/* quando estiver visível */
+.login-success-bar.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
