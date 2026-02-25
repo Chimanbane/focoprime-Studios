@@ -10,10 +10,9 @@
   <!-- Favicon -->
   <link rel="icon" href="images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="images/favicon.png">
-  
+  <!--- pwa progressive web app -->
   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2563eb">
-  
+  <meta name="theme-color" content="#2563eb">
   <!-- SEO + IA -->
   <meta name="description" content="FocoPrime IA é um assistente escolar inteligente criado em Moçambique para ajudar alunos com estudos, exames e aprendizagem personalizada.">
   <!-- Open Graph -->
@@ -76,12 +75,11 @@
     <div id="loginheader"></div>
     <div id="modelUsageBadge"></div>
     
-    <!--- UPGRADE PREMIUM MODAL --->
     <!---======= UPGRADE MODE ====== --->
     <div id="upgradeModal" class="upgrade-modal">
       <div class="upgrade-box">
         <button class="upgrade-close" id="closeUpgrade">&times;</button>
-        
+        <!--- upgrade logótipo e ícone --->
         <div class="upgrade-header">
           <span class="upgrade-logo">
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +88,6 @@
               <path d="M17.31 14H9.72L5.95 2.68A1 1 0 0 0 5 2H2v2h2.28l3.54 10.63A2 2 0 0 0 9.72 16h7.59a2 2 0 0 0 1.87-1.3l2.76-7.35-1.87-.7zM10 18a2 2 0 1 0 0 4 2 2 0 1 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 1 0 0-4"></path><path d="m11.71 7.29-1.42 1.42 2.71 2.7 4.71-4.7-1.42-1.42L13 8.59z"></path>
             </svg>
           </span>
-          
           <!--- parte do título  --->
           <div class="upgrade-title">
             <h2>Upgrade para</h2>
@@ -122,7 +119,6 @@
             Modelos ilimitados
           </li>
         </ul>
-        
         <!--- botão do upgrade --->
         <button class="upgrade-btn">
           <span class="material-symbols-rounded">
@@ -141,16 +137,14 @@
       </div>
     </div>
     <!--- ====== FINAL DO POPUP (UPGRADE) ====--->
-    <!--- =====≈==============================--->
     
     <!--- ====== MODELO SELETOR MODAL ======== --->
     <div id="modelModal" class="model-modal">
       <div class="model-box">
-        
+        <!--- selecionado de modelo título --->
         <h3 class="model-title">Selecionar modelo</h3>
-        
+        <!--- lista dos modelos --->
         <div class="model-list">
-          
           <!--- modelo v3.5 lite --->
           <div class="model-item" data-model="v3.5">
             <div class="model-info">
@@ -158,7 +152,6 @@
               <span class="badge free">Grátis</span>
             </div>
           </div>
-          
           <!--- modelo v4.0 crack --->
           <div class="model-item" data-model="v4.0">
             <div class="model-info">
@@ -166,7 +159,6 @@
               <span class="badge free">Grátis</span>
             </div>
           </div>
-          
           <!--- modelo v5.0 premium --->
           <div class="model-item premium" data-model="v5.0">
             <div class="model-info">
@@ -174,12 +166,10 @@
               <span class="badge premium-badge">Premium</span>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
     <!--- ========= FECHAMENTO DO SELETOR ========== --->
-    <!--- =========================÷===÷÷÷÷========= --->
     
     <!--- ====== LOADER DE ENTRADA ====== --->
     <div id="ai-loader" class="ai-loader">
@@ -200,11 +190,10 @@
       </div>
     </div>
     <!--- ========== FECHAMENTO =========== --->
-    <!--- ================================= --->
     
     <!--- ====== MENU SIDEBAR PRINCIPAL ====== --->
     <div id="sideMenu" class="side-menu">
-      
+      <!--- lista do sidebar --->
       <ul class="side-menu-list">
         <li class="side-item" id="newChatBtn">
           <span class="material-symbols-rounded"><i class="ri-chat-smile-ai-fill"></i></span>
@@ -274,23 +263,22 @@
     <!--- ========== HISTÓRICO SIDEBAR ========== --->
     <div id="historySidebar" class="history-sidebar">
       <div class="history-header">
-  <div class="search-wrapper">
-    <input type="text" id="historySearch" placeholder="Pesquisar conversas...">
-    <button class="search-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M10 2a8 8 0 105.29 14.29l5.35 5.36 1.41-1.41-5.36-5.35A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
-      </svg>
-    </button>
-    <div id="userUsagePanel"></div>
-  </div>
-</div>
-      
+        <div class="search-wrapper">
+          <input type="text" id="historySearch" placeholder="Pesquisar conversas...">
+          <button class="search-icon">
+            <!--- ícone svg de pesquisa --->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 2a8 8 0 105.29 14.29l5.35 5.36 1.41-1.41-5.36-5.35A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+            </svg>
+          </button>
+          <!-- id -->
+          <div id="userUsagePanel"></div>
+        </div>
+      </div>
       <div id="historyList" class="history-list"></div>
     </div>
-    
     <div id="historyOverlay" class="history-overlay"></div>
     <!--- ============== FECHAMENTO DO HISTÓRICO ========= --->
-    <!--- =================================== --->
 
     <!--- ====== APP HEADER ====== --->
     <div id="appheader"></div>
@@ -302,34 +290,29 @@
       });
     </script>
     <!--- ====== FECHAMENTO DO APP HEADER ====== --->
-    <!--- ====================================== --->
     
-    <!-- Barra de sucesso -->
-<div id="loginSuccessBar" class="login-success-bar">
-  <i class="ri-check-line"></i>
-  <span id="loginSuccessText">Login efetuado com sucesso!</span>
-</div>
-
-    <!--- ====== LOGIN MODAL (REQUERIDO) ======= --->
+    <!--- ====== LOGIN MODAL GOOGLE/EMAIL (REQUERIDO) ======= --->
+    <div id="loginSuccessBar" class="login-success-bar">
+      <i class="ri-check-line"></i>
+      <span id="loginSuccessText">Login efetuado com sucesso!</span>
+    </div>
+    <!--- ===== LOGIN MODA POPUP ===== --->
     <div id="loginModal" class="login-modal">
       <div class="login-box">
-
-        <!-- Barra de erro profissional -->
-<div id="loginErrorBar" class="login-error-bar">
-  <i class="ri-error-warning-fill"></i>
-  <span id="loginErrorText">Erro ao iniciar sessão</span>
-</div>
-
-
-        
+        <!--- barra de erro profissional --->
+        <div id="loginErrorBar" class="login-error-bar">
+          <i class="ri-error-warning-fill"></i>
+          <span id="loginErrorText">Erro ao iniciar sessão</span>
+        </div>
+        <!--- botão de fechar popUp --->
         <span class="login-close" id="closeLoginModal">
           <span class="material-symbols-rounded">close</span>
         </span>
-        <!--- Header --->
+        <!--- Cabeçalho --->
         <img src="images/Logo.png" class="login-logo" />
         <h2 id="loginTitle">Bem vindo a FocoPrime</h2>
         <p id="loginSubtitle">Entrar com a sua conta</p>
-        <!---========== LOGIN VIEW ==========--->
+        <!--- ========== LOGIN VIEW ========== --->
         <div id="loginView">
           <div class="password-container">
             <input type="email" id="emailInput" placeholder="Email" class="input-premium">
@@ -342,36 +325,34 @@
               Esqueceu a senha?
             </span>
           </p>
-          <!--- Botão entrar --->
+          <!--- Botão de entrar --->
           <button id="emailLoginBtn" class="btn-premium">
             <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 2v.51l-8 6.22-8-6.22V6zM4 18V9.04l7.39 5.74c.18.14.4.21.61.21s.43-.07.61-.21L20 9.03v8.96H4Z"></path>
-</svg>
+            fill="currentColor" viewBox="0 0 24 24" >
+              <!--- Focoprime icones svg de email --->
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 2v.51l-8 6.22-8-6.22V6zM4 18V9.04l7.39 5.74c.18.14.4.21.61.21s.43-.07.61-.21L20 9.03v8.96H4Z"></path>
+            </svg>
             Entrar com Email
           </button>
           <!--- Botão continuar com a Google --->
           <button id="googleLoginBtn" class="btn-google">
-  <svg class="google-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.18 3.6l6.85-6.85C35.92 2.36 30.39 0 24 0 14.61 0 6.43 5.4 2.39 13.29l7.98 6.2C12.19 13.24 17.66 9.5 24 9.5z"/>
-    <path fill="#4285F4" d="M46.1 24.5c0-1.64-.15-3.21-.43-4.73H24v9.02h12.4c-.53 2.87-2.14 5.31-4.56 6.95l7.08 5.5C43.96 37.01 46.1 31.33 46.1 24.5z"/>
-    <path fill="#FBBC05" d="M10.37 28.49c-.48-1.44-.75-2.98-.75-4.49s.27-3.05.75-4.49l-7.98-6.2C.86 16.53 0 20.13 0 24s.86 7.47 2.39 10.69l7.98-6.2z"/>
-    <path fill="#34A853" d="M24 48c6.39 0 11.75-2.11 15.67-5.74l-7.08-5.5c-1.97 1.32-4.49 2.09-8.59 2.09-6.34 0-11.81-3.74-13.63-9.99l-7.98 6.2C6.43 42.6 14.61 48 24 48z"/>
-  </svg>
-  Continuar com Google
-</button>
-          <!--- Ainda não tens conta --->
+            <svg class="google-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.18 3.6l6.85-6.85C35.92 2.36 30.39 0 24 0 14.61 0 6.43 5.4 2.39 13.29l7.98 6.2C12.19 13.24 17.66 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.1 24.5c0-1.64-.15-3.21-.43-4.73H24v9.02h12.4c-.53 2.87-2.14 5.31-4.56 6.95l7.08 5.5C43.96 37.01 46.1 31.33 46.1 24.5z"/>
+              <path fill="#FBBC05" d="M10.37 28.49c-.48-1.44-.75-2.98-.75-4.49s.27-3.05.75-4.49l-7.98-6.2C.86 16.53 0 20.13 0 24s.86 7.47 2.39 10.69l7.98-6.2z"/>
+              <path fill="#34A853" d="M24 48c6.39 0 11.75-2.11 15.67-5.74l-7.08-5.5c-1.97 1.32-4.49 2.09-8.59 2.09-6.34 0-11.81-3.74-13.63-9.99l-7.98 6.2C6.43 42.6 14.61 48 24 48z"/>
+            </svg>
+            Continuar com Google
+          </button>
+          <!--- Ainda não tens conta? --->
           <p class="switch-text">
             Ainda não tens conta?
             <span id="showRegister">Criar conta</span>
           </p>
-          
         </div>
-        
         <!---=============== REGISTER VIEW ============--->
         <div id="registerView" style="display: none;">
-          
+          <!--- Avatar Upload --->
           <div class="avatar-upload">
             <input type="file" id="photoInput" accept="image/*" hidden>
             <img src="images/user-placeholder.png" id="previewPhoto">
@@ -379,24 +360,24 @@ fill="currentColor" viewBox="0 0 24 24" >
               <i class="ri-camera-line"></i>
             </button>
           </div>
-          
+          <!--- barras dos emets --->
           <input type="text" id="registerName" placeholder="Nome completo" class="input-premium">
           <input type="email" id="registerEmail" placeholder="Email" class="input-premium">
           <div class="password-container">
             <input type="password" id="registerPassword" placeholder="Senha" class="input-premium">
             <i class="ri-eye-line password-toggle" id="toggleRegisterPassword"></i>
           </div>
-          
+          <!--- botão criar conta --->
           <button id="emailRegisterBtn" class="btn-premium">
             Criar conta
           </button>
-          
+          <!--- já tens conta? --->
           <p class="switch-text">
             Já tens conta?
             <span id="showLogin">Entrar</span>
           </p>
         </div>
-        <!--- Login terms --->
+        <!--- ===== Login terms ===== --->
         <span class="login-terms">
           Ao continuar, você aceita as nossas
           <a href="#"><strong>Políticas de privacidade</strong></a>
@@ -404,7 +385,6 @@ fill="currentColor" viewBox="0 0 24 24" >
       </div>
     </div>
     <!--- ====== FECHAMENTO DO LOGIN (ID) ====== --->
-    <!--- ====================================== --->
     
     <!--- ====== SUGESTÕES ====== --->
     <div id="sugere"></div>
@@ -445,10 +425,10 @@ fill="currentColor" viewBox="0 0 24 24" >
         <button id="theme-toggle-btn" class="material-symbols-rounded">light_mode</button>
         <button id="delete-chats-btn" class="material-symbols-rounded menu-icon">
           <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-fill="currentColor" viewBox="0 0 24 24" >
-<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M16 12V6c0-2.21-1.79-4-4-4S8 3.79 8 6v6c0 2.21 1.79 4 4 4s4-1.79 4-4m-6 0V6c0-1.1.9-2 2-2s2 .9 2 2v6c0 1.1-.9 2-2 2s-2-.9-2-2"></path><path d="M18 12c0 3.31-2.69 6-6 6s-6-2.69-6-6H4c0 4.07 3.06 7.44 7 7.93V22h2v-2.07c3.94-.49 7-3.86 7-7.93z"></path>
-</svg>
+          fill="currentColor" viewBox="0 0 24 24" >
+            <!--- focoprime svg icone botão --->
+            <path d="M16 12V6c0-2.21-1.79-4-4-4S8 3.79 8 6v6c0 2.21 1.79 4 4 4s4-1.79 4-4m-6 0V6c0-1.1.9-2 2-2s2 .9 2 2v6c0 1.1-.9 2-2 2s-2-.9-2-2"></path><path d="M18 12c0 3.31-2.69 6-6 6s-6-2.69-6-6H4c0 4.07 3.06 7.44 7 7.93V22h2v-2.07c3.94-.49 7-3.86 7-7.93z"></path>
+          </svg>
         </button>
       </div>
     </div>
@@ -464,19 +444,13 @@ fill="currentColor" viewBox="0 0 24 24" >
   </div>
   <!--- ========== FECHAMENTO ============= --->
   
-  <div id="appInstallBar" style="display:none; background:#0055ff; color:#fff; padding:10px; text-align:center;">
-  <span>Instale o FocoPrime IA no seu dispositivo!</span>
-  <button id="installBtn">Instalar</button>
-</div>
-  <!--- =================================== --->
-  
   <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js")
-    .then(() => console.log("PWA ativa"))
-    .catch(err => console.log("Erro PWA:", err));
-}
-</script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js")
+      .then(() => console.log("PWA ativa"))
+      .catch(err => console.log("Erro PWA:", err));
+    }
+  </script>
   <!--- ======== FECHAMENTO ============= --->
 
   
