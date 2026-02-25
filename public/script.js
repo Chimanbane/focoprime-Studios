@@ -790,19 +790,12 @@ fill="currentColor" viewBox="0 0 24 24" >
 }
 
 // PWA APP PROGRESSIVE
-let deferredPrompt;
+const groupChatBtn = document.getElementById("delete-chats-btn");
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // impede que apareça o prompt automático
-  deferredPrompt = e;
-  document.getElementById('appInstallBar').style.display = 'flex'; // sua barra de instalar
+groupChatBtn.addEventListener("click", () => {
+  openGroupChat();
 });
 
-document.getElementById('installBtn').addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log('Usuário escolheu:', outcome);
-    deferredPrompt = null;
+function openGroupChat() {
+  document.getElementById("groupChatModal").classList.add("active");
   }
-});
