@@ -235,9 +235,24 @@ emailRegisterBtn.addEventListener("click", async () => {
 });
 
 // Salvar foto localmente
-if (photoData) {
-  localStorage.setItem("userPhoto_" + user.uid, photoData);
+let photoBase64 = null;
+
+if (photoInput.files[0]) {
+  const reader = new FileReader();
+
+  photoBase64 = await new Promise((resolve) => {
+    reader.onload = e => resolve(e.target.result);
+    reader.readAsDataURL(photoInput.files[0]);
+  });
 }
+
+// 🔥 Salvar no Firestore
+await setDoc(doc(db, "users", user.uid), {
+  name: registerName.value,
+  email: registerEmail.value,
+  photoBase64: photoBase64 || null,
+  createdAt: Date.now()
+});
 
     // 🔥 FORÇA ATUALIZAÇÃO DO USER
     await user.reload();
@@ -247,8 +262,7 @@ if (photoData) {
     userChipName.textContent =
       updatedUser.displayName.split(" ")[0];
 
-    userPhoto.src =
-  photoData || "images/carta.png";
+    userPhoto.src = photoBase64 || "images/carta.png";
 
     // ✅ Mostrar barra de sucesso
   showLoginSuccess("Conta criada com sucesso!");
@@ -264,7 +278,7 @@ if (photoData) {
 /* ===============================
    👤 CONTROLE DE SESSÃO
 ================================= */
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   const loginBtn = document.getElementById("loginBtn");
 
   if (user) {
@@ -288,15 +302,16 @@ onAuthStateChanged(auth, (user) => {
     userName.value = user.displayName || "";
     userChipName.textContent = user.displayName?.split(" ")[0] || "Usuário";
 
-    const savedPhoto = localStorage.getItem("userPhoto_" + user.uid);
+    const userDoc = await getDoc(doc(db, "users", user.uid));
 
-    if (savedPhoto) {
-      userPhoto.src = savedPhoto;
-    } else if (user.photoURL) {
-      userPhoto.src = user.photoURL;
-    } else {
-      userPhoto.src = "images/carta.png";
-    }
+if (userDoc.exists() && userDoc.data().photoBase64) {
+  userPhoto.src = userDoc.data().photoBase64;
+} else if (user.photoURL) {
+  // caso login Google
+  userPhoto.src = user.photoURL;
+} else {
+  userPhoto.src = "images/carta.png";
+}
 
   } else {
     // usuário não logado → mostra botão entrar
@@ -564,4 +579,4 @@ function formatTimestamp(ts) {
   const seconds = String(date.getSeconds()).padStart(2, '0');
 
   return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-   }
+       }
