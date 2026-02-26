@@ -445,63 +445,87 @@ menuOverlay?.addEventListener("click", closeMenu);
 
 window.statusText = statusText;
 
-const sendBtn = document.getElementById("sendGroupMessage");
+const groupMessages = document.getElementById("groupMessages");
 const groupInput = document.getElementById("groupMessageInput");
+const sendBtn = document.getElementById("sendGroupMessage");
+const replyPreview = document.getElementById("replyPreview");
+const replyTextEl = document.getElementById("replyText");
+const cancelReplyBtn = document.getElementById("cancelReply");
 
+let replyingTo = null;
+
+// Enviar mensagem
 sendBtn.addEventListener("click", () => {
   const user = auth.currentUser;
   if (!user) return alert("Precisa estar logado");
 
-  const message = groupInput.value.trim();
-  if (!message) return;
+  const text = groupInput.value.trim();
+  if (!text) return;
 
   push(ref(realtimeDB, "groupChat"), {
-  name: user.displayName,
-  email: user.email, // adiciona esta linha
-  photo: user.photoURL || "images/user-placeholder.png",
-  text: message,
-  timestamp: Date.now()
-});
+    name: user.displayName,
+    email: user.email,
+    photo: user.photoURL || "images/user-placeholder.png",
+    text: text,
+    timestamp: Date.now(),
+    replyTo: replyingTo || null
+  });
 
   groupInput.value = "";
+  replyingTo = null;
+  replyPreview.style.display = "none";
+  replyTextEl.textContent = "";
 });
 
-const groupMessages = document.getElementById("groupMessages");
+// Cancelar resposta
+cancelReplyBtn.addEventListener("click", () => {
+  replyingTo = null;
+  replyPreview.style.display = "none";
+  replyTextEl.textContent = "";
+});
 
+// Atualizar lista de mensagens
 onValue(ref(realtimeDB, "groupChat"), (snapshot) => {
   groupMessages.innerHTML = "";
 
-  snapshot.forEach((child) => {
-  const data = child.val();
-  const div = document.createElement("div");
-  div.classList.add("group-message");
+  snapshot.forEach(child => {
+    const data = child.val();
+    const div = document.createElement("div");
+    div.classList.add("group-message");
 
-  const currentUser = auth.currentUser;
+    const user = auth.currentUser;
+    const isMyMessage = user && data.email === user.email;
+    div.classList.add(isMyMessage ? "my-message" : "other-message");
 
-  // Adiciona classes dependendo de quem enviou
-  if (currentUser && data.email === currentUser.email) {
-    div.classList.add("my-message");       // mensagens do próprio usuário
-  } else {
-    div.classList.add("other-message");    // mensagens dos outros
-  }
+    const showAvatar = !isMyMessage;
 
-  // Verifica se é a mensagem do próprio usuário
-const showAvatar = !(currentUser && data.email === currentUser.email);
+    div.innerHTML = `
+      ${showAvatar ? `<img src="${data.photo}">` : ''}
+      <div class="message-content">
+        <span class="user-name">${data.name}</span>
+        <span class="user-email">${data.email || 'sem email'}</span>
+        <span class="message-time">${formatTimestamp(data.timestamp)}</span>
+        ${data.replyTo ? `<div class="replied-message">Respondendo: ${data.replyTo}</div>` : ''}
+        <p class="message-text">${data.text}</p>
+        ${!isMyMessage ? `<button class="reply-btn">Responder</button>` : ''}
+      </div>
+    `;
 
-div.innerHTML = `
-  ${showAvatar ? `<img src="${data.photo}">` : ''}
-  <div class="message-content">
-  <span class="user-name">${data.name}</span>
-  <span class="user-email">${data.email || 'sem email'}</span>
-  <span class="message-time">${formatTimestamp(data.timestamp)}</span>
-  <p class="message-text">${data.text}</p>
-</div>
-`;
-
-  groupMessages.appendChild(div);
-});
+    groupMessages.appendChild(div);
+  });
 
   groupMessages.scrollTop = groupMessages.scrollHeight;
+
+  // Botões de responder
+  groupMessages.querySelectorAll(".reply-btn").forEach(btn => {
+    btn.onclick = (e) => {
+      const msg = e.target.closest(".message-content").querySelector(".message-text").textContent;
+      replyingTo = msg;
+      replyTextEl.textContent = msg;
+      replyPreview.style.display = "flex";
+      groupInput.focus();
+    }
+  });
 });
 
 document.getElementById("closeGroupChat")
@@ -522,4 +546,4 @@ function formatTimestamp(ts) {
   const seconds = String(date.getSeconds()).padStart(2, '0');
 
   return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-                                          }
+}
