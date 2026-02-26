@@ -200,3 +200,67 @@
   color: #888;
   margin-top: 2px;
 }
+
+
+
+
+/* Barra de mensagem respondida (tipo WhatsApp) */
+.group-reply-preview {
+  background: #f1f1f1;
+  border-left: 3px solid #1d7efd;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  color: #333;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-reply-preview span {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.group-reply-preview button {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Botão responder embaixo de mensagens dos outros */
+.group-message .reply-btn {
+  font-size: 0.75rem;
+  color: #1d7efd;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 2px;
+  align-self: flex-start;
+  padding: 0;
+}
+
+/* Colocar o preview acima do input */
+.group-input-container {
+  display: flex;
+  flex-direction: column; /* empilha: replyPreview acima do input+botão */
+  width: 100%;
+  gap: 5px;
+}
+
+.group-input-inner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.group-input button {
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  }
