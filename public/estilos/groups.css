@@ -71,8 +71,8 @@
 }
 
 .group-message img {
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   border: 2px solid #1d7efd;
   flex-shrink: 0;
@@ -160,4 +160,37 @@
   font-size: 0.75rem;
   color: #a0a0a0;
   margin-left: 5px;
+}
+
+/* Mensagens do usuário logado à direita */
+.group-message.my-message {
+  margin-left: 7px;
+  flex-direuction: row-reverse;  /* imagem e texto à direita */
+  justify-content: flex-end;
+}
+
+.group-message.my-message .message-text {
+  background: #1d7efd; /* cor destacada para o próprio usuário */
+  color: #fff;
+}
+
+/* Mensagens de outros usuários à esquerda */
+.group-message.other-message {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.group-message.other-message .message-text {
+  background: var(--primary-color);
+  color: var(--text-color);
+}
+
+.group-message .message-content {
+  display: flex;
+  flex-direction: column; /* empilha nome e email verticalmente */
+}
+
+.group-message.my-message .message-content {
+  align-items: flex-end;
+  text-align: right;
 }
