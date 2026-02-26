@@ -472,21 +472,33 @@ onValue(ref(realtimeDB, "groupChat"), (snapshot) => {
   groupMessages.innerHTML = "";
 
   snapshot.forEach((child) => {
-    const data = child.val();
+  const data = child.val();
+  const div = document.createElement("div");
+  div.classList.add("group-message");
 
-    const div = document.createElement("div");
-    div.classList.add("group-message");
+  const currentUser = auth.currentUser;
 
-    div.innerHTML = `
-  <img src="${data.photo}">
-  <div>
-    <strong>${data.name}</strong> <span class="user-email">&lt;${data.email}&gt;</span>
-    <p>${data.text}</p>
+  // Adiciona classes dependendo de quem enviou
+  if (currentUser && data.email === currentUser.email) {
+    div.classList.add("my-message");       // mensagens do próprio usuário
+  } else {
+    div.classList.add("other-message");    // mensagens dos outros
+  }
+
+  // Verifica se é a mensagem do próprio usuário
+const showAvatar = !(currentUser && data.email === currentUser.email);
+
+div.innerHTML = `
+  ${showAvatar ? `<img src="${data.photo}">` : ''}
+  <div class="message-content">
+    <span class="user-name">${data.name}</span>
+    <span class="user-email">${data.email || 'sem email'}</span>
+    <p class="message-text">${data.text}</p>
   </div>
 `;
 
-    groupMessages.appendChild(div);
-  });
+  groupMessages.appendChild(div);
+});
 
   groupMessages.scrollTop = groupMessages.scrollHeight;
 });
