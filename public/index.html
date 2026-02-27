@@ -261,24 +261,61 @@
     <div id="menuOverlay" class="menu-overlay"></div>
     <!--- ====== FECHAMENTO DO SIDEMENU ===== --->
     
-    <!--- ========== HISTÓRICO SIDEBAR ========== --->
-    <div id="historySidebar" class="history-sidebar">
-      <div class="history-header">
-        <div class="search-wrapper">
-          <input type="text" id="historySearch" placeholder="Pesquisar conversas...">
-          <button class="search-icon">
-            <!--- ícone svg de pesquisa --->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M10 2a8 8 0 105.29 14.29l5.35 5.36 1.41-1.41-5.36-5.35A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
-            </svg>
-          </button>
-          <!-- id -->
-          <div id="userUsagePanel"></div>
-        </div>
-      </div>
-      <div id="historyList" class="history-list"></div>
+    <!-- ========== HISTÓRICO SIDEBAR ========== -->
+<div id="historySidebar" class="history-sidebar">
+
+  <!-- 🔎 TOPO -->
+  <div class="history-top">
+
+    <div class="search-wrapper">
+      <i class="ri-search-line"></i>
+      <input type="text" id="historySearch" placeholder="Procurar">
     </div>
-    <div id="historyOverlay" class="history-overlay"></div>
+
+    <!-- 📌 MENU RÁPIDO -->
+    <div class="history-menu">
+
+      <div class="menu-item" id="newChatBtn">
+        <i class="ri-edit-line"></i>
+        <span>Novo chat</span>
+      </div>
+
+      <div class="menu-item">
+        <i class="ri-image-line"></i>
+        <span>Imagens</span>
+      </div>
+
+      <div class="menu-item">
+        <i class="ri-apps-line"></i>
+        <span>Apps</span>
+      </div>
+
+      <div class="menu-item">
+        <i class="ri-folder-add-line"></i>
+        <span>Novo projeto</span>
+      </div>
+
+      <div class="menu-item">
+        <i class="ri-folder-line"></i>
+        <span>Projetos</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 🗂 LISTA DE CONVERSAS -->
+  <div id="historyList" class="history-list"></div>
+
+  <!-- 👤 UTILIZADOR -->
+  <div class="history-user">
+    <img id="sidebarUserPhoto" src="images/carta.png">
+    <span id="sidebarUserName">Usuário</span>
+  </div>
+
+</div>
+
+<div id="historyOverlay" class="history-overlay"></div>
     <!--- ============== FECHAMENTO DO HISTÓRICO ========= --->
 
     <!--- ====== APP HEADER ====== --->
