@@ -43,6 +43,8 @@ const realtimeDB = getDatabase();
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
+let currentUserData = null;
+let currentUserPhoto = "images/carta.png";
 window.db = db;
 
 /* ===============================
@@ -304,14 +306,20 @@ onAuthStateChanged(auth, async (user) => {
 
     const userDoc = await getDoc(doc(db, "users", user.uid));
 
-if (userDoc.exists() && userDoc.data().photoBase64) {
-  userPhoto.src = userDoc.data().photoBase64;
-} else if (user.photoURL) {
-  // caso login Google
-  userPhoto.src = user.photoURL;
+if (userDoc.exists()) {
+  currentUserData = userDoc.data();
 } else {
-  userPhoto.src = "images/carta.png";
+  currentUserData = null;
 }
+
+// 🔥 PRIORIDADE PROFISSIONAL
+currentUserPhoto =
+  currentUserData?.photoBase64 ||
+  user.photoURL ||
+  "images/carta.png";
+
+// Atualiza UI principal
+userPhoto.src = currentUserPhoto;
 
   } else {
     // usuário não logado → mostra botão entrar
@@ -480,7 +488,7 @@ sendBtn.addEventListener("click", () => {
   push(ref(realtimeDB, "groupChat"), {
     name: user.displayName,
     email: user.email,
-    photo: user.photoURL || "images/user-placeholder.png",
+    photo: currentUserPhoto,
     text: text,
     timestamp: Date.now(),
     replyTo: replyingTo || null
@@ -579,4 +587,4 @@ function formatTimestamp(ts) {
   const seconds = String(date.getSeconds()).padStart(2, '0');
 
   return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-       }
+   }
