@@ -516,18 +516,18 @@ document.querySelector("#stop-response-btn")?.addEventListener("click", () => {
 // ==============================
 // SIDEBAR MENU
 // ==============================
-const sideMenu = document.getElementById("sideMenu");
-const menuOverlay = document.getElementById("menuOverlay");
+const historySidebar = document.getElementById("historySidebar");
+const historyOverlay = document.getElementById("historyOverlay");
 const closeMenuBtn = document.getElementById("closeMenuBtn");
 const sideLogoutBtn = document.getElementById("sideLogoutBtn");
 const newChatBtn = document.getElementById("newChatBtn");
 
-const openMenu = () => { sideMenu.classList.add("active"); menuOverlay.classList.add("active"); };
-const closeMenu = () => { sideMenu.classList.remove("active"); menuOverlay.classList.remove("active"); };
+const openMenu = () => { historySidebar.classList.add("active"); historyOverlay.classList.add("active"); };
+const closeMenu = () => { historySidebar.classList.remove("active"); historyOverlay.classList.remove("active"); };
 
 document.getElementById("newsButton")?.addEventListener("click", openMenu);
 closeMenuBtn?.addEventListener("click", closeMenu);
-menuOverlay?.addEventListener("click", closeMenu);
+historyOverlay?.addEventListener("click", closeMenu);
 
 newChatBtn?.addEventListener("click", () => {
 
@@ -694,25 +694,6 @@ setInterval(() => {
   }
 }, 60000); // atualiza a cada 1 minuto
 
-// HISTÓRICO DE CONVERSAS 
-const historySidebar = document.getElementById("historySidebar");
-const historyOverlay = document.getElementById("historyOverlay");
-const openHistoryBtn = document.getElementById("openHistoryBtn");
-const closeHistoryBtn = document.getElementById("closeHistoryBtn");
-const historyList = document.getElementById("historyList");
-
-openHistoryBtn?.addEventListener("click", () => {
-  historySidebar.classList.add("active");
-  historyOverlay.classList.add("active");
-});
-
-closeHistoryBtn?.addEventListener("click", closeHistory);
-historyOverlay?.addEventListener("click", closeHistory);
-
-function closeHistory() {
-  historySidebar.classList.remove("active");
-  historyOverlay.classList.remove("active");
-}
 
 // FUNÇÃO SALVAR CONVERSAS 
 async function saveChatToFirestore(title, messages) {
@@ -805,5 +786,4 @@ groupChatBtn.addEventListener("click", () => {
 function openGroupChat() {
   document.getElementById("groupChatModal").classList.add("active");
 }
-
 
