@@ -811,17 +811,29 @@ const userGeminiOverlay = document.getElementById("userGeminiOverlay");
 const closeUserGemini = document.getElementById("closeUserGemini");
 const panelLogoutBtn = document.getElementById("panelLogoutBtn");
 
-openUserPanelBtn.addEventListener("click", () => {
+openUserPanelBtn.addEventListener("click", async () => {
   userGeminiPanel.classList.add("active");
   userGeminiOverlay.classList.add("active");
 
   const user = window.auth.currentUser;
-  if (user) {
-    document.getElementById("panelUserEmail").textContent = user.email;
-    document.getElementById("panelUserName").textContent = user.displayName || "Usuário";
-    document.getElementById("panelUserPhoto").src =
-      user.photoURL || currentUserPhoto;
+  if (!user) return;
+
+  document.getElementById("panelUserEmail").textContent = user.email;
+  document.getElementById("panelUserName").textContent =
+    user.displayName || "Usuário";
+
+  // 🔥 BUSCAR FOTO DO FIRESTORE
+  const userDoc = await getDoc(doc(window.db, "users", user.uid));
+
+  let photo = "images/carta.png";
+
+  if (userDoc.exists() && userDoc.data().photoBase64) {
+    photo = userDoc.data().photoBase64;
+  } else if (user.photoURL) {
+    photo = user.photoURL;
   }
+
+  document.getElementById("panelUserPhoto").src = photo;
 });
 
 function closeUserGeminiPanel() {
