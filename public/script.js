@@ -902,3 +902,75 @@ saveNameBtn.addEventListener("click", async () => {
     showToast("Erro ao atualizar nome", "error");
   }
 });
+
+// IMAGEM CHANGE
+const panelUserPhoto = document.getElementById("panelUserPhoto");
+const photoOptions = document.getElementById("photoOptions");
+const viewPhotoOption = document.getElementById("viewPhotoOption");
+const uploadPhotoOption = document.getElementById("uploadPhotoOption");
+const panelPhotoInput = document.getElementById("panelPhotoInput");
+const panelAvatarError = document.getElementById("panelAvatarError");
+
+// 🔥 Mostrar menu ao clicar na foto
+panelUserPhoto.addEventListener("click", () => {
+  photoOptions.classList.toggle("show");
+});
+
+// 👁️ Ver imagem
+viewPhotoOption.addEventListener("click", () => {
+  const src = panelUserPhoto.src;
+  const win = window.open();
+  win.document.write(`<img src="${src}" style="width:100%">`);
+});
+
+// 📤 Upload imagem
+uploadPhotoOption.addEventListener("click", () => {
+  panelPhotoInput.click();
+});
+
+// 🔥 Validar e converter
+panelPhotoInput.addEventListener("change", async () => {
+  const file = panelPhotoInput.files[0];
+  if (!file) return;
+
+  const maxSize = 1 * 1024 * 1024;
+
+  if (file.size > maxSize) {
+    panelAvatarError.classList.add("show");
+    photoOptions.classList.remove("show");
+    panelPhotoInput.value = "";
+    return;
+  }
+
+  panelAvatarError.classList.remove("show");
+
+  const reader = new FileReader();
+
+  reader.onload = async (e) => {
+    const base64 = e.target.result;
+
+    const user = window.auth.currentUser;
+    if (!user) return;
+
+    try {
+      // 🔥 Guardar no Firestore
+      await updateDoc(doc(window.db, "users", user.uid), {
+        photoBase64: base64
+      });
+
+      // Atualizar UI inteira
+      panelUserPhoto.src = base64;
+      document.getElementById("sidebarUserPhoto").src = base64;
+      document.getElementById("userPhoto").src = base64;
+
+      currentUserPhoto = base64;
+
+      showToast("Foto atualizada com sucesso!", "success");
+
+    } catch (error) {
+      showToast("Erro ao salvar imagem", "error");
+    }
+  };
+
+  reader.readAsDataURL(file);
+});
