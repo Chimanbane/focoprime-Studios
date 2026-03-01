@@ -252,4 +252,34 @@
 
 .custom-toast.error {
   background: #d62939;
-  }
+}
+
+/* IMAGEM OPÇÕES */
+.photo-options {
+  display: none;
+  flex-direction: column;
+  background: var(--secondary-hover-color);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 6px;
+  width: 160px;
+}
+
+.photo-options.show {
+  display: flex;
+}
+
+.photo-option {
+  padding: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+
+.photo-option:hover {
+  background: #1d7efd;
+  color: white;
+}
