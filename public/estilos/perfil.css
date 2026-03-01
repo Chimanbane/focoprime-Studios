@@ -61,7 +61,8 @@
   gap: 6px;
   padding: 8px 10px;
   border-radius: 999px;
-  font-size: 12px;
+  border: 2px solid #1d7efd;
+  font-size: 15px;
   margin: 0 auto 10px auto; /* 👈 centraliza horizontalmente */
   justify-content: center;
 }
@@ -360,4 +361,4 @@
 #saveNicknameBtn:hover {
   transform: translateY(-2px);
   background: #1054c9;
-  }
+}
