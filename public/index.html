@@ -302,10 +302,15 @@ fill="currentColor" viewBox="0 0 24 24" >
 </div>
   </div>
 
-    <div class="bio">
-      <i class="ri-user-settings-line"></i>
-      <span>Adicionar biografia</span>
-    </div>
+    <div class="bio" id="addNicknameBtn">
+  <i class="ri-user-settings-line"></i>
+  <span id="bioText">Adicionar Alcunha</span>
+</div>
+
+<div class="bio-input-wrapper" id="bioInputWrapper" style="display:none;">
+  <input type="text" id="nicknameInput" placeholder="Escreva sua alcunha" maxlength="20">
+  <button id="saveNicknameBtn">Guardar</button>
+</div>
     
     <!-- EMAIL -->
 <div class="chatgpt-email">
