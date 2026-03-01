@@ -44,6 +44,9 @@
 .user-gemini-profile {
   text-align: center;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .user-gemini-profile img {
@@ -71,6 +74,7 @@
   background: none;
   border: none;
   height: 28px;
+  color: var(--text-color);
 }
 
 .gemini-item:hover {
@@ -168,3 +172,84 @@
   background: linear-gradient(135deg, goldenrod, orange);
   color: white;
 }
+
+/* salvar nome */
+
+.user-name-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap; /* 👈 impede sair da área */
+  max-width: 100%;
+}
+
+.user-name-wrapper h3 {
+  margin: 0;
+  font-size: 18px;
+  word-break: break-word;
+}
+
+.edit-name-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.edit-name-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.edit-name-input {
+  display: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #1d7efd;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  width: 140px;
+}
+
+.save-name-btn {
+  display: none;
+  border: none;
+  background: #1d7efd;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap; /* 👈 impede quebra feia */
+}
+
+.custom-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.3s ease;
+  z-index: 99999;
+}
+
+.custom-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.custom-toast.success {
+  background: #1d7efd;
+}
+
+.custom-toast.error {
+  background: #d62939;
+  }
