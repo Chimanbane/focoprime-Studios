@@ -864,18 +864,41 @@ saveNameBtn.addEventListener("click", async () => {
   if (!user) return alert("Sem utilizador");
 
   try {
-    console.log("ANTES:", user.displayName);
-
     await updateProfile(user, {
       displayName: newName
     });
 
-    console.log("DEPOIS:", user.displayName);
+    // 🔥 Força atualizar dados locais
+    await user.reload();
+    const updatedUser = window.auth.currentUser;
 
-    alert("Atualizado no Auth com sucesso");
+    // ✅ Atualiza UI imediatamente
+    panelUserName.textContent = updatedUser.displayName;
+    document.getElementById("sidebarUserName").textContent = updatedUser.displayName;
+    document.getElementById("userChipName").textContent =
+      updatedUser.displayName.split(" ")[0];
+
+    // Atualiza heading principal
+    const heading = document.querySelector(".heading");
+    if (heading) {
+      heading.textContent = "Olá, " + updatedUser.displayName;
+    }
+
+    // 🔥 Atualiza system prompt da IA
+    if (typeof updateSystemPrompt === "function") {
+      updateSystemPrompt(updatedUser.displayName);
+    }
+
+    // 🔄 Voltar modo normal
+    panelUserName.style.display = "inline-block";
+    editNameBtn.style.display = "inline-block";
+    panelUserNameInput.style.display = "none";
+    saveNameBtn.style.display = "none";
+
+    showToast("Nome atualizado com sucesso!", "success");
 
   } catch (error) {
     console.error(error);
-    alert(error.message);
+    showToast("Erro ao atualizar nome", "error");
   }
 });
