@@ -990,3 +990,76 @@ panelPhotoInput.addEventListener("change", async () => {
 
   reader.readAsDataURL(file);
 });
+
+
+// ADICIONAR ALCUNHA 
+const addNicknameBtn = document.getElementById("addNicknameBtn");
+const bioInputWrapper = document.getElementById("bioInputWrapper");
+const nicknameInput = document.getElementById("nicknameInput");
+const saveNicknameBtn = document.getElementById("saveNicknameBtn");
+const bioText = document.getElementById("bioText");
+
+// Função para salvar no Firestore
+async function saveNickname(nickname) {
+  const user = window.auth.currentUser;
+  if (!user) return;
+
+  try {
+    await updateDoc(doc(db, "users", user.uid), {
+      nickname: nickname
+    });
+
+    // Atualiza UI
+    bioText.textContent = "@" + nickname;
+    bioInputWrapper.style.display = "none";
+    addNicknameBtn.style.pointerEvents = "none"; // impede clicar de novo
+    addNicknameBtn.style.opacity = 0.8;
+
+    // Atualiza prompt da IA
+    if (typeof updateSystemPrompt === "function") {
+      updateSystemPrompt(user.displayName || "Aluno", nickname);
+    }
+
+    showToast("Alcunha guardada!", "success");
+
+  } catch (err) {
+    console.error(err);
+    showToast("Erro ao guardar alcunha", "error");
+  }
+}
+
+// Abrir input ao clicar
+addNicknameBtn.addEventListener("click", () => {
+  bioInputWrapper.style.display = "flex";
+  nicknameInput.focus();
+});
+
+// Guardar alcunha
+saveNicknameBtn.addEventListener("click", () => {
+  const nickname = nicknameInput.value.trim();
+  if (!nickname) return showToast("Escreva uma alcunha válida", "error");
+  saveNickname(nickname);
+});
+
+// Permite pressionar Enter
+nicknameInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") saveNicknameBtn.click();
+});
+
+// Carregar alcunha existente ao abrir painel
+async function loadNickname() {
+  const user = window.auth.currentUser;
+  if (!user) return;
+
+  const snap = await getDoc(doc(db, "users", user.uid));
+  const data = snap.data();
+
+  if (data?.nickname) {
+    bioText.textContent = "@" + data.nickname;
+    addNicknameBtn.style.pointerEvents = "none";
+    addNicknameBtn.style.opacity = 0.8;
+  }
+}
+
+// Chamar ao abrir painel
+openUserPanelBtn.addEventListener("click", loadNickname);
