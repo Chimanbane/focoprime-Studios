@@ -269,6 +269,25 @@ fill="currentColor" viewBox="0 0 24 24" >
 
   <div class="user-gemini-profile">
     <img id="panelUserPhoto" src="images/carta.png">
+    
+    <div id="photoOptions" class="photo-options">
+  <div class="photo-option" id="viewPhotoOption">
+    <i class="ri-eye-line"></i>
+    <span>Ver imagem</span>
+  </div>
+  <div class="photo-option" id="uploadPhotoOption">
+    <i class="ri-upload-2-line"></i>
+    <span>Carregar imagem</span>
+  </div>
+</div>
+
+<div class="avatar-error" id="panelAvatarError">
+  <i class="ri-error-warning-line"></i>
+  <span>Imagem maior que 1MB</span>
+</div>
+
+<input type="file" id="panelPhotoInput" accept="image/*" hidden>
+    
     <div class="user-name-wrapper">
   <h3 id="panelUserName">Usuário</h3>
   <input type="text" id="panelUserNameInput" class="edit-name-input">
