@@ -433,7 +433,7 @@ async function generateChatTitle(userMessage) {
         messages: [
           {
             role: "system",
-            content: "Cria um título curto, use a objectivo da pergunta (máximo 5 palavras),que tenha não podem ultrapassar 40 caracteres, profissional e bonito para esta conversa. Não uses aspas."
+            content: "Cria um título curto, objetivo (máximo 5 palavras, até 40 caracteres), profissional e bonito para esta conversa. Não uses aspas."
           },
           {
             role: "user",
@@ -447,6 +447,12 @@ async function generateChatTitle(userMessage) {
 
     const title =
       data.choices?.[0]?.message?.content?.trim() || "Nova Conversa";
+
+    // 🔥 Atualiza header AQUI (depois de existir)
+    const headerTitle = document.getElementById("currentChatTitle");
+    if (headerTitle) {
+      headerTitle.textContent = title;
+    }
 
     return title.substring(0, 50);
 
@@ -584,6 +590,12 @@ newChatBtn?.addEventListener("click", () => {
   toggleWelcomeUI(true);
 
   closeMenu();
+  
+  const headerTitle = document.getElementById("currentChatTitle");
+if (headerTitle) {
+  headerTitle.textContent = "Nova Conversa";
+}
+  
 });
 
 // ==============================
@@ -1102,4 +1114,4 @@ for (let i = 0; i < 40; i++) {
   particle.style.animationDuration = 5 + Math.random() * 10 + "s";
   particle.style.opacity = Math.random();
   particlesContainer.appendChild(particle);
-}
+      }
