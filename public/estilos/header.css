@@ -87,3 +87,20 @@
   font-weight: 500;
   color: var(--subheading-color);
 }
+
+.chat-title-bar {
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-color);
+  background: var(--secondary-color);
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 2px solid #1d7efd;
+  box-shadow: 0 0 10px rgba(29, 126, 253, 0.4);
+  max-width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
