@@ -13,16 +13,10 @@ fill="currentColor" viewBox="0 0 24 24" >
             </span>
         </div>
         
-        <button id="logoutBtn" class="user-chip">
-            <img id="userPhoto" src="images/user-placeholder.png">
-            <div class="user-info">
-                <span id="userChipName" class="nomea">Actualizando</span>
-                <div class="user-status">
-                    <span class="status-dot"></span>
-                    <span class="status-text" id="statusText">0 restantes</span>
-                </div>
-            </div>
-        </button>
+        <!-- ===== TÍTULO DA CONVERSA (quando logado) ===== -->
+<div id="chatTitleBar" class="chat-title-bar" style="display:none;">
+      <span id="currentChatTitle">Nova Conversa</span>
+    </div>
         
         <!---- BOTÃO DE ENTAR CRIAR/ENTRAR ---->
         <button id="loginBtn" class="user-chip login-btn" style="display:none;">
@@ -41,7 +35,7 @@ fill="currentColor" viewBox="0 0 24 24" >
                 <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
 fill="currentColor" viewBox="0 0 24 24" >
 <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-<path d="M4.5 11h5c.83 0 1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5h-5C3.67 3 3 3.67 3 4.5v5c0 .83.67 1.5 1.5 1.5M5 5h4v4H5zm14.5-2h-5c-.83 0-1.5.67-1.5 1.5v5c0 .83.67 1.5 1.5 1.5h5c.83 0 1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5M19 9h-4V5h4zM4.5 21h5c.83 0 1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5h-5c-.83 0-1.5.67-1.5 1.5v5c0 .83.67 1.5 1.5 1.5m.5-6h4v4H5zm13-2h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M5 5h9v3H5zm0 14v-9h9v9zm11 0v-9h3V8h-3V5h3v14z"></path>
 </svg>
             </span>
         </button>
