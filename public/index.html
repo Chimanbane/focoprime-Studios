@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FocoPrime Studio</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="tela/mobile.css">
+<link rel="stylesheet" href="estilos/footer.css">
+<link rel="stylesheet" href="estilos/footer-mobile.css">
+<link rel="stylesheet" href="estilos/pro.css">
+<link rel="stylesheet" href="landing/estilos/mobile/navbar.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+<header class="navbar">
+
+  <div class="logo">
+    <img src="images/groq.png" alt="FocoPrime">
+  </div>
+
+  <!-- Botões e Hamburger -->
+  <div class="menu-area">
+    <button class="btn get-started">
+<i class="ri-rocket-line"></i>
+Get Started
+</button> <!-- este botão sempre visível -->
+    <button class="menu-icon" id="menuToggle">
+<i class="ri-menu-line"></i>
+</button>
+  </div>
+
+  <!-- Menu mobile -->
+  <nav class="nav-links">
+    <a href="#">Research</a>
+    <a href="#">Products</a>
+    <a href="#">Developers</a>
+    <a href="#">Company</a>
+    <button class="btn mobile-get-started">
+<i class="ri-rocket-line"></i>
+Get Started
+</button>
+  </nav>
+
+</header>
+
+<div class="mav">
+    <!-- Canvas animado -->
+<canvas id="aiCanvas" class="ai-canvas"></canvas>
+<section class="hero">
+  
+
+<h1 id="heroTitle"></h1>
+
+<p>
+FocoPrime Studio builds AI systems that help people,
+companies and creators innovate faster.
+</p>
+
+<div class="hero-buttons">
+
+<button class="primary">
+<i class="ri-ai-generate"></i>
+Try AI
+</button>
+
+<button class="secondary">
+<i class="ri-code-box-line"></i>
+View Projects
+</button>
+
+</div>
+
+</section>
+
+<section class="portfolio-showcase">
+
+<div class="portfolio-container">
+
+<img src="images/portfolio.png" alt="FocoPrime Dashboard">
+
+</div>
+
+</section>
+</div>
+
+<section class="partners reveal">
+
+<p class="partners-title">Trusted by global platforms</p>
+
+<div class="partners-slider">
+
+<div class="partners-track">
+
+<img src="images/parceiro/google.png" alt="Google">
+<img src="images/parceiro/paypal.png" alt="PayPal">
+<img src="images/parceiro/groq.png" alt="groq">
+<img src="images/parceiro/m-pesa.png" alt="M-Pesa">
+<img src="images/parceiro/master.png" alt="Mastercard">
+
+<!-- duplicação para loop infinito -->
+<img src="images/parceiro/google.png" alt="Google">
+<img src="images/parceiro/paypal.png" alt="PayPal">
+<img src="images/parceiro/groq.png" alt="groq">
+<img src="images/parceiro/m-pesa.png" alt="M-Pesa">
+<img src="images/parceiro/master.png" alt="Mastercard">
+
+</div>
+
+</div>
+
+</section>
+
+
+<!--- ESPAÇO RESERVADO PARA MELHORIAS --->
+
+<section class="ai-showcase reveal">
+
+<div class="ai-container">
+
+<div class="ai-text">
+
+<h2>Meet FocoPrime AI</h2>
+
+<p>
+FocoPrime AI is a powerful conversational intelligence system designed
+to help developers, companies and creators build smarter products.
+</p>
+
+<ul class="ai-features">
+<li>Natural conversations</li>
+<li>Code generation</li>
+<li>Image understanding</li>
+<li>Fast API integration</li>
+</ul>
+
+<div class="ai-buttons">
+
+<button class="primary">
+<i class="ri-ai-generate"></i>
+Try FocoPrime AI
+</button>
+
+<button class="secondary">
+<i class="ri-code-line"></i>
+View API
+</button>
+
+</div>
+
+</div>
+
+
+<div class="ai-demo">
+
+<div class="ai-chat">
+
+<div class="chat-msg user">
+How can I build an AI chatbot?
+</div>
+
+<div class="chat-msg ai">
+You can integrate FocoPrime AI using our API and start building intelligent assistants in minutes.
+</div>
+
+<div class="chat-msg user">
+Can you generate code?
+</div>
+
+<div class="chat-msg ai">
+Yes. I can generate JavaScript, Python, HTML and more.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--- SECÇÃO <section class="developers-api ai-bg reveal">ERS -->
+<section class="developers-api ai-bg reveal">
+
+<div class="dev-container">
+
+<div class="dev-text">
+
+<h2>Build with FocoPrime API</h2>
+
+<p>
+Integrate powerful AI models into your applications using our
+developer-friendly API. Generate text, analyze images and
+build intelligent assistants in minutes.
+</p>
+
+<div class="dev-buttons">
+
+<button class="primary">
+<i class="ri-rocket-line"></i>
+Start building
+</button>
+
+<button class="secondary">
+<i class="ri-book-open-line"></i>
+View documentation
+</button>
+
+</div>
+
+</div>
+
+
+<div class="dev-code">
+
+<!-- Tabs linguagem -->
+
+<div class="code-tabs">
+
+<button class="tab active" data-code="js">JavaScript</button>
+<button class="tab" data-code="python">Python</button>
+<button class="tab" data-code="curl">Curl</button>
+
+<button class="copy-btn">
+<i class="ri-file-copy-line"></i>
+Copy
+</button>
+
+</div>
+
+
+<pre><code id="codeBlock"></code></pre>
+
+</div>
+
+</div>
+
+</section>
+
+<!--- SECÇÃO MODELS --->
+<section class="models ai-bg reveal">
+
+<div class="models-container">
+
+<div class="models-header">
+
+<h2>AI Models</h2>
+
+<p>
+Explore the powerful AI models that power the FocoPrime platform.
+Each model is optimized for specific tasks such as conversation,
+vision and software development.
+</p>
+
+</div>
+
+
+<div class="models-grid">
+
+<!-- MODEL 1 -->
+
+<div class="model-card">
+
+<div class="model-icon">
+<i class="ri-brain-line"></i>
+</div>
+
+<h3>FocoPrime GPT</h3>
+
+<p class="model-desc">
+Advanced language model designed for conversations,
+content generation and intelligent assistants.
+</p>
+
+<ul class="model-features">
+
+<li><i class="ri-check-line"></i> Chat & conversation</li>
+<li><i class="ri-check-line"></i> Content generation</li>
+<li><i class="ri-check-line"></i> Multilingual</li>
+
+</ul>
+
+<button class="model-btn">
+<i class="ri-rocket-line"></i>
+Try model
+</button>
+
+</div>
+
+
+<!-- MODEL 2 -->
+
+<div class="model-card">
+
+<div class="model-icon">
+<i class="ri-image-line"></i>
+</div>
+
+<h3>FocoPrime Vision</h3>
+
+<p class="model-desc">
+AI model capable of understanding images,
+detecting objects and generating visual content.
+</p>
+
+<ul class="model-features">
+
+<li><i class="ri-check-line"></i> Image recognition</li>
+<li><i class="ri-check-line"></i> Object detection</li>
+<li><i class="ri-check-line"></i> Image generation</li>
+
+</ul>
+
+<button class="model-btn">
+<i class="ri-rocket-line"></i>
+Try model
+</button>
+
+</div>
+
+
+<!-- MODEL 3 -->
+
+<div class="model-card">
+
+<div class="model-icon">
+<i class="ri-code-box-line"></i>
+</div>
+
+<h3>FocoPrime Code</h3>
+
+<p class="model-desc">
+AI optimized for developers to generate,
+review and explain code across many languages.
+</p>
+
+<ul class="model-features">
+
+<li><i class="ri-check-line"></i> Code generation</li>
+<li><i class="ri-check-line"></i> Bug detection</li>
+<li><i class="ri-check-line"></i> 40+ languages</li>
+
+</ul>
+
+<button class="model-btn">
+<i class="ri-rocket-line"></i>
+Try model
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--- how it work -->
+<section class="how-ai-works ai-bg reveal">
+
+<div class="works-container">
+
+<div class="works-header">
+
+<h2>How FocoPrime AI Works</h2>
+
+<p>
+Understand how our AI platform processes information and generates intelligent responses.
+</p>
+
+</div>
+
+<div class="works-grid">
+
+<div class="work-card">
+
+<div class="work-icon">
+<i class="ri-brain-line"></i>
+</div>
+
+<h3>Input your idea</h3>
+
+<p>
+Ask questions, generate code or analyze data using natural language prompts.
+</p>
+
+</div>
+
+<div class="work-card">
+
+<div class="work-icon">
+<i class="ri-cpu-line"></i>
+</div>
+
+<h3>AI processes data</h3>
+
+<p>
+FocoPrime AI analyzes context using advanced language models and neural networks.
+</p>
+
+</div>
+
+<div class="work-card">
+
+<div class="work-icon">
+<i class="ri-lightbulb-flash-line"></i>
+</div>
+
+<h3>Receive intelligent results</h3>
+
+<p>
+Get answers, code, analysis or ideas instantly with high-performance AI responses.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="about reveal">
+
+<h2>About FocoPrime Studio</h2>
+
+<p>
+We are a technology studio focused on building modern AI platforms,
+web systems and digital products that empower innovation.
+</p>
+
+</section>
+
+<!--- SECÇÃO DE PREÇOS --->
+<section class="pricing ai-bg reveal">
+
+<div class="pricing-header">
+
+<h2>Simple and transparent pricing</h2>
+<p>Choose the plan that fits your needs</p>
+
+<div class="billing-toggle">
+
+<span class="billing-label active" id="monthlyBtn">Monthly</span>
+
+<div class="toggle-switch" id="toggleBilling">
+<div class="toggle-circle"></div>
+</div>
+
+<span class="billing-label" id="yearlyBtn">Yearly</span>
+
+</div>
+
+</div>
+
+
+<div class="pricing-grid">
+
+<!-- STARTER -->
+
+<div class="price-card">
+
+<div class="plan-icon">
+<i class="ri-seedling-line"></i>
+</div>
+<h3>Starter</h3>
+
+<p class="price">
+<span class="monthly">Free</span>
+<span class="yearly">Free</span>
+</p>
+
+<p class="plan-desc">
+Perfect for individuals getting started with AI tools.
+</p>
+
+<ul class="features">
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Basic AI access
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Limited API usage
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Community support
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Basic tools
+</li>
+
+<li class="no">
+<i class="ri-close-line"></i>
+Advanced models
+</li>
+
+<li class="no">
+<i class="ri-close-line"></i>
+Priority support
+</li>
+
+</ul>
+
+<div class="price-buttons">
+
+<button class="price-btn">
+<i class="ri-customer-service-2-line"></i>
+Contact Sales
+</button>
+
+<button class="cobranca-btn">
+<i class="ri-bank-card-line"></i>
+Cobrança mensal
+</button>
+
+</div>
+
+</div>
+
+
+<!-- PRO -->
+
+<div class="price-card featured">
+
+<div class="badge">Most Popular</div>
+
+<div class="plan-icon">
+<i class="ri-rocket-line"></i>
+</div>
+<h3>Pro</h3>
+
+<p class="price">
+
+<span class="monthly">$20/mo</span>
+<span class="yearly">$200/yr</span>
+
+</p>
+
+<p class="plan-desc">
+Best for developers and teams building AI applications.
+</p>
+
+<ul class="features">
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Advanced AI models
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Priority API speed
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Image generation
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Developer tools
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Email support
+</li>
+
+<li class="no">
+<i class="ri-close-line"></i>
+Dedicated infrastructure
+</li>
+
+</ul>
+
+<div class="price-buttons">
+
+<button class="price-btn">
+<i class="ri-customer-service-2-line"></i>
+Contact Sales
+</button>
+
+<button class="cobranca-btn">
+<i class="ri-rocket-line"></i>
+Start Pro/
+Cobrança mensal
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ENTERPRISE -->
+
+<div class="price-card">
+
+<div class="plan-icon">
+<i class="ri-building-2-line"></i>
+</div>
+<h3>Enterprise</h3>
+
+<p class="price">
+<span class="monthly">Custom</span>
+<span class="yearly">Custom</span>
+</p>
+
+<p class="plan-desc">
+For companies that need scalable AI infrastructure.
+</p>
+
+<ul class="features">
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Unlimited API usage
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Dedicated infrastructure
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Custom AI models
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Team collaboration
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Priority support
+</li>
+
+<li class="yes">
+<i class="ri-check-line"></i>
+Custom integrations
+</li>
+
+</ul>
+
+<div class="price-buttons">
+
+<button class="price-btn">
+<i class="ri-customer-service-2-line"></i>
+Contact Sales
+</button>
+
+<button class="cobranca-btn">
+<i class="ri-bank-card-line"></i>
+Cobrança mensal
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer class="footer">
+  <canvas id="footerCanvas" class="footer-canvas"></canvas>
+
+<div class="footer-container">
+
+<!-- CTA -->
+
+<div class="footer-cta">
+
+<h2>Build the future with FocoPrime AI</h2>
+
+<p>Join developers and creators building intelligent systems.</p>
+
+<div class="newsletter">
+
+<input type="email" placeholder="Enter your email">
+
+<button class="cta-btn">
+<i class="ri-rocket-line"></i>
+Get Started
+</button>
+
+</div>
+
+</div>
+
+
+<!-- GRID FOOTER -->
+
+<div class="footer-grid">
+
+<div class="footer-brand">
+
+<img src="images/groq.png" alt="FocoPrime">
+
+<p>
+FocoPrime Studio builds modern AI systems and digital platforms
+for companies, developers and creators.
+</p>
+
+</div>
+
+
+<div class="footer-column">
+
+<h4>Products</h4>
+
+<a href="#">FocoPrime AI</a>
+<a href="#">Vision</a>
+<a href="#">Code</a>
+
+</div>
+
+
+<div class="footer-column">
+
+<h4>Company</h4>
+
+<a href="#">About</a>
+<a href="#">Research</a>
+<a href="#">Careers</a>
+
+</div>
+
+
+<div class="footer-column">
+
+<h4>Resources</h4>
+
+<a href="#">Developers</a>
+<a href="#">Documentation</a>
+<a href="#">Blog</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+<p>© 2026 FocoPrime Studio — All rights reserved</p>
+
+</div>
+
+</footer>
+
+<!-- Botão fixo de IA -->
+<button id="aiButton" class="ai-floating-btn">
+  <i class="ri-ai-generate"></i>
+  <span id="aiText">Chat with AI</span>
+</button>
+
+<!-- AI CHAT MODAL -->
+<div id="aiChatModal" class="ai-chat-modal">
+
+<div class="ai-chat-box">
+
+<div class="ai-chat-header">
+<span>FocoPrime AI</span>
+
+<button id="closeAI">
+<i class="ri-close-line"></i>
+</button>
+
+</div>
+
+<div class="ai-chat-messages" id="aiMessages">
+
+<div class="ai-msg">
+Hello 👋  
+How can I help you today?
+</div>
+
+</div>
+
+<div class="ai-chat-input">
+
+<input id="aiInput" type="text" placeholder="Ask something...">
+
+<button id="sendAI">
+<i class="ri-send-plane-2-line"></i>
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="script.js"></script>
+<script src="lanhding/scripts/footer.js"></script>
+
+</body>
+</html>
