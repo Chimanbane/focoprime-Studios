@@ -1,0 +1,1392 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root {
+  /* Dark theme colors */
+  --text-color: #edf3ff;
+  --subheading-color: #97a7ca;
+  --placeholder-color: #c3cdde;
+  --primary-color: #0b0b0f;
+  --secondary-color: #283045;
+  --secondary-hover-color: #333e58;
+  --scrollbar-color: #626a7f;
+}
+
+body.light-theme {
+  /* Light theme colors */
+  --text-color: #090c13;
+  --subheading-color: #7b8cae;
+  --placeholder-color: #606982;
+  --primary-color: #f3f7ff;
+  --secondary-color: #dce6f9;
+  --secondary-hover-color: #d2ddf2;
+  --scrollbar-color: #a2aac2;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+  background: var(--primary-color);
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+border-bottom:1px solid #222;
+}
+
+.navbar nav a{
+margin:0 15px;
+text-decoration:none;
+color:#ccc;
+font-size:14px;
+}
+
+.logo img {
+font-weight:600;
+font-size:20px;
+height: 40px;
+}
+
+
+.btn{
+background:white;
+color:black;
+border:none;
+padding:8px 16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:120px 20px;
+max-width:900px;
+margin:auto;
+}
+
+.hero h1{
+font-size:52px;
+margin-bottom:20px;
+}
+
+.hero p{
+color:#aaa;
+font-size:18px;
+}
+
+.hero-buttons{
+margin-top:40px;
+}
+
+.primary{
+background:white;
+color:black;
+padding:12px 24px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+z-index: 100;
+}
+
+.secondary{
+background:#1c1c22;
+color:white;
+padding:12px 24px;
+border: none;
+border-radius:8px;
+cursor:pointer;
+z-index: 100;
+}
+
+.secondary:hover {
+  border: 2px solid white;
+}
+
+.hero-buttons button{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+/* PRODUCTS */
+
+.products{
+padding:100px 60px;
+text-align:center;
+}
+
+.products h2{
+font-size:36px;
+margin-bottom:50px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background: #111;
+padding:30px;
+border-radius:12px;
+border:1px solid #222;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#444;
+}
+
+/* =========================
+   MODERN SERVICES GRID
+========================= */
+
+/* =========================
+   OPENAI STYLE PRODUCTS
+========================= */
+
+.products{
+padding:140px 40px;
+}
+
+.products-container{
+max-width:900px;
+margin:auto;
+}
+
+.products-header{
+margin-bottom:60px;
+}
+
+.products-header h2{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.products-header p{
+color:#9aa0aa;
+font-size:16px;
+max-width:600px;
+}
+
+/* LIST */
+
+.products-list{
+display:flex;
+flex-direction:column;
+border-top:1px solid #222;
+}
+
+/* ITEM */
+
+.product-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:30px 0;
+
+border-bottom:1px solid #222;
+
+text-decoration:none;
+color:inherit;
+
+transition:0.3s;
+}
+
+/* LEFT */
+
+.product-left h3{
+font-size:20px;
+margin-bottom:6px;
+}
+
+.product-left p{
+font-size:14px;
+color:#9aa0aa;
+max-width:500px;
+}
+
+/* RIGHT */
+
+.product-right{
+display:flex;
+align-items:center;
+gap:6px;
+color:#bbb;
+font-size:14px;
+transition:0.3s;
+}
+
+/* HOVER */
+
+.product-item:hover{
+padding-left:8px;
+}
+
+.product-item:hover .product-right{
+color:white;
+transform:translateX(5px);
+}
+
+/* TITLE */
+
+.service-overlay h3{
+font-size:18px;
+font-weight:600;
+}
+
+/* ABOUT */
+
+.about{
+text-align:center;
+padding:80px 20px;
+max-width:700px;
+margin:auto;
+color:#aaa;
+}
+
+/* FOOTER */
+
+footer{
+border-top:1px solid #222;
+padding:20px;
+text-align:center;
+color:#777;
+}
+
+/* Animação */
+/* Canvas animado IA */
+.ai-canvas{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+pointer-events:none;
+opacity:0.6;
+}
+
+/* Hero ajustado */
+.hero{
+position:relative; /* necessário para o canvas absoluto */
+text-align:center;
+padding:120px 20px;
+max-width:900px;
+margin:auto;
+z-index:1;
+}
+
+/* =========================
+   PARTNERS SLIDER
+========================= */
+
+.partners{
+margin-top:60px;
+text-align:center;
+overflow:hidden;
+}
+
+.partners-title{
+color:#777;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.partners-slider{
+width:100%;
+overflow:hidden;
+position:relative;
+}
+
+.partners-track{
+display:flex;
+gap:80px;
+align-items:center;
+animation:scrollPartners 20s linear infinite;
+}
+
+.partners-track img{
+height:35px;
+opacity:0.7;
+filter:grayscale(100%);
+transition:0.3s;
+}
+
+.partners-track img:hover{
+opacity:1;
+filter:grayscale(0);
+}
+
+/* animação */
+
+@keyframes scrollPartners{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-50%);
+}
+
+}
+
+/* fade nas bordas */
+.partners-slider::before,
+.partners-slider::after{
+content:"";
+position:absolute;
+top:0;
+width:120px;
+height:100%;
+z-index:2;
+}
+
+.partners-slider::before{
+left:0;
+background:linear-gradient(to right,#0b0b0f,transparent);
+}
+
+.partners-slider::after{
+right:0;
+background:linear-gradient(to left,#0b0b0f,transparent);
+}
+
+/* =========================
+   PRICING MODERN AI
+========================= */
+
+.pricing{
+padding:140px 40px;
+text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+/* background glow */
+
+.pricing::before{
+content:"";
+position:absolute;
+width:600px;
+height:600px;
+background:radial-gradient(circle,#2b6cff40,transparent);
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+filter:blur(120px);
+z-index:0;
+}
+
+.pricing-header{
+position:relative;
+z-index:2;
+margin-bottom:80px;
+}
+
+.pricing-header h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.pricing-header p{
+color:#9aa0aa;
+}
+
+/* BILLING TOGGLE */
+
+.billing-toggle{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+margin-top:25px;
+}
+
+.billing-label{
+color:#888;
+font-size:14px;
+}
+
+.billing-label.active{
+color:white;
+}
+
+.toggle-switch{
+width:50px;
+height:26px;
+background:#222;
+border-radius:20px;
+position:relative;
+cursor:pointer;
+}
+
+.toggle-circle{
+width:20px;
+height:20px;
+background:white;
+border-radius:50%;
+position:absolute;
+top:3px;
+left:4px;
+transition:0.3s;
+}
+
+.toggle-switch.active .toggle-circle{
+left:26px;
+}
+
+/* GRID */
+
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+max-width:1100px;
+margin:auto;
+position:relative;
+z-index:2;
+}
+
+/* CARD */
+
+.price-card{
+background:rgba(20,20,30,0.7);
+backdrop-filter:blur(10px);
+border:1px solid #777;
+border-radius:16px;
+padding:45px;
+transition:0.3s;
+position:relative;
+}
+
+.price-card:hover{
+transform:translateY(-8px);
+border-color:#444;
+}
+
+/* FEATURED */
+
+.featured{
+border:1px solid #2b6cff;
+box-shadow:0 0 40px #2b6cff40;
+transform:scale(1.05);
+}
+
+.featured:hover{
+transform:scale(1.05) translateY(-8px);
+}
+
+/* BADGE */
+
+.badge{
+position:absolute;
+top:-12px;
+left:50%;
+transform:translateX(-50%);
+background:#2b6cff;
+color:white;
+padding:5px 12px;
+border-radius:6px;
+font-size:12px;
+}
+
+/* PRICE */
+
+.price{
+font-size:36px;
+margin:20px 0;
+}
+
+/* YEARLY hidden */
+
+.yearly{
+display:none;
+}
+
+/* FEATURES */
+
+.price-card ul{
+list-style:none;
+margin:25px 0;
+text-align:left;
+}
+
+.price-card ul li{
+margin-bottom:12px;
+color:#9aa0aa;
+}
+
+/* BUTTON */
+.price-buttons{
+margin-top:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.price-btn{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:none;
+background:white;
+color:black;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.cobranca-btn{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:none;
+background:#1c1c22;
+color: white;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+
+
+.pro-btn{
+background:#2b6cff;
+color:white;
+}
+
+.price-btn:hover{
+transform:translateY(-2px);
+}
+
+/* =========================
+   FOCO PRIME AI SHOWCASE
+========================= */
+
+.ai-showcase{
+padding:140px 60px;
+}
+
+.ai-container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+max-width:1100px;
+margin:auto;
+align-items:center;
+}
+
+/* TEXT */
+
+.ai-text h2{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.ai-text p{
+color:#9aa0aa;
+margin-bottom:25px;
+line-height:1.6;
+}
+
+/* FEATURES */
+
+.ai-features{
+list-style:none;
+margin-bottom:30px;
+}
+
+.ai-features li{
+margin-bottom:10px;
+color:#cfd6e6;
+}
+
+/* BUTTONS */
+
+.ai-buttons{
+display:flex;
+gap:15px;
+}
+
+.ai-buttons button{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+/* DEMO */
+
+.ai-demo{
+background:linear-gradient(180deg,#111,#07070a);
+border:1px solid #222;
+border-radius:14px;
+padding:30px;
+}
+
+/* CHAT */
+
+.ai-chat{
+display:flex;
+flex-direction:column;
+gap:15px;
+font-size:14px;
+}
+
+.chat-msg{
+padding:12px 16px;
+border-radius:8px;
+max-width:85%;
+}
+
+.chat-msg.user{
+background:#1c1c22;
+align-self:flex-end;
+}
+
+.chat-msg.ai{
+background:#111;
+border:1px solid #222;
+}
+
+/* =========================
+   HOW FOCO PRIME AI WORKS
+========================= */
+
+.how-ai-works{
+padding:140px 60px;
+text-align:center;
+}
+
+.works-container{
+max-width:1100px;
+margin:auto;
+}
+
+.works-header{
+margin-bottom:70px;
+}
+
+.works-header h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.works-header p{
+color:#9aa0aa;
+font-size:16px;
+max-width:600px;
+margin:auto;
+}
+
+/* GRID */
+
+.works-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+/* CARD */
+
+.work-card{
+background:#111;
+border:1px solid #222;
+border-radius:14px;
+padding:40px;
+transition:0.3s;
+}
+
+.work-card:hover{
+transform:translateY(-6px);
+border-color:#444;
+}
+
+/* ICON */
+
+.work-icon{
+font-size:36px;
+color:#2b6cff;
+margin-bottom:20px;
+}
+
+/* TITLE */
+
+.work-card h3{
+margin-bottom:12px;
+font-size:20px;
+}
+
+/* TEXT */
+
+.work-card p{
+color:#9aa0aa;
+font-size:14px;
+line-height:1.6;
+}
+
+/* features icons pricing */
+
+.features{
+list-style:none;
+margin:25px 0;
+text-align:left;
+}
+
+.features li{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:12px;
+font-size:14px;
+}
+
+.features li.yes{
+color:#cfd6e6;
+}
+
+.features li.no{
+color:#666;
+}
+
+.features i{
+font-size:18px;
+}
+
+.plan-desc {
+  background: #111;
+  border: 2px solid #444;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* Ícone do dos botões Preço */
+.price-btn,
+.cobranca-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+.plan-icon{
+font-size:30px;
+margin-bottom:10px;
+color:#2b6cff;
+}
+
+/* get started para o ícone não colar no texto */
+.btn,
+.cta-btn{
+align-items:center;
+gap:5px;
+justify-content:center;
+}
+
+@media (min-width: 768px) {
+  .get-started {
+    display: none;
+  }
+  .menu-icon {
+    display: none;
+  }
+}
+
+/* =========================
+   PORTFOLIO SHOWCASE MODERNO
+========================= */
+.portfolio-container {
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* imagem normal */
+.portfolio-container img {
+  width: 90%;
+  border-radius: 16px;
+  border: 1px solid #222;
+  display: block;
+  z-index: 1;
+  transition: 0.4s ease-in-out;
+}
+
+/* pseudo-elemento para escurecer gradualmente a imagem */
+.portfolio-container::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* cobre toda a imagem */
+  border-radius: 16px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none; /* não interfere em clique */
+  z-index: 2;
+  transition: background 0.4s ease-in-out;
+}
+
+/* hover suave */
+.portfolio-container:hover::after {
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.5) 100%);
+}
+
+
+/* fundo azul*/
+.mav {
+  background: radial-gradient(circle at top, #0b0b0f, #111227);
+  overflow: hidden;
+  position: relative;
+}
+
+.primary:hover {
+  box-shadow: 0 0 15px #2b6cff80, 0 0 30px #2b6cff40;
+  transform: translateY(-2px);
+}
+
+.secondary:hover {
+  box-shadow: 0 0 10px #fff3, 0 0 20px #fff2;
+  transform: translateY(-2px);
+}
+
+/* Botão fixo estilo OpenAI no canto inferior direito */
+.ai-floating-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #2b6cff, #0b0b0f);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+/* Ícone dentro do botão */
+.ai-floating-btn i {
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Span do texto */
+.ai-floating-btn #aiText {
+  transition: opacity 0.5s ease, width 0.5s ease;
+  white-space: nowrap;
+}
+
+/* Hover efeito */
+.ai-floating-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(43,108,255,0.6);
+}
+
+/* Estado só ícone */
+.ai-floating-btn.icon-only {
+  padding: 14px;
+  border-radius: 50%;
+}
+
+.ai-floating-btn.icon-only #aiText {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* =========================
+   DEVELOPERS API
+========================= */
+
+.developers-api{
+padding:140px 60px;
+background:#0b0b0f;
+}
+
+.dev-container{
+max-width:1100px;
+margin:auto;
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+align-items:center;
+}
+
+/* TEXTO */
+
+.dev-text h2{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.dev-text p{
+color:#9aa0aa;
+line-height:1.6;
+margin-bottom:30px;
+max-width:500px;
+}
+
+/* BOTÕES */
+
+.dev-buttons{
+display:flex;
+gap:15px;
+}
+
+.dev-buttons button{
+display:flex;
+align-items:center;
+justify-content: center;
+gap:8px;
+}
+
+/* CODE BLOCK */
+
+.dev-code{
+background:#07070a;
+border:1px solid #222;
+border-radius:14px;
+padding:30px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+.dev-code pre{
+margin:0;
+font-size:14px;
+color:#9effc3;
+overflow:auto;
+}
+
+.dev-code code{
+font-family:monospace;
+line-height:1.6;
+}
+
+/* =========================
+   CODE TABS
+========================= */
+
+.code-tabs{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:15px;
+border-bottom:1px solid #222;
+padding-bottom:10px;
+}
+
+/* tabs */
+
+.tab{
+background:none;
+border:none;
+color:#aaa;
+margin-right:15px;
+cursor:pointer;
+font-size:14px;
+}
+
+.tab.active{
+color:white;
+font-weight:600;
+}
+
+/* botão copiar */
+
+.copy-btn{
+margin-left:auto;
+background:#1c1c22;
+border:none;
+color:white;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:6px;
+font-size:13px;
+}
+
+/* código */
+
+.dev-code pre{
+background:#07070a;
+padding:20px;
+border-radius:10px;
+overflow:auto;
+}
+
+/* syntax colors */
+
+.keyword{color:#ff7b72;}
+.string{color:#a5d6ff;}
+.func{color:#d2a8ff;}
+.comment{color:#6e7681;}
+
+.dev-code pre {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* =========================
+   MODELS SECTION
+========================= */
+
+.models{
+padding:140px 60px;
+background:#0b0b0f;
+text-align:center;
+}
+
+.models-container{
+max-width:1100px;
+margin:auto;
+}
+
+/* header */
+
+.models-header{
+margin-bottom:70px;
+}
+
+.models-header h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.models-header p{
+color:#9aa0aa;
+max-width:600px;
+margin:auto;
+}
+
+/* grid */
+
+.models-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+/* card */
+
+.model-card{
+background:#111;
+border:1px solid #222;
+border-radius:16px;
+padding:35px;
+transition:0.3s;
+text-align:left;
+}
+
+.model-card:hover{
+transform:translateY(-6px);
+border-color:#2b6cff;
+}
+
+/* icon */
+
+.model-icon{
+font-size:32px;
+color:#2b6cff;
+margin-bottom:15px;
+}
+
+/* title */
+
+.model-card h3{
+font-size:20px;
+margin-bottom:10px;
+}
+
+/* description */
+
+.model-desc{
+color:#9aa0aa;
+font-size:14px;
+margin-bottom:20px;
+line-height:1.6;
+}
+
+/* features */
+
+.model-features{
+list-style:none;
+margin-bottom:25px;
+}
+
+.model-features li{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+margin-bottom:8px;
+color:#cfd6e6;
+}
+
+.model-features i{
+color:#2b6cff;
+}
+
+/* button */
+
+.model-btn{
+background:white;
+color:black;
+border:none;
+padding:10px 18px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+display:flex;
+align-items:center;
+gap:8px;
+transition:0.3s;
+}
+
+.model-btn:hover{
+transform:translateY(-2px);
+}
+
+/* =========================
+   AI CHAT MODAL
+========================= */
+
+.ai-chat-modal{
+position:fixed;
+bottom:90px;
+right:30px;
+width:360px;
+height:500px;
+
+background:#0b0b0f;
+border:1px solid #222;
+border-radius:14px;
+
+display:none;
+flex-direction:column;
+
+box-shadow:0 20px 60px rgba(0,0,0,0.7);
+
+z-index:9998;
+}
+
+/* header */
+
+.ai-chat-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:12px 15px;
+
+border-bottom:1px solid #222;
+font-weight:600;
+}
+
+/* mensagens */
+
+.ai-chat-messages{
+flex:1;
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:10px;
+font-size:14px;
+}
+
+/* msg user */
+
+.user-msg{
+align-self:flex-end;
+background:#2b6cff;
+padding:10px 14px;
+border-radius:8px;
+max-width:80%;
+}
+
+/* msg ai */
+
+.ai-msg{
+background:#111;
+border:1px solid #222;
+padding:10px 14px;
+border-radius:8px;
+max-width:80%;
+}
+
+/* input */
+
+.ai-chat-input{
+display:flex;
+border-top:1px solid #222;
+}
+
+.ai-chat-input input{
+flex:1;
+padding:12px;
+border:none;
+background:#07070a;
+color:white;
+}
+
+.ai-chat-input button{
+background:#2b6cff;
+border:none;
+color:white;
+padding:12px;
+cursor:pointer;
+}
+
+/* =========================
+   SCROLL ANIMATION
+========================= */
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:all 0.8s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* =========================
+   AI BACKGROUND SECTIONS
+========================= */
+
+.ai-bg{
+position:relative;
+overflow:hidden;
+}
+
+.ai-bg::before{
+
+content:"";
+
+position:absolute;
+width:700px;
+height:700px;
+
+background:radial-gradient(circle,#2b6cff25,transparent 70%);
+
+top:-200px;
+left:50%;
+
+transform:translateX(-50%);
+filter:blur(120px);
+
+z-index:0;
+
+}
+
+.ai-bg > *{
+position:relative;
+z-index:1;
+}
+
+/* =========================
+   AI CURSOR GLOW
+========================= */
+
+.cursor-glow{
+
+position:fixed;
+width:300px;
+height:300px;
+
+background:radial-gradient(circle,#2b6cff40,transparent 70%);
+
+pointer-events:none;
+
+transform:translate(-50%,-50%);
+z-index:0;
+
+filter:blur(80px);
+
+transition:opacity 0.3s;
+}
+
+body:hover .cursor-glow{
+opacity:1;
+}
+
+/* =========================
+   HERO AI TYPING
+========================= */
+
+#heroTitle::after{
+content:"|";
+margin-left:5px;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%,100%{opacity:1;}
+50%{opacity:0;}
+}
+
+
+
+  /* =========================
+   NAVBAR GLASS EFFECT ON SCROLL
+========================= */
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99999;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0px);
+  background: rgba(11, 11, 15, 0); /* transparente inicialmente */
+  border-bottom: none;
+}
+
+.navbar.scrolled {
+  backdrop-filter: blur(15px);
+  background: rgba(11, 11, 15, 0.8); /* efeito glass ao scroll */
+  border-bottom: 1px solid #222;
+}
+
+/* Navbar links */
+.navbar nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 14px;
+}
