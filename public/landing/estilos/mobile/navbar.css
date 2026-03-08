@@ -1,0 +1,78 @@
+@media(max-width:768px) {
+  /* =========================
+   NAVBAR GLASS EFFECT ON SCROLL
+========================= */
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0px);
+  background: rgba(11, 11, 15, 0); /* transparente inicialmente */
+  border-bottom: none;
+}
+
+.navbar.scrolled {
+  backdrop-filter: blur(15px);
+  background: rgba(11, 11, 15, 0.8); /* efeito glass ao scroll */
+  border-bottom: 1px solid #222;
+}
+
+/* Navbar links */
+.navbar nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* =========================
+   LOADING SCREEN AI
+========================= */
+
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #0b0b0f, #2b6cff);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  transition: opacity 0.5s ease;
+}
+
+#loadingScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* AI loading spinner */
+#loadingScreen .spinner {
+  border: 5px solid rgba(255,255,255,0.2);
+  border-top: 5px solid white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+#loadingScreen p {
+  font-size: 18px;
+  color: #ffffffcc;
+}
+}
