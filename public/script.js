@@ -134,7 +134,7 @@ let dy = particles[a].y - particles[b].y;
 
 let distance = dx*dx + dy*dy;
 
-if(distance < 12000){
+if(distance < 40000){
 
 ctx.beginPath();
 ctx.strokeStyle="rgba(43,108,255,0.15)";
@@ -398,5 +398,78 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// REDIMENSIONAMENTO PARA LOGIN
+// REDIRECIONAR PARA LOGIN
 
+function openLogin(){
 
+document.body.classList.add("page-leave");
+
+setTimeout(()=>{
+
+window.location.href = "login/login.html";
+
+},400);
+
+}
+
+// botão do topo
+const getStartedBtn = document.querySelector(".get-started");
+if(getStartedBtn){
+  getStartedBtn.addEventListener("click", openLogin);
+}
+
+// botão do menu mobile
+const mobileGetStarted = document.querySelector(".mobile-get-started");
+if(mobileGetStarted){
+  mobileGetStarted.addEventListener("click", openLogin);
+}
+
+// botão do footer
+const footerGetStarted = document.querySelector(".cta-btn");
+if(footerGetStarted){
+  footerGetStarted.addEventListener("click", openLogin);
+}
+
+// 1 M DE USUÁRIOS BARRA */
+const counter = document.querySelector(".trust-number");
+
+const updateCounter = () => {
+
+const target = +counter.getAttribute("data-target");
+let count = +counter.innerText;
+
+const increment = target / 120;
+
+if(count < target){
+
+count += increment;
+
+counter.innerText = Math.floor(count).toLocaleString();
+
+setTimeout(updateCounter,20);
+
+}else{
+
+counter.innerText = "1M+";
+
+}
+
+};
+
+const observer = new IntersectionObserver(entries => {
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+
+updateCounter();
+observer.disconnect();
+
+}
+
+});
+
+});
+
+observer.observe(counter);
