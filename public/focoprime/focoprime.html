@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FocoPrime AI Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+<div class="sidebar-header">
+
+<!--- logótipo --->
+<div class="logo">
+  <img src="../images/logo.png">
+</div>
+
+</div>
+
+<nav>
+
+<a class="active">
+<i class="ri-home-line"></i>
+Home
+</a>
+
+<a>
+<i class="ri-flask-line"></i>
+Playground
+</a>
+
+<a>
+<i class="ri-save-line"></i>
+Enable saving
+</a>
+
+<a>
+<i class="ri-tools-line"></i>
+Build
+</a>
+
+<a>
+<i class="ri-dashboard-line"></i>
+Dashboard
+</a>
+
+<a>
+<i class="ri-book-open-line"></i>
+Documentation
+</a>
+
+</nav>
+
+<i class="ri-moon-line" id="themeToggle"></i>
+
+<div class="sidebar-bottom">
+
+<a>
+<i class="ri-key-line"></i>
+Get API key
+</a>
+
+<a>
+<i class="ri-settings-3-line"></i>
+Settings
+</a>
+
+<div class="account">
+
+<div class="avatar">S</div>
+<span>user@email.com</span>
+
+</div>
+
+</div>
+
+</aside>
+
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  
+
+<button id="menuBtn" class="menu-btn">
+<i class="ri-menu-line"></i>
+</button>
+
+
+
+<div class="logo">
+  <img id="themeLogo" src="../images/black.png">
+</div>
+
+
+<div class="top-icons">
+
+<i class="ri-notification-3-line"></i>
+
+</div>
+
+</header>
+
+
+<!-- SEARCH -->
+<div class="search-box">
+
+<i class="ri-search-line"></i>
+
+<input placeholder="Start a chat or build an app">
+
+<i class="ri-equalizer-line filter-icon"></i>
+
+</div>
+
+
+<!-- CARD -->
+<section class="center-card">
+
+<div class="card">
+
+<div class="card-icon">
+<i class="ri-sparkling-line"></i>
+</div>
+
+<h2>Create your first app</h2>
+
+<p>
+Jump into the playground to chat with AI
+or build a new application.
+</p>
+
+<button class="start-btn">
+<i class="ri-tools-line"></i>
+Start Building
+</button>
+
+</div>
+
+</section>
+
+  <!--- criar opções  --->
+  <section class="build-panel" id="buildPanel">
+
+<div class="build-grid">
+
+<div class="build-card" onclick="createAI()">
+<i class="ri-robot-2-line"></i>
+<h3>Create AI</h3>
+<p>Build your own AI assistant</p>
+</div>
+
+<div class="build-card" onclick="createPrompt()">
+<i class="ri-lightbulb-line"></i>
+<h3>Create Prompt</h3>
+<p>Design powerful prompts</p>
+</div>
+
+</div>
+
+</section>
+
+<!--- secção de gride --->
+<section class="quick-start">
+
+<h3>Quick start</h3>
+
+<!--- barra de dados --->
+<div class="user-bar">
+
+<div class="user-left">
+
+<div class="user-avatar" id="userAvatar">U</div>
+
+<div class="user-info">
+<span class="user-name" id="userName">User</span>
+<span class="user-email" id="userEmail">user@email.com</span>
+</div>
+
+</div>
+
+<div class="user-right">
+
+<div class="plan-badge" id="userPlan">
+<i class="ri-vip-crown-line"></i>
+Free
+</div>
+
+<div class="coin-badge">
+<i class="ri-star-smile-line"></i>
+<span id="userCoins">30</span>
+</div>
+
+<button class="logout-btn" id="logoutBtn">
+<i class="ri-logout-box-r-line"></i>
+</button>
+
+</div>
+
+</div>
+
+<div class="quick-grid">
+
+<div class="quick-card" onclick="openTool('chat')">
+<i class="ri-chat-3-line"></i>
+<h4>AI Chat</h4>
+<p>Chat with powerful AI models</p>
+</div>
+
+<div class="quick-card" onclick="openTool('image')">
+<i class="ri-image-line"></i>
+<h4>Image Generator</h4>
+<p>Create AI generated images</p>
+</div>
+
+<div class="quick-card" onclick="openTool('writer')">
+<i class="ri-quill-pen-line"></i>
+<h4>AI Writer</h4>
+<p>Generate articles and posts</p>
+</div>
+
+<div class="quick-card" onclick="openTool('bot')">
+<i class="ri-robot-2-line"></i>
+<h4>Chatbot Builder</h4>
+<p>Create AI bots for websites</p>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<script type="module" src="auth/firebase-user.js"></script>
+<script src="script.js"></script>
+
+</body>
+  </html>
