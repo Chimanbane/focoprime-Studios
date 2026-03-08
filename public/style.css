@@ -1390,3 +1390,172 @@ animation:blink 1s infinite;
   color: #ccc;
   font-size: 14px;
 }
+
+
+/* =========================
+PAGE TRANSITION
+========================= */
+
+body{
+transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+body.page-leave{
+opacity:0;
+transform:scale(0.98);
+}
+
+/* =========================
+   AI TRUST BAR (OPENAI STYLE)
+========================= */
+
+.ai-trust{
+padding:60px 20px;
+display:flex;
+justify-content:center;
+}
+
+.trust-container{
+
+display:flex;
+align-items:center;
+gap:20px;
+
+max-width:900px;
+width:100%;
+
+}
+
+.trust-line{
+
+flex:1;
+height:1px;
+
+background:linear-gradient(
+to right,
+transparent,
+#f4c542,
+transparent
+);
+
+opacity:0.6;
+
+}
+
+.trust-badge{
+
+animation:goldGlow 3s infinite alternate;
+display:flex;
+align-items:center;
+gap:10px;
+
+padding:10px 18px;
+
+background:linear-gradient(
+135deg,
+#f4c542,
+#e8b800
+);
+
+border-radius:40px;
+
+color:#111;
+
+font-weight:600;
+font-size:14px;
+
+box-shadow:
+0 4px 15px rgba(244,197,66,0.4);
+
+}
+
+/* BRILHO SUAVE DOURADO */
+@keyframes goldGlow{
+
+0%{
+box-shadow:0 0 10px rgba(244,197,66,0.3);
+}
+
+100%{
+box-shadow:0 0 25px rgba(244,197,66,0.8);
+}
+
+}
+
+.trust-badge i{
+
+font-size:18px;
+
+}
+
+/* número */
+
+.trust-number{
+font-weight:700;
+}
+
+/* texto */
+
+.trust-text{
+opacity:0.9;
+}
+
+@media (max-width:600px){
+
+.trust-container{
+flex-direction:column;
+gap:15px;
+}
+
+.trust-line{
+width:80%;
+}
+
+}
+
+/* LINHAS LATERAIS */
+.trust-line{
+
+flex:1;
+height:1px;
+
+background:linear-gradient(
+90deg,
+transparent,
+#f4c542,
+transparent
+);
+
+background-size:200% 100%;
+
+animation:lineMove 4s linear infinite;
+
+}
+
+@keyframes lineMove{
+
+0%{
+background-position:-200% 0;
+}
+
+100%{
+background-position:200% 0;
+}
+
+}
+
+
+/*sjsbbdbdnrhrn3*/
+.trust-badge {
+  color: #f4c542;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 30px;
+  border: 2px solid #f4c542;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(244,197,66,0.1);
+  animation: goldGlow 3s infinite alternate;
+}
