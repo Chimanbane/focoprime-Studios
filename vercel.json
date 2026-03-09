@@ -1,6 +1,13 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/ai/:slug", "destination": "/focoprime/builder/ai/ai.html" }
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" },
+    { "src": "focoprime/**/*.html", "use": "@vercel/static" },
+    { "src": "focoprime/**/*.css", "use": "@vercel/static" },
+    { "src": "focoprime/**/*.js", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1.js" },
+    { "src": "/(.*)", "dest": "/focoprime/$1" }
   ]
 }
