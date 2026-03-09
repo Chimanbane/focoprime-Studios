@@ -333,6 +333,14 @@ Ready
 
 <div class="prompt-actions">
 
+<button class="prompt-btn"
+onclick="openPublic('${prompt.slug}')">
+
+<i class="ri-share-line"></i>
+Open
+
+</button>
+
 <button class="prompt-btn" onclick="editPrompt('${id}','${prompt.task}')">
 <i class="ri-edit-line"></i> Customize
 </button>
@@ -370,11 +378,17 @@ if(!title) return
 const task = prompt("What should AI do?")
 if(!task) return
 
+const slug = title
+.toLowerCase()
+.replace(/\s+/g,"-")
+.replace(/[^a-z0-9-]/g,"")
+
 await addDoc(
 collection(db,"users",user.uid,"prompts"),
 {
 title:title,
 task:task,
+slug:slug,
 created:Date.now()
 }
 )
@@ -465,3 +479,11 @@ alert(result || "No response from AI")
 }
 
 window.runPrompt = runPrompt
+
+function openPublic(slug){
+
+window.open(`/focoprime/p/?slug=${slug}`,"_blank")
+
+}
+
+window.openPublic = openPublic
