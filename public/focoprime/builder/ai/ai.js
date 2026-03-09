@@ -76,3 +76,24 @@ userMessage.addEventListener("keypress", e=>{
     sendMessage();
   }
 });
+
+const slug = window.location.pathname.split("/").pop();
+
+async function loadAI() {
+  try {
+    const res = await fetch(`/api/get-ai?slug=${slug}`);
+    if (!res.ok) throw new Error("AI not found");
+    const aiData = await res.json();
+
+    document.getElementById("aiTitle").textContent = aiData.name;
+
+    // restante do código para chat com a API Groq
+    window.aiData = aiData;
+
+  } catch (err) {
+    alert("AI não encontrada!");
+    window.location.href = "../focoprime.html";
+  }
+}
+
+loadAI();
