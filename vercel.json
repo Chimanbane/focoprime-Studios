@@ -1,5 +1,6 @@
 {
+  "version": 2,
   "rewrites": [
-    { "source": "/:slug*", "destination": "/ai/ai.html" }
+    { "source": "/ai/:slug", "destination": "/focoprime/builder/ai/ai.html" }
   ]
 }
