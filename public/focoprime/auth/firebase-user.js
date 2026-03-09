@@ -6,6 +6,10 @@ onAuthStateChanged,
 signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import { 
+getFirestore 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 // CONFIG
 const firebaseConfig = {
@@ -13,10 +17,13 @@ apiKey: "AIzaSyD0e-w-clS29jxcGT1wL5HC8i-8nZJXV7o",
 authDomain: "focoprime-a2913.firebaseapp.com",
 projectId: "focoprime-a2913",
 appId: "1:163306607632:web:bdb097981bef1c7c72e695"
-};
+}
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+const auth = getAuth(app)
+
+export { auth, db }
 
 
 // ========================
