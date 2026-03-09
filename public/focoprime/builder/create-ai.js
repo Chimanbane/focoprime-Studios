@@ -9,42 +9,39 @@ tempValue.textContent = tempSlider.value
 
 })
 
-function publishAI(){
+async function publishAI() {
+  const name = document.getElementById("aiName").value;
+  const description = document.getElementById("aiDescription").value;
+  const prompt = document.getElementById("aiPrompt").value;
+  const model = document.getElementById("aiModel").value;
+  const temp = document.getElementById("aiTemp").value;
 
-const name = document.getElementById("aiName").value
-const description = document.getElementById("aiDescription").value
-const prompt = document.getElementById("aiPrompt").value
-const model = document.getElementById("aiModel").value
-const temp = document.getElementById("aiTemp").value
+  if (!name || !prompt) {
+    alert("Please fill AI name and prompt");
+    return;
+  }
 
-if(!name || !prompt){
+  const slug = name.toLowerCase().replaceAll(" ", "-");
 
-alert("Please fill AI name and prompt")
-return
+  try {
+    const res = await fetch("/api/create-ai", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, description, prompt, model, temp, slug })
+    });
 
-}
+    const data = await res.json();
 
-// criar slug
-const slug = name
-.toLowerCase()
-.replaceAll(" ","-")
-
-// guardar IA
-const aiData = {
-
-name,
-description,
-prompt,
-model,
-temp,
-slug
-
-}
-
-localStorage.setItem("fp_ai_"+slug,JSON.stringify(aiData))
-
-alert("AI created! Link:\n\nfocoprime.fp.site/"+slug)
-
+    if (res.ok) {
+      alert(`AI created! Link:\n\n${window.location.origin}/ai/${slug}`);
+      window.location.href = `/ai/${slug}`;
+    } else {
+      alert("Error: " + data.error);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Failed to create AI");
+  }
 }
 
 
