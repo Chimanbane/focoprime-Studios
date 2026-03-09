@@ -5,8 +5,27 @@ const MODEL = "llama-3.1-8b-instant";
 
 export async function POST(req: NextRequest) {
   try {
+
     const body = await req.json();
-    const { messages } = body;
+
+    let messages = body.messages;
+
+    // aceitar prompt simples
+    if (!messages && body.prompt) {
+      messages = [
+        {
+          role: "user",
+          content: body.prompt
+        }
+      ];
+    }
+
+    if (!messages) {
+      return NextResponse.json(
+        { error: "No prompt or messages provided" },
+        { status: 400 }
+      );
+    }
 
     if (!process.env.GROQ_API_KEY) {
       return NextResponse.json(
@@ -38,10 +57,13 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(data);
+
   } catch (err: any) {
+
     return NextResponse.json(
       { error: err.message || "Erro interno" },
       { status: 500 }
     );
+
   }
 }
