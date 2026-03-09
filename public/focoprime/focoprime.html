@@ -158,18 +158,43 @@ Start Building
 
 <div class="build-grid">
 
-<div class="build-card" onclick="createAI()">
+<div class="build-card coming-soon-card">
 <i class="ri-robot-2-line"></i>
 <h3>Create AI</h3>
 <p>Build your own AI assistant</p>
+
+<span class="coming-badge">Coming Soon</span>
+
 </div>
 
-<div class="build-card" onclick="createPrompt()">
+<div class="build-card" onclick="openPromptBuilder()">
 <i class="ri-lightbulb-line"></i>
 <h3>Create Prompt</h3>
 <p>Design powerful prompts</p>
 </div>
 
+</div>
+
+</section>
+
+<!-- PROMPTS AREA -->
+<section class="prompts-area" id="promptsArea">
+
+<div class="prompts-header">
+
+<h3>
+<i class="ri-lightbulb-flash-line"></i>
+Your Prompts
+</h3>
+
+<button class="new-prompt-btn" onclick="openPromptBuilder()">
+<i class="ri-add-line"></i>
+Create Prompt
+</button>
+
+</div>
+
+<div class="prompts-grid" id="promptsGrid">
 </div>
 
 </section>
@@ -246,7 +271,7 @@ Free
 </div>
 
 <script type="module" src="auth/firebase-user.js"></script>
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 
 </body>
   </html>
