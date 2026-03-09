@@ -1,3 +1,13 @@
+import { auth, db } from "./auth/firebase-user.js"
+
+import {
+collection,
+addDoc,
+getDocs,
+updateDoc,
+doc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+
 const menuBtn = document.getElementById("menuBtn")
 const sidebar = document.getElementById("sidebar")
 const overlay = document.getElementById("menuOverlay")
@@ -257,18 +267,18 @@ const startBtn = document.querySelector(".start-btn")
 const centerCard = document.querySelector(".center-card")
 const buildPanel = document.getElementById("buildPanel")
 
-startBtn.addEventListener("click",()=>{
+startBtn.addEventListener("click", () => {
+    centerCard.style.opacity = "0"
+    centerCard.style.transform = "translateY(-20px)"
 
-centerCard.style.opacity = "0"
-centerCard.style.transform = "translateY(-20px)"
-
-setTimeout(()=>{
-
-centerCard.style.display = "none"
-buildPanel.classList.add("active")
-
-},300)
-
+    setTimeout(() => {
+        centerCard.style.display = "none"
+        // Antes de adicionar a classe, define display
+        buildPanel.style.display = "flex"
+        // Força reflow para que a animação funcione
+        void buildPanel.offsetWidth
+        buildPanel.classList.add("active")
+    }, 300)
 })
 
 function createAI(){
@@ -277,8 +287,152 @@ window.location.href = "builder/create-ai.html"
 
 }
 
-function createPrompt(){
+// ==========================
+// PROMPT SYSTEM
+// ==========================
 
-window.location.href = "builder/create-prompt.html"
+const promptsArea = document.getElementById("promptsArea")
+const promptsGrid = document.getElementById("promptsGrid")
+
+let prompts = JSON.parse(localStorage.getItem("fp_prompts")) || []
+
+async function loadPrompts(){
+
+const user = auth.currentUser
+
+if(!user) return
+
+promptsGrid.innerHTML=""
+
+const snapshot = await getDocs(
+collection(db,"users",user.uid,"prompts")
+)
+
+if(snapshot.empty) return
+
+promptsArea.style.display="block"
+centerCard.style.display="none"
+buildPanel.style.display="none"
+
+snapshot.forEach(docSnap=>{
+
+const prompt = docSnap.data()
+const id = docSnap.id
+
+const card = document.createElement("div")
+card.className="prompt-card"
+
+card.innerHTML=`
+
+<div class="prompt-title">${prompt.title}</div>
+
+<div class="prompt-status">
+<i class="ri-checkbox-circle-line"></i>
+Ready
+</div>
+
+<div class="prompt-actions">
+
+<button class="prompt-btn" onclick="editPrompt('${id}','${prompt.task}')">
+<i class="ri-edit-line"></i> Customize
+</button>
+
+<button class="prompt-btn" onclick="copyPrompt('${prompt.task}')">
+<i class="ri-file-copy-line"></i> Copy
+</button>
+
+</div>
+
+`
+
+promptsGrid.appendChild(card)
+
+})
 
 }
+
+// ==========================
+// CREATE PROMPT
+// ==========================
+
+async function openPromptBuilder(){
+
+const user = auth.currentUser
+
+if(!user){
+alert("Login required")
+return
+}
+
+const title = prompt("Prompt name?")
+if(!title) return
+
+const task = prompt("What should AI do?")
+if(!task) return
+
+await addDoc(
+collection(db,"users",user.uid,"prompts"),
+{
+title:title,
+task:task,
+created:Date.now()
+}
+)
+
+loadPrompts()
+
+}
+
+// ==========================
+// COPY PROMPT
+// ==========================
+
+function copyPrompt(text){
+
+navigator.clipboard.writeText(text)
+
+alert("Prompt copied!")
+
+}
+
+// ==========================
+// EDIT PROMPT
+// ==========================
+
+async function editPrompt(id,oldTask){
+
+const user = auth.currentUser
+
+const newTask = prompt("Edit prompt:",oldTask)
+
+if(!newTask) return
+
+await updateDoc(
+doc(db,"users",user.uid,"prompts",id),
+{
+task:newTask
+}
+)
+
+loadPrompts()
+
+}
+
+// ==========================
+// INIT
+// ==========================
+
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+loadPrompts()
+}
+
+})
+
+
+window.openPromptBuilder = openPromptBuilder
+window.copyPrompt = copyPrompt
+window.editPrompt = editPrompt
