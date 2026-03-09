@@ -2,18 +2,14 @@ import fs from "fs";
 import path from "path";
 
 export default function handler(req, res) {
-  const slug = req.query.slug;
-  const dbPath = path.join(process.cwd(), "api", "ai-db.json");
+  const { slug } = req.query;
+  const filePath = path.join(process.cwd(), "data", "ais.json");
+  const rawData = fs.readFileSync(filePath, "utf-8");
+  const aiDB = JSON.parse(rawData);
 
-  if (!fs.existsSync(dbPath)) {
-    return res.status(404).json({ error: "No AIs found" });
-  }
-
-  const db = JSON.parse(fs.readFileSync(dbPath));
-
-  if (!db[slug]) {
+  if (!slug || !aiDB[slug]) {
     return res.status(404).json({ error: "AI not found" });
   }
 
-  res.status(200).json(db[slug]);
+  res.status(200).json(aiDB[slug]);
 }
