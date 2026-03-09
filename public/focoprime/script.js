@@ -451,9 +451,16 @@ prompt:text
 
 const data = await response.json()
 
-const result = data.choices?.[0]?.message?.content || "No response"
+console.log("Groq response:",data)
 
-alert(result)
+if(data.error){
+alert("Error: "+data.error)
+return
+}
+
+const result = data?.choices?.[0]?.message?.content
+
+alert(result || "No response from AI")
 
 }
 
