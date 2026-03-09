@@ -439,7 +439,7 @@ window.editPrompt = editPrompt
 
 async function runPrompt(text){
 
-const response = await fetch("/api/groq",{
+const response = await fetch("/api/chat",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
