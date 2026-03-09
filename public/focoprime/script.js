@@ -337,8 +337,8 @@ Ready
 <i class="ri-edit-line"></i> Customize
 </button>
 
-<button class="prompt-btn" onclick="copyPrompt('${prompt.task}')">
-<i class="ri-file-copy-line"></i> Copy
+<button class="prompt-btn" onclick="runPrompt(\`${prompt.task}\`)">
+<i class="ri-play-line"></i> Run
 </button>
 
 </div>
@@ -436,3 +436,25 @@ loadPrompts()
 window.openPromptBuilder = openPromptBuilder
 window.copyPrompt = copyPrompt
 window.editPrompt = editPrompt
+
+async function runPrompt(text){
+
+const response = await fetch("/api/groq",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+prompt:text
+})
+})
+
+const data = await response.json()
+
+const result = data.choices?.[0]?.message?.content || "No response"
+
+alert(result)
+
+}
+
+window.runPrompt = runPrompt
