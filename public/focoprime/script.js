@@ -1,3 +1,42 @@
+// ==========================
+// APP LOADER
+// ==========================
+
+const loader = document.getElementById("appLoader")
+const loaderProgress = document.getElementById("loaderProgress")
+
+let progress = 0
+
+const fakeLoad = setInterval(()=>{
+
+progress += Math.random() * 20
+
+if(progress >= 90){
+progress = 90
+}
+
+loaderProgress.style.width = progress + "%"
+
+},200)
+
+function finishLoading(){
+
+clearInterval(fakeLoad)
+
+loaderProgress.style.width = "100%"
+
+setTimeout(()=>{
+
+loader.style.opacity = "0"
+
+setTimeout(()=>{
+loader.style.display = "none"
+},400)
+
+},400)
+
+}
+
 import { auth, db } from "./auth/firebase-user.js"
 
 import {
@@ -300,7 +339,10 @@ async function loadPrompts(){
 
 const user = auth.currentUser
 
-if(!user) return
+if(!user){
+finishLoading()
+return
+}
 
 promptsGrid.innerHTML=""
 
@@ -308,8 +350,18 @@ const snapshot = await getDocs(
 collection(db,"users",user.uid,"prompts")
 )
 
-if(snapshot.empty) return
+if(snapshot.empty){
 
+// NÃO TEM PROMPTS
+centerCard.style.display="flex"
+buildPanel.style.display="none"
+promptsArea.style.display="none"
+
+finishLoading()
+return
+}
+
+// TEM PROMPTS
 promptsArea.style.display="block"
 centerCard.style.display="none"
 buildPanel.style.display="none"
@@ -356,6 +408,7 @@ Open
 promptsGrid.appendChild(card)
 
 })
+finishLoading()
 
 }
 
@@ -487,3 +540,54 @@ window.open(`/focoprime/p/?slug=${slug}`,"_blank")
 }
 
 window.openPublic = openPublic
+
+
+
+// ELEMENTOS
+const searchInput = document.querySelector(".search-box input");
+const aiResponse = document.getElementById("aiResponse");
+const aiText = document.getElementById("aiText");
+
+// FUNÇÃO PARA ENVIAR PROMPT
+async function sendPrompt(prompt) {
+  if(!prompt) return;
+
+  // Mostrar animação inicial
+  aiText.textContent = "AI is typing...";
+  aiResponse.classList.add("show");
+
+  try {
+    // Chamada à sua API (você pode apontar para /api/chat)
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt })
+    });
+
+    const data = await res.json();
+    const reply = data?.choices?.[0]?.message?.content || "Sem resposta da IA.";
+
+    // Simular digitação animada
+    aiText.textContent = "";
+    let i = 0;
+    const typeWriter = setInterval(() => {
+      if(i < reply.length){
+        aiText.textContent += reply.charAt(i);
+        i++;
+      } else {
+        clearInterval(typeWriter);
+      }
+    }, 25);
+
+  } catch (err) {
+    aiText.textContent = "Erro na IA: " + err.message;
+  }
+}
+
+// EVENTO: ENTER na barra de pesquisa
+searchInput.addEventListener("keypress", e => {
+  if(e.key === "Enter") {
+    sendPrompt(searchInput.value);
+    searchInput.value = "";
+  }
+});
