@@ -11,9 +11,30 @@
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="pages/get-api.css">
 
 </head>
 <body>
+  
+  <!-- LOADER -->
+<div id="appLoader">
+
+<div class="loader-box">
+
+<div class="loader-logo">
+<i class="ri-loader-4-line"></i>
+</div>
+
+<div class="loader-bar">
+<div class="loader-progress" id="loaderProgress"></div>
+</div>
+
+<p>Loading workspace...</p>
+
+</div>
+
+</div>
+<!--- fim -->
   
   <div class="menu-overlay" id="menuOverlay"></div>
 
@@ -30,44 +51,51 @@
 </div>
 
 <nav>
+  <!-- Seção Principal -->
+  <div class="menu-section">
+    <h4>Principal</h4>
+    <a class="active">
+      <i class="ri-home-line"></i> Home
+    </a>
+    <a>
+      <i class="ri-flask-line"></i> Playground
+    </a>
+    <a>
+      <i class="ri-tools-line"></i> Build
+    </a>
+    <a>
+      <i class="ri-dashboard-line"></i> Dashboard
+    </a>
+  </div>
 
-<a class="active">
-<i class="ri-home-line"></i>
-Home
+  <!-- Seção de Recursos -->
+  <div class="menu-section">
+    <h4>Recursos</h4>
+    <a>
+      <i class="ri-save-line"></i> Enable Saving
+    </a>
+    <a>
+      <i class="ri-book-open-line"></i> Documentation
+    </a>
+  </div>
+
+  <!-- Seção Conta / Configurações -->
+  <div class="menu-section">
+    <h4>Conta</h4>
+    <a id="openApiPage">
+<i class="ri-key-line"></i> Get API Key
 </a>
-
-<a>
-<i class="ri-flask-line"></i>
-Playground
-</a>
-
-<a>
-<i class="ri-save-line"></i>
-Enable saving
-</a>
-
-<a>
-<i class="ri-tools-line"></i>
-Build
-</a>
-
-<a>
-<i class="ri-dashboard-line"></i>
-Dashboard
-</a>
-
-<a>
-<i class="ri-book-open-line"></i>
-Documentation
-</a>
-
+    <a>
+      <i class="ri-settings-3-line"></i> Settings
+    </a>
+  </div>
 </nav>
 
 <i class="ri-moon-line" id="themeToggle"></i>
 
 <div class="sidebar-bottom">
 
-<a>
+<a id="openApiPage2">
 <i class="ri-key-line"></i>
 Get API key
 </a>
@@ -125,6 +153,11 @@ Settings
 
 <i class="ri-equalizer-line filter-icon"></i>
 
+</div>
+
+<!-- AI RESPONSE BAR -->
+<div id="aiResponse" class="ai-response">
+  <div class="ai-text" id="aiText"></div>
 </div>
 
 
@@ -272,6 +305,7 @@ Free
 
 <script type="module" src="auth/firebase-user.js"></script>
 <script type="module" src="script.js"></script>
+<script src="pages/scripts/getapi.js"></script>
 
 </body>
   </html>
