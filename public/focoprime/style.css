@@ -896,4 +896,120 @@ background:var(--bg-hover);
 
 background:var(--border-color);
 
+}
+
+
+/*menu*/
+.menu-section{
+  margin-bottom: 25px;
+}
+
+.menu-section h4{
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.menu-section a{
+  margin-bottom: 5px;
+}
+
+
+/* ==========================
+LOADER OPENAI STYLE
+========================== */
+
+#appLoader{
+
+position:fixed;
+inset:0;
+
+background:var(--bg-main);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+z-index:5000;
+
+}
+
+.loader-box{
+
+text-align:center;
+width:260px;
+
+}
+
+.loader-logo{
+
+font-size:34px;
+color:var(--color-accent);
+
+animation:spin 1.2s linear infinite;
+
+margin-bottom:20px;
+
+}
+
+@keyframes spin{
+
+from{transform:rotate(0deg)}
+to{transform:rotate(360deg)}
+
+}
+
+.loader-bar{
+
+height:6px;
+background:var(--border-color);
+border-radius:20px;
+overflow:hidden;
+
+}
+
+.loader-progress{
+
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#6c63ff,#2b6cff);
+
+transition:width .3s ease;
+
+}
+
+.loader-box p{
+
+margin-top:10px;
+font-size:13px;
+color:var(--text-secondary);
+
+}
+
+/* AI RESPONSE BAR */
+.ai-response {
+  position: relative;
+  margin: 20px auto 10px auto;
+  max-width: 450px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+}
+
+.ai-response.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ai-text {
+  white-space: pre-wrap;
+  line-height: 1.4;
   }
